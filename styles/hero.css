@@ -1,0 +1,9 @@
+.hero-wrapper {
+  padding-top: calc(128.226%);
+}
+
+@media screen and (min-width: 576px) {
+  .hero-wrapper {
+    padding-top: calc(56.8787%);
+  }
+}
