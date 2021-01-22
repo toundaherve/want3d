@@ -9,14 +9,14 @@ export default function Item() {
           {/* Hidden */}
           <div></div>
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 col-md-6">
               {/* Poster */}
               <div
-                className="bg-dark bg-gradient"
-                style={{ height: "240px", width: "100%" }}
+                className="bg-dark bg-gradient h-100"
+                style={{ minHeight: "240px", width: "100%" }}
               ></div>
             </div>
-            <div className="col-12">
+            <div className="col-12 col-md-6">
               {/* About item */}
               <div className="d-block flex-wrap px-3">
                 <span className="d-block flex-grow-1 flex-shrink-1 mb-3"></span>
