@@ -27,7 +27,7 @@ export default function Header() {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="">
+              <div>
                 <div
                   className="d-flex flex-wrap"
                   style={{ padding: "12px 0px" }}
