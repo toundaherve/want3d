@@ -4,12 +4,12 @@ import Layout from "../components/Layout";
 export default function Item() {
   return (
     <Layout>
+      <span className="d-block mb-3 w-100 text-white">.</span>
       <div className="d-flex flex-wrap flex-grow-1">
         <div className="container">
           {/* Hidden */}
-          <div></div>
           <div className="row">
-            <div className="col-12 col-md-7">
+            <div className="col-12 col-md-7 px-0 pe-md-5">
               <div className="bg-secondary">
                 {/* Poster */}
                 <div
@@ -46,11 +46,11 @@ export default function Item() {
                 <span className="d-block my-3 border-bottom border-1 border-light"></span>
               </div>
             </div>
-            <div className="col-12 col-md-5">
+            <div className="col-12 col-md-5 px-0">
               {/* Reply */}
               <div>
-                <h4 className="mb-2">Interested ? Leave your details</h4>
-                <span className="d-block mb-3"></span>
+                <h4 className="mb-0">Interested ? Leave your details</h4>
+                <span className="d-block mb-4"></span>
                 <Form className="d-flex flex-column">
                   <FormGroup>
                     <Input

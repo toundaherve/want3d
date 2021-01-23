@@ -6,7 +6,6 @@ export default function Layout({ children }) {
     <div>
       <div className="">
         <Header />
-        <span className="d-block mb-3"></span>
         <div className="container">{children}</div>
         <span className="d-block mb-3"></span>
       </div>

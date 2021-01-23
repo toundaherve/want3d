@@ -13,6 +13,7 @@ import { useState } from "react";
 export default function Results() {
   return (
     <Layout>
+      <span className="d-block mb-3 w-100 text-white"></span>
       <div>
         <div className="d-flex justify-content-center">
           <div
@@ -67,7 +68,7 @@ export default function Results() {
                   <div key={idx} className="col">
                     <div className="d-flex flex-column justify-content-between card p-2 border">
                       <h6 className="text-center mb-0">WANTED</h6>
-                      <div className="w-100" style={{ height: "96px" }}></div>
+                      <div className="w-100" style={{ height: "128px" }}></div>
                       <div className="text-center">
                         <small>Reward</small>
                         <h6 className="text-center mb-0">$750</h6>

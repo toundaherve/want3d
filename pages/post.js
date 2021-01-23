@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 export default function Post() {
   return (
     <Layout>
+      <span className="d-block mb-3 w-100 text-white">.</span>
       <div style={{ maxWidth: "762px", margin: "0 auto" }}>
         <h3>Post your wanted item</h3>
         <span className="d-block mb-2"></span>
@@ -12,12 +13,7 @@ export default function Post() {
           <FormGroup>
             <Label for="exampleItemName">Item name</Label>
             <span className="d-block mb-2"></span>
-            <Input
-              type="text"
-              name="itemName"
-              id="exampleItemName"
-              placeholder="with a placeholder"
-            />
+            <Input type="text" name="itemName" id="exampleItemName" />
           </FormGroup>
           <span className="d-block mb-3"></span>
           {/* Item reward */}
@@ -78,13 +74,13 @@ export default function Post() {
           <span className="d-block mb-3"></span>
           {/* Location */}
           <FormGroup>
-            <Label for="exampleLocation">Your location</Label>
+            <Label for="exampleLocation">City / Country</Label>
             <span className="d-block mb-2"></span>
             <Input type="text" name="location" id="exampleLocation" />
           </FormGroup>
           <span className="d-block mb-3"></span>
           <FormGroup>
-            <Label for="exampleEmail">Your email</Label>
+            <Label for="exampleEmail">Email</Label>
             <span className="d-block mb-2"></span>
             <Input type="email" name="email" id="exampleEmail" />
             <div id="emailHelp" className="form-text">
