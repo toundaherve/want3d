@@ -43,7 +43,7 @@ export default function Header() {
                       </div>
                       <div className="d-flex justify-content-end flex-nowrap">
                         <span className="d-inline-block flex-grow-0 flex-shrink-1 ms-4 mb-3"></span>
-                        <Button color="primary">LOG IN</Button>
+                        <Button color="primary">POST</Button>
                       </div>
                     </div>
                   </div>

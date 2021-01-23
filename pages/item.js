@@ -11,17 +11,21 @@ export default function Item() {
           <div className="row">
             <div className="col-12 col-md-6">
               {/* Poster */}
-              <div
-                className="bg-dark bg-gradient h-100"
-                style={{ minHeight: "240px", width: "100%" }}
-              ></div>
+              <div className="d-flex flex-column justify-content-between card p-2 border h-100">
+                <h6 className="display-1 text-center mb-0">WANTED</h6>
+                <div className="w-100" style={{ height: "96px" }}></div>
+                <div className="text-center">
+                  <small className="display-6">Reward</small>
+                  <h6 className="text-center mb-0 display-1">£750</h6>
+                </div>
+              </div>
             </div>
             <div className="col-12 col-md-6">
               {/* About item */}
               <div className="d-block flex-wrap px-3">
                 <span className="d-block flex-grow-1 flex-shrink-1 mb-3"></span>
-                <h1>Wanted Iphone 6s</h1>
-                <p className="h1">£120</p>
+                <h1>Iphone 6s</h1>
+                <p className="h1">£750</p>
                 <span className="d-block mb-2"></span>
                 <div></div>
                 <span className="d-block mb-2"></span>
@@ -73,9 +77,8 @@ export default function Item() {
                 <span className="d-block my-3 border-bottom border-1 border-light"></span>
                 {/* Reply */}
                 <div>
-                  <h6 className="fw-bold mb-2">
-                    Interested ? Leave your details
-                  </h6>
+                  <h1 className="mb-2">Interested ? Leave your details</h1>
+                  <span className="d-block mb-3"></span>
                   <Form className="d-none d-flex flex-column">
                     <FormGroup>
                       <Input
@@ -92,41 +95,31 @@ export default function Item() {
                     </Button>
                   </Form>
                   <Form className="d-flex flex-column">
-                    <FormGroup row>
-                      <Label for="exampleEmail" sm={2}>
-                        Email
-                      </Label>
-                      <Col sm={10}>
-                        <Input
-                          type="email"
-                          name="email"
-                          id="exampleEmail"
-                          placeholder="example@example.org"
-                        />
-                      </Col>
+                    <FormGroup>
+                      <Input
+                        type="email"
+                        name="email"
+                        id="exampleEmail"
+                        placeholder="Email"
+                      />
                     </FormGroup>
                     <span className="d-block mb-3"></span>
-                    <FormGroup row>
-                      <Label for="examplePhone" sm={2}>
-                        Phone
-                      </Label>
-                      <Col sm={10}>
-                        <Input
-                          type="text"
-                          name="phone"
-                          id="examplePhone"
-                          placeholder="1111 11111"
-                        />
-                      </Col>
+                    <FormGroup>
+                      <Input
+                        type="text"
+                        name="phone"
+                        id="examplePhone"
+                        placeholder="Phone"
+                      />
                     </FormGroup>
                     <span className="d-block mb-3"></span>
-                    <FormGroup row>
-                      <Label for="exampleText" sm={2}>
-                        Message
-                      </Label>
-                      <Col sm={10}>
-                        <Input type="textarea" name="text" id="exampleText" />
-                      </Col>
+                    <FormGroup>
+                      <Input
+                        type="textarea"
+                        name="text"
+                        id="exampleText"
+                        placeholder="Message"
+                      />
                     </FormGroup>
                     <span className="d-block mb-3"></span>
                     <Button className="align-self-end" color="success">

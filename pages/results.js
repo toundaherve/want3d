@@ -60,20 +60,17 @@ export default function Results() {
               <span className="d-block mb-2 flex-grow-1 flex-shrink-1"></span>
               {/* Results Grid */}
               <div
-                className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2"
+                className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-2"
                 style={{ marginTop: "0px" }}
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, idx) => (
                   <div key={idx} className="col">
-                    <div className="card">
-                      <img src="..." className="card-img-top" alt="..." />
-                      <div className="card-body">
-                        <h5 className="card-title">Card title</h5>
-                        <p className="card-text">
-                          This is a longer card with supporting text below as a
-                          natural lead-in to additional content. This content is
-                          a little bit longer.
-                        </p>
+                    <div className="d-flex flex-column justify-content-between card p-2 border">
+                      <h6 className="text-center mb-0">WANTED</h6>
+                      <div className="w-100" style={{ height: "96px" }}></div>
+                      <div className="text-center">
+                        <small>Reward</small>
+                        <h6 className="text-center mb-0">$750</h6>
                       </div>
                     </div>
                   </div>
