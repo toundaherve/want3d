@@ -4,23 +4,28 @@ import Layout from "../components/Layout";
 export default function Item() {
   return (
     <Layout>
-      <span className="d-block mb-3 w-100 text-white">.</span>
+      <span className="d-none d-md-block mb-3 w-100 text-white">.</span>
       <div className="d-flex flex-wrap flex-grow-1">
         <div className="container">
           {/* Hidden */}
           <div className="row">
             <div className="col-12 col-md-7 px-0 pe-md-5">
-              <div className="bg-secondary">
-                {/* Poster */}
-                <div
-                  className="d-flex flex-column justify-content-between card p-2 border mx-auto"
-                  style={{ width: "256px" }}
-                >
-                  <h1 className="text-center mb-0">WANTED</h1>
-                  <div className="w-100" style={{ height: "256px" }}></div>
-                  <div className="text-center">
-                    <small className="h5">Reward</small>
-                    <h1 className="text-center mb-0">£750</h1>
+              <div
+                className="bg-secondary w-100 position-relative"
+                style={{ paddingTop: "56.25%" }}
+              >
+                <div className="position-absolute top-0 start-0 bottom-0 end-0">
+                  {/* Poster */}
+                  <div
+                    className="d-flex flex-column justify-content-between card p-2 border mx-auto h-100"
+                    style={{ width: "256px" }}
+                  >
+                    <h6 className="text-center mb-0">WANTED</h6>
+                    <div className="w-100"></div>
+                    <div className="text-center">
+                      <small>Reward</small>
+                      <h6 className="text-center mb-0">£750</h6>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -49,8 +54,8 @@ export default function Item() {
             <div className="col-12 col-md-5 px-0">
               {/* Reply */}
               <div>
-                <h4 className="mb-0">Interested ? Leave your details</h4>
-                <span className="d-block mb-4"></span>
+                <h6 className="mb-0">Interested ? Leave your details</h6>
+                <span className="d-block mb-3"></span>
                 <Form className="d-flex flex-column">
                   <FormGroup>
                     <Input

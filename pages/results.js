@@ -66,12 +66,21 @@ export default function Results() {
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, idx) => (
                   <div key={idx} className="col">
-                    <div className="d-flex flex-column justify-content-between card p-2 border">
-                      <h6 className="text-center mb-0">WANTED</h6>
-                      <div className="w-100" style={{ height: "128px" }}></div>
-                      <div className="text-center">
-                        <small>Reward</small>
-                        <h6 className="text-center mb-0">$750</h6>
+                    <div
+                      className="position-relative w-100"
+                      style={{ paddingTop: "171.36%" }}
+                    >
+                      <div className="position-absolute top-0 start-0 end-0 bottom-0">
+                        <div className="d-flex flex-column justify-content-between card p-2 border h-100">
+                          <h6 className="text-center mb-2 flex-grow-0">
+                            WANTED
+                          </h6>
+                          <div className="w-100 flex-grow-1 bg-dark"></div>
+                          <div className="text-center flex-grow-0">
+                            <small>Reward</small>
+                            <h6 className="text-center mb-0">$750</h6>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
