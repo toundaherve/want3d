@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import Layout from "./Layout";
+import LoadingButton from "./LoadingButton";
 
 export default function PostPage({ onSubmit }) {
   const { register, handleSubmit, errors } = useForm();
@@ -12,7 +12,7 @@ export default function PostPage({ onSubmit }) {
         <h5>Post your wanted item</h5>
         <span className="d-block mb-3"></span>
         <form
-          className="d-flex flex-column border p-3 p-md-4-5 validated"
+          className="d-flex flex-column border p-3 p-md-4-5 validated rounded"
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* Item name */}
@@ -51,8 +51,8 @@ export default function PostPage({ onSubmit }) {
                 ref={register}
               >
                 <option defaultValue>GBP</option>
-                <option value="1">EUR</option>
-                <option value="2">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
               </select>
               <input
                 type="number"
@@ -101,7 +101,7 @@ export default function PostPage({ onSubmit }) {
                 Select a Category
               </option>
               <option value="Automobiles">Automobiles</option>
-              <option value="Phone">Phones</option>
+              <option value="Phones">Phones</option>
               <option value="Clothing">Clothing</option>
             </select>
             {errors.category && (
@@ -153,12 +153,11 @@ export default function PostPage({ onSubmit }) {
           </div>
           <span className="d-block mb-3"></span>
           <div className="py-3 align-self-md-end">
-            <Button className="w-100" color="success">
-              Submit
-            </Button>
+            <LoadingButton isLoading={false} />
           </div>
         </form>
       </div>
+      <span className="d-block w-100 text-white">.</span>
     </Layout>
   );
 }

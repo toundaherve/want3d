@@ -8,14 +8,17 @@ import SearchForm from "./SearchForm";
 export default function Header() {
   const [shadow, setShadow] = useState(false);
 
+  function handleShadow() {
+    if (window.scrollY > 2) {
+      setShadow(true);
+    } else {
+      setShadow(false);
+    }
+  }
+
   useEffect(() => {
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 2) {
-        setShadow(true);
-      } else {
-        setShadow(false);
-      }
-    });
+    document.addEventListener("scroll", handleShadow);
+    return document.removeEventListener("scroll", handleShadow);
   }, []);
 
   return (
