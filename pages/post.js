@@ -30,6 +30,6 @@ export default function Post() {
       />
     )
   ) : (
-    <PostPage isLoading={isLoading} />
+    <PostPage isLoading={isLoading} onSubmit={onSubmit} />
   );
 }
