@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { Button } from "reactstrap";
+import Link from "next/link";
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 
@@ -15,7 +16,7 @@ export default function Header() {
         setShadow(false);
       }
     });
-  });
+  }, []);
 
   return (
     <div className="sticky-top w-100 sticky-header">
@@ -43,7 +44,9 @@ export default function Header() {
                       </div>
                       <div className="d-flex justify-content-end flex-nowrap">
                         <span className="d-inline-block flex-grow-0 flex-shrink-1 ms-4 mb-3"></span>
-                        <Button color="primary">POST</Button>
+                        <Link href="/post">
+                          <Button color="primary">POST</Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -56,14 +59,16 @@ export default function Header() {
                       style={{ marginBottom: "12px" }}
                     ></span>
                     <div className="d-flex justify-content-between align-items-center flex-nowrap">
-                      <MdMenu size={38} />
+                      <div className="flex-grow-1">
+                        <SearchForm />
+                      </div>
                       <span
                         className="inline-block flex-grow-0 flex-shrink-1 mb-3"
                         style={{ marginLeft: "12px" }}
                       ></span>
-                      <div className="flex-grow-1">
-                        <SearchForm />
-                      </div>
+                      <Link href="/post">
+                        <Button color="primary">POST</Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
