@@ -8,6 +8,7 @@ import {
   DropdownMenu,
   DropdownToggle,
 } from "reactstrap";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function ResultsPage({
@@ -19,7 +20,7 @@ export default function ResultsPage({
   return (
     <Layout>
       <span className="d-block mb-3 w-100 text-white"></span>
-      <div>
+      <div className="d-none">
         <div className="d-flex justify-content-center">
           <div
             className="position-relative z-index-0 bg-dark"
@@ -49,18 +50,33 @@ export default function ResultsPage({
                     </Breadcrumb>
                   </div>
                   {/* Title */}
-                  <h1>Wanted {searchText}</h1>
+                  {
+                    <h1>
+                      {data.length > 0
+                        ? `Wanted "${searchText}"`
+                        : `No wanted "${searchText}" yet`}
+                    </h1>
+                  }
                   {/* Filters */}
-                  <div className="d-flex flex-nowrap w-100">
-                    <div className="d-flex flex-nowrap">
-                      {filters.map((filter, idx) => (
-                        <div key={idx} className="d-flex flex-wrap py-2 px-1">
-                          <Filter options={filter[1]}>{filter[0][0]}</Filter>
+                  {data.length > 0 && (
+                    <>
+                      <div className="d-flex flex-nowrap w-100">
+                        <div className="d-flex flex-nowrap">
+                          {filters.map((filter, idx) => (
+                            <div
+                              key={idx}
+                              className="d-flex flex-wrap py-2 px-1"
+                            >
+                              <Filter options={filter[1]}>
+                                {filter[0][0]}
+                              </Filter>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                  <span className="d-block flex-grow-1 flex-shrink-1 mb-3"></span>
+                      </div>
+                      <span className="d-block flex-grow-1 flex-shrink-1 mb-3"></span>
+                    </>
+                  )}
                 </div>
               </div>
               <span className="d-block mb-2 flex-grow-1 flex-shrink-1"></span>
@@ -71,25 +87,27 @@ export default function ResultsPage({
               >
                 {data.map((item, idx) => (
                   <div key={idx} className="col">
-                    <div
-                      className="position-relative w-100"
-                      style={{ paddingTop: "171.36%" }}
-                    >
-                      <div className="position-absolute top-0 start-0 end-0 bottom-0">
-                        <div className="d-flex flex-column justify-content-between card p-2 border h-100">
-                          <h6 className="text-center mb-2 flex-grow-0">
-                            WANTED
-                          </h6>
-                          <div className="w-100 flex-grow-1 bg-dark"></div>
-                          <div className="text-center flex-grow-0">
-                            <small>Reward</small>
-                            <h6 className="text-center mb-0">{`${currencySymbol(
-                              item.currency
-                            )} ${item.reward}`}</h6>
+                    <Link href="/item">
+                      <div
+                        className="position-relative w-100"
+                        style={{ paddingTop: "171.36%" }}
+                      >
+                        <div className="position-absolute top-0 start-0 end-0 bottom-0">
+                          <div className="d-flex flex-column justify-content-between card p-2 border h-100">
+                            <h6 className="text-center mb-2 flex-grow-0">
+                              WANTED
+                            </h6>
+                            <div className="w-100 flex-grow-1 bg-dark"></div>
+                            <div className="text-center flex-grow-0">
+                              <small>Reward</small>
+                              <h6 className="text-center mb-0">{`${currencySymbol(
+                                item.currency
+                              )} ${item.reward}`}</h6>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>

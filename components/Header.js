@@ -45,7 +45,7 @@ export default function Header() {
                           <SearchForm />
                         </div>
                       </div>
-                      <div className="d-flex justify-content-end flex-nowrap">
+                      <div className="d-flex justify-content-end flex-nowrap align-items-center">
                         <span className="d-inline-block flex-grow-0 flex-shrink-1 ms-4 mb-3"></span>
                         <Link href="/post">
                           <Button color="primary">POST</Button>

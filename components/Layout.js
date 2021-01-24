@@ -4,7 +4,7 @@ import Logo from "./Logo";
 export default function Layout({ children }) {
   return (
     <div>
-      <div className="">
+      <div className="min-vh-100">
         <Header />
         <div className="container">{children}</div>
         <span className="d-block mb-3"></span>
