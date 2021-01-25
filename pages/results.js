@@ -3,6 +3,7 @@ import ResultsPage from "../components/ResultsPage";
 const searchText = "Iphone 6 plus";
 const data = [
   {
+    id: "211341",
     name: "Iphone 6 plus",
     reward: "750",
     currency: "GBP",
@@ -12,6 +13,7 @@ const data = [
     email: "toundaherve@gmail.com",
   },
   {
+    id: "48274824",
     name: "Iphone 6 plus",
     reward: "650",
     currency: "GBP",

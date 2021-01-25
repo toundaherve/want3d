@@ -150,7 +150,7 @@ function Filter({ children, options = ["option1", "option2", "option3"] }) {
   );
 }
 
-function currencySymbol(currency) {
+export function currencySymbol(currency) {
   const symbols = {
     EUR: "€",
     USD: "$",
