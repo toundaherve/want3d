@@ -42,16 +42,14 @@ export default function Post() {
         image: croppedImage,
       };
 
-      console.log(data);
-
       let response;
       try {
-        response = await axios.post("http://192.168.1.68:3000/post", data);
+        response = await axios.post("http://192.168.1.68:3000/api/post", data);
 
         if (response.data.error) {
           handleError(response.data.errorMessage);
         } else {
-          setNewPostId(data.postId);
+          setNewPostId(response.data.newPostId);
         }
       } catch (error) {
         handleError(error);
@@ -77,7 +75,7 @@ export default function Post() {
           type="success"
           nextMessage={"You can see your wanted poster here: "}
           nextButtonText="View poster"
-          nextLink={`/item${newPostId}`}
+          nextLink={`/item?id=${newPostId}`}
         />
       )}
       {!errorMessage && !newPostId && (
