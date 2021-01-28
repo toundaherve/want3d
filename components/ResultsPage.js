@@ -97,7 +97,13 @@ export default function ResultsPage({
                             <h6 className="text-center mb-2 flex-grow-0">
                               WANTED
                             </h6>
-                            <div className="w-100 flex-grow-1 bg-dark"></div>
+                            <div className="w-100 flex-grow-1 bg-light">
+                              <img
+                                className="img-fluid"
+                                src="https://i.guim.co.uk/img/media/ac8cc7193827bc8e5a1ec338113c49ea21248174/0_0_2100_1260/master/2100.jpg?width=1225&quality=85&auto=format&fit=max&s=9d51b50e7ba1828ffc0b91c11b9210a6"
+                                alt={item.name}
+                              />
+                            </div>
                             <div className="text-center flex-grow-0">
                               <small>Reward</small>
                               <h6 className="text-center mb-0">{`${currencySymbol(
