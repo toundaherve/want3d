@@ -22,3 +22,16 @@ export async function savePostToDb(data) {
     throw error;
   }
 }
+
+export async function getPostFromDb(id) {
+  let pk = id;
+  if (typeof id === "string") {
+    pk = parseInt(id);
+  }
+  try {
+    const newPost = await Post.findByPk(pk, { raw: true });
+    return newPost;
+  } catch (error) {
+    throw error;
+  }
+}

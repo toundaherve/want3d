@@ -1,4 +1,5 @@
 import ItemPage from "../components/ItemPage";
+import { getPostFromDb } from "../db/Post";
 
 const item = {
   id: "211341",
@@ -11,6 +12,35 @@ const item = {
   email: "toundaherve@gmail.com",
 };
 
-export default function Item() {
-  return <ItemPage data={item} />;
+export default function Item({ data }) {
+  return <ItemPage data={data} />;
+}
+
+export async function getServerSideProps(context) {
+  const id = context.query.id;
+
+  if (!id) {
+    context.res.writeHead(400, { "Context-Type": "text/plain" });
+    context.res.end("Missing Id");
+    return;
+  }
+
+  let post = await getPostFromDb(id);
+  if (post === null) {
+    context.res.writeHead(400, { "Context-Type": "text/plain" });
+    context.res.end("Post not found");
+    return;
+  }
+
+  console.dir(post.createdAt.toString());
+
+  return {
+    props: {
+      data: {
+        ...post,
+        createdAt: post.createdAt.toString(),
+        updatedAt: post.updatedAt.toString(),
+      },
+    },
+  };
 }
