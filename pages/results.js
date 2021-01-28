@@ -1,4 +1,5 @@
 import ResultsPage from "../components/ResultsPage";
+import { searchPostsInDb } from "../db/Post";
 
 const searchText = "Iphone 6 plus";
 const data = [
@@ -28,6 +29,40 @@ const filters = [
   [["Category"], ["Automobiles", "Phones", "Clothing"]],
 ];
 
-export default function Results() {
-  return <ResultsPage searchText={searchText} data={data} filters={filters} />;
+export default function Results({ data, search }) {
+  return <ResultsPage search={search} data={data} filters={filters} />;
+}
+
+export async function getServerSideProps(context) {
+  const text = context.query.search;
+
+  if (!text) {
+    context.res.writeHead(400, { "Context-Type": "text/plain" });
+    context.res.end("Missing search text");
+    return;
+  }
+
+  const limit = context.query.limit ? context.query.limit : 10;
+  const offset = context.query.offset ? context.query.offset : 0;
+
+  let results;
+  try {
+    results = await searchPostsInDb(text, limit, offset);
+  } catch (error) {
+    context.res.writeHead(500, { "Context-Type": "text/plain" });
+    context.res.end("Internal server error");
+    return;
+  }
+
+  results.forEach((post) => {
+    delete post.createdAt;
+    delete post.updatedAt;
+  });
+
+  return {
+    props: {
+      data: results,
+      search: text,
+    },
+  };
 }

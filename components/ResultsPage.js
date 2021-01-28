@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function ResultsPage({
-  searchText = "",
+  search = "",
   data = [],
   hasMoreData = false,
   filters = [],
@@ -53,8 +53,8 @@ export default function ResultsPage({
                   {
                     <h1>
                       {data.length > 0
-                        ? `Wanted "${searchText}"`
-                        : `No wanted "${searchText}" yet`}
+                        ? `Wanted "${search}"`
+                        : `No wanted "${search}" yet`}
                     </h1>
                   }
                   {/* Filters */}
@@ -87,7 +87,7 @@ export default function ResultsPage({
               >
                 {data.map((item, idx) => (
                   <div key={idx} className="col">
-                    <Link href="/item">
+                    <a href={`/item?id=${item.id}`} className="link-dark">
                       <div
                         className="position-relative w-100"
                         style={{ paddingTop: "171.36%" }}
@@ -113,7 +113,7 @@ export default function ResultsPage({
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </a>
                   </div>
                 ))}
               </div>

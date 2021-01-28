@@ -25,14 +25,19 @@ export async function getServerSideProps(context) {
     return;
   }
 
-  let post = await getPostFromDb(id);
-  if (post === null) {
-    context.res.writeHead(400, { "Context-Type": "text/plain" });
-    context.res.end("Post not found");
+  let post;
+  try {
+    post = await getPostFromDb(id);
+    if (post === null) {
+      context.res.writeHead(400, { "Context-Type": "text/plain" });
+      context.res.end("Post not found");
+      return;
+    }
+  } catch (error) {
+    context.res.writeHead(500, { "Context-Type": "text/plain" });
+    context.res.end("Internal server error");
     return;
   }
-
-  console.dir(post.createdAt.toString());
 
   return {
     props: {

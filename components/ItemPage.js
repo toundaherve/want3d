@@ -38,7 +38,9 @@ export default function ItemPage({ data }) {
                 <h6 className="fw-bold">Item Details</h6>
                 <div className="flex-wrap">
                   {Object.keys(data).map((key, idx) => {
-                    if (!["description", "email", "id"].includes(key)) {
+                    if (
+                      !["description", "email", "id", "image"].includes(key)
+                    ) {
                       return (
                         <div key={idx} className="flex-wrap">
                           <span>{capitalize(key)}: </span>
