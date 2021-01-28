@@ -6,7 +6,6 @@ import PostPage from "../components/PostPage";
 export default function Post() {
   const [newPostId, setNewPostId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [croppedImage, setCroppedImage] = useState(null);
 
@@ -21,7 +20,6 @@ export default function Post() {
       errorMessage = error.message;
     }
 
-    hasError(true);
     setErrorMessage(errorMessage);
   }
 
@@ -46,18 +44,18 @@ export default function Post() {
 
       console.log(data);
 
-      // let response;
-      // try {
-      //   response = await axios.post("http://192.168.1.68:3000/post", data);
+      let response;
+      try {
+        response = await axios.post("http://192.168.1.68:3000/post", data);
 
-      //   if (response.data.error) {
-      //     handleError(response.data.errorMessage);
-      //   } else {
-      //     setNewPostId(data.postId);
-      //   }
-      // } catch (error) {
-      //   handleError(error);
-      // }
+        if (response.data.error) {
+          handleError(response.data.errorMessage);
+        } else {
+          setNewPostId(data.postId);
+        }
+      } catch (error) {
+        handleError(error);
+      }
     }
 
     setIsSubmitting(false);
@@ -65,7 +63,7 @@ export default function Post() {
 
   return (
     <>
-      {hasError && (
+      {errorMessage && (
         <Alert
           heading="Sorry ! We could not perform the operation"
           message={errorMessage}
@@ -82,7 +80,7 @@ export default function Post() {
           nextLink={`/item${newPostId}`}
         />
       )}
-      {!hasError && !newPostId && (
+      {!errorMessage && !newPostId && (
         <PostPage
           isSubmitting={isSubmitting}
           onSubmit={onSubmit}
