@@ -11,24 +11,25 @@ export default function ItemPage({ data }) {
           {/* Hidden */}
           <div className="row">
             <div className="col-12 col-md-7 px-0 pe-md-5">
-              <div
-                className="bg-secondary w-100 position-relative"
-                style={{ paddingTop: "56.25%" }}
-              >
-                <div className="position-absolute top-0 start-0 bottom-0 end-0">
-                  {/* Poster */}
-                  <div
-                    className="d-flex flex-column justify-content-between card p-2 border mx-auto h-100"
-                    style={{ width: "256px" }}
-                  >
-                    <h6 className="text-center mb-0">WANTED</h6>
-                    <div className="w-100"></div>
-                    <div className="text-center">
-                      <small>Reward</small>
-                      <h6 className="text-center mb-0">{`${currencySymbol(
-                        data.currency
-                      )} ${data.reward}`}</h6>
-                    </div>
+              <div className="bg-secondary w-100 position-relative">
+                {/* Poster */}
+                <div
+                  className="d-flex flex-column justify-content-between card p-2 border mx-auto h-100"
+                  style={{ width: "256px" }}
+                >
+                  <h6 className="text-center mb-0">WANTED</h6>
+                  <div className="w-100">
+                    <img
+                      className="img-fluid"
+                      src={data.image}
+                      alt={data.name}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <small>Reward</small>
+                    <h6 className="text-center mb-0">{`${currencySymbol(
+                      data.currency
+                    )} ${data.reward}`}</h6>
                   </div>
                 </div>
               </div>
