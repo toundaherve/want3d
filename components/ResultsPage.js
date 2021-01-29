@@ -100,7 +100,7 @@ export default function ResultsPage({
                             <div className="w-100 flex-grow-1 bg-light">
                               <img
                                 className="img-fluid"
-                                src="https://i.guim.co.uk/img/media/ac8cc7193827bc8e5a1ec338113c49ea21248174/0_0_2100_1260/master/2100.jpg?width=1225&quality=85&auto=format&fit=max&s=9d51b50e7ba1828ffc0b91c11b9210a6"
+                                src={item.image}
                                 alt={item.name}
                               />
                             </div>

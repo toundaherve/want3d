@@ -55,6 +55,7 @@ export async function getServerSideProps(context) {
   }
 
   results.forEach((post) => {
+    post.image = post.image.toString("utf8");
     delete post.createdAt;
     delete post.updatedAt;
   });

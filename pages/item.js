@@ -43,6 +43,7 @@ export async function getServerSideProps(context) {
     props: {
       data: {
         ...post,
+        image: post.image.toString("utf8"),
         createdAt: post.createdAt.toString(),
         updatedAt: post.updatedAt.toString(),
       },
