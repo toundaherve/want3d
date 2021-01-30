@@ -1,9 +1,55 @@
-.p-4-5 {
+.pt-12px {
+  padding-top: 12px !important;
+}
+
+.pb-12px {
+  padding-bottom: 12px !important;
+}
+
+.pl-12px {
+  padding-left: 12px !important;
+}
+
+.pr-12px {
+  padding-right: 12pc !important;
+}
+
+.mt-12px {
+  margin-top: 12px !important;
+}
+
+.mb-12px {
+  margin-bottom: 12px !important;
+}
+
+.ml-12px {
+  margin-left: 12px !important;
+}
+
+.mr-12px {
+  margin-right: 12px !important;
+}
+
+.ml-20px {
+  margin-left: 20px !important;
+}
+
+.p-32px {
   padding: 32px !important;
 }
 
 @media screen and (min-width: 768px) {
-  .p-md-4-5 {
+  .p-md-32px {
     padding: 32px !important;
+  }
+}
+
+.header-height {
+  height: 108px;
+}
+
+@media screen and (min-width: 768px) {
+  .header-height {
+    height: 62px;
   }
 }

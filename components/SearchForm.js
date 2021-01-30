@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 export default function SearchForm() {
   return (
     <form className="d-flex" action="/results">
@@ -8,9 +10,7 @@ export default function SearchForm() {
         aria-label="Search"
         name="search"
       />
-      <button className="btn btn-outline-success" type="submit">
-        Search
-      </button>
+      <Button type="submit">Search</Button>
     </form>
   );
 }
