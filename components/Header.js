@@ -131,7 +131,7 @@ function HeaderContent1() {
 
 function HeaderContent2() {
   return (
-    <div className="d-none d-md-flex">
+    <div className="d-none d-md-flex align-items-center">
       <Logo />
       <span className="d-inline-block mb-3 ms-3"></span>
       <div className="flex-grow-1">
