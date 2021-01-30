@@ -82,7 +82,7 @@ function FooterContent() {
 function FooterNav({ title, links = [] }) {
   return (
     <div className="d-flex align-items-center flex-column">
-      <h6>{title}</h6>
+      <h6 className="mb-0">{title}</h6>
       <span className="d-block mb-2"></span>
       {links.map((link, idx) => (
         <a key={idx} href={link.url} className="mb-1">

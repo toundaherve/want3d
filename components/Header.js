@@ -87,7 +87,11 @@ export default function Header() {
   const addShadow = useWindowHasScrolledPastValue(2);
 
   return (
-    <div className={`sticky-top ${addShadow ? "shadow" : "shadow-none"}`}>
+    <div
+      className={`sticky-top header-top ${
+        addShadow ? "shadow" : "shadow-none"
+      }`}
+    >
       <div className="bg-white">
         <div className="header-height">
           <div className="container">
@@ -116,7 +120,9 @@ function HeaderContent1() {
         <div className="col-12">
           <div className="d-flex">
             <div className="">
-              <Button outlined>POST</Button>
+              <Button outlined link="/post">
+                POST
+              </Button>
             </div>
             <div className="span d-block mb-3 ml-12px"></div>
             <div className="flex-grow-1">
@@ -138,7 +144,9 @@ function HeaderContent2() {
         <SearchForm />
       </div>
       <span className="d-inline-block mb-3 ml-20px"></span>
-      <Button outlined>POST</Button>
+      <Button outlined link="/post">
+        POST
+      </Button>
     </div>
   );
 }
