@@ -15,55 +15,12 @@ export default function Footer() {
   );
 }
 
-const links = {
-  wantedLinks: [
-    {
-      text: "About WANT3D",
-      url: "/about",
-    },
-    {
-      text: "Advertising on WANT3D",
-      url: "/advertising",
-    },
-    {
-      text: "News",
-      url: "/news",
-    },
-  ],
-
-  legalLinks: [
-    {
-      text: "Contact",
-      url: "/contact",
-    },
-    {
-      text: "Terms & Conditions",
-      url: "/terms",
-    },
-    {
-      text: "Buyer protection",
-      url: "/buyer-protection",
-    },
-    {
-      text: "Privacy Policy",
-      url: "/privacy-policy",
-    },
-    {
-      text: "Cookie Policy",
-      url: "/cookie-policy",
-    },
-    {
-      text: "Privacy settings",
-      url: "/privacy-settings",
-    },
-  ],
-};
-
 function FooterDivider() {
-  return <span className="d-block border"></span>;
+  return <span className="d-block border border-light"></span>;
 }
 
 function FooterContent() {
+  const links = getLinksData();
   return (
     <div className="row">
       <div className="col-12 col-md-4">
@@ -109,11 +66,57 @@ function FooterCopyright() {
 function FooterSocialMediaLinks() {
   return (
     <div className="d-flex justify-content-center py-20px">
-      <span>F</span>
+      <a href="/">F</a>
       <span className="d-block ml-12px mb-3"></span>
-      <span>I</span>
+      <a href="/">I</a>
       <span className="d-block ml-12px mb-3"></span>
-      <span>T</span>
+      <a href="/">T</a>
     </div>
   );
+}
+
+function getLinksData() {
+  return {
+    wantedLinks: [
+      {
+        text: "About WANT3D",
+        url: "/about",
+      },
+      {
+        text: "Advertising on WANT3D",
+        url: "/advertising",
+      },
+      {
+        text: "News",
+        url: "/news",
+      },
+    ],
+
+    legalLinks: [
+      {
+        text: "Contact",
+        url: "/contact",
+      },
+      {
+        text: "Terms & Conditions",
+        url: "/terms",
+      },
+      {
+        text: "Buyer protection",
+        url: "/buyer-protection",
+      },
+      {
+        text: "Privacy Policy",
+        url: "/privacy-policy",
+      },
+      {
+        text: "Cookie Policy",
+        url: "/cookie-policy",
+      },
+      {
+        text: "Privacy settings",
+        url: "/privacy-settings",
+      },
+    ],
+  };
 }
