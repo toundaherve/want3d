@@ -27,6 +27,12 @@
   padding: 32px !important;
 }
 
+@media screen and (min-width: 768px) {
+  .p-md-32px {
+    padding: 32px !important;
+  }
+}
+
 .pt-32px {
   padding-top: 32px !important;
 }
@@ -151,4 +157,10 @@
   display: inline-block;
   width: 160px;
   height: 600px;
+}
+
+@media screen and (min-width: 992px) {
+  .post-form-width {
+    max-width: 66.6667%;
+  }
 }

@@ -1,13 +1,3 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  ButtonDropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-} from "reactstrap";
-import { useState } from "react";
-
 import Layout from "./Layout";
 import Button from "./Button";
 
@@ -77,16 +67,18 @@ function Panel() {
       <span className="d-block mb-2"></span>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb mb-0">
-          <li className="breadcrumb-item">Home</li>
+          <li className="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
           <li className="breadcrumb-item active" aria-current="page">
             Results
           </li>
         </ol>
       </nav>
       <h1 className="mb-0">Results for wanted "iphone"</h1>
-      <span className="d-block mb-3"></span>
+      <span className="d-block mb-12px"></span>
       <div className="d-flex flex-nowrap">
-        {[1, 2, 3, 4].map((filter, idx) => (
+        {[1, 2].map((filter, idx) => (
           <div key={idx}>
             <Filter />
           </div>
@@ -108,24 +100,16 @@ function Filter() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Dropdown button
+          Filter
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li>
-            <a className="dropdown-item" href="#">
-              Action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Another action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Something else here
-            </a>
-          </li>
+          {[1, 2, 3].map((option, idx) => (
+            <li key={idx}>
+              <a className="dropdown-item" href="#">
+                Action
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
