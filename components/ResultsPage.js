@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 
-export default function ResultsPage({
+function ResultsPageOLD({
   search = "",
   data = [],
   hasMoreData = false,
@@ -166,4 +166,51 @@ export function currencySymbol(currency) {
   };
 
   return symbols[currency];
+}
+
+export default function ResultsPage() {
+  return (
+    <Layout>
+      <span className="d-block mb-2"></span>
+      <div className="container">
+        <TopAd />
+        <span className="d-block mb-3"></span>
+        <div className="d-flex justify-content-between flex-wrap">
+          <div className="flex-grow-1"></div>
+          <div className="d-none d-lg-block results-page-aside-ad-box ms-lg-3">
+            <AsideAd />
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+function TopAd() {
+  return (
+    <div className="d-flex justify-content-center">
+      <div className="position-relative">
+        <div className="results-page-top-ad-box">
+          <div className="results-page-top-ad-iframe-box d-inline-block bg-light border">
+            {/* iframe goes here */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AsideAd() {
+  return (
+    // TODO : Stick at ~91px
+    <div className="results-page-aside-ad-top border">
+      <div className="d-flex justify-content-start">
+        <div className="position-relative">
+          <div className="results-page-aside-ad-iframe-box bg-light">
+            {/* iframe goes here */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

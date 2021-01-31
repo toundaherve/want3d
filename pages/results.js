@@ -1,6 +1,7 @@
 import ResultsPage from "../components/ResultsPage";
 import { searchPostsInDb } from "../db/Post";
 
+// mockData
 const searchText = "Iphone 6 plus";
 const data = [
   {
@@ -39,7 +40,9 @@ export async function getServerSideProps(context) {
   if (!text) {
     context.res.writeHead(400, { "Context-Type": "text/plain" });
     context.res.end("Missing search text");
-    return;
+    return {
+      props: null,
+    };
   }
 
   const limit = context.query.limit ? context.query.limit : 10;
@@ -51,13 +54,15 @@ export async function getServerSideProps(context) {
   } catch (error) {
     context.res.writeHead(500, { "Context-Type": "text/plain" });
     context.res.end("Internal server error");
-    return;
+    return {
+      props: null,
+    };
   }
 
   results.forEach((post) => {
-    post.image = post.image.toString("utf8");
-    delete post.createdAt;
-    delete post.updatedAt;
+    post.image = post.image.toString("utf8"); // image is of type buffer
+    delete post.createdAt; // not needed
+    delete post.updatedAt; // not needed
   });
 
   return {
