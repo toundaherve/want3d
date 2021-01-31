@@ -106,6 +106,27 @@
   height: 50px;
 }
 
+@media screen and (min-width: 768px) {
+  .results-page-top-ad-box {
+    max-width: 728px;
+    max-height: 90px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .results-page-top-ad-iframe-box {
+    width: 728px;
+    height: 90px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .results-page-top-ad-box {
+    max-width: 970px;
+    max-height: 250px;
+  }
+}
+
 .results-page-aside-ad-box {
   flex: 0 0 auto;
 }
