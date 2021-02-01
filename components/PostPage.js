@@ -262,13 +262,12 @@ export default function PostPage() {
         <form action="">
           <h4 className="mb-0">Make a poster</h4>
           <span className="d-block mb-3"></span>
-
           <FormSection>
             <ImageField />
           </FormSection>
           <span className="d-block mb-3"></span>
           <FormSection>
-            <div>
+            <FormField>
               <Label htmlFor="name-field">Item name</Label>
               <span className="d-block mb-1"></span>
               <Input
@@ -277,9 +276,9 @@ export default function PostPage() {
                 placeholder="The name of the item"
                 name="name"
               />
-            </div>
+            </FormField>
             <span className="d-block mb-3"></span>
-            <div>
+            <FormField>
               <Label htmlFor="reward-field">Reward</Label>
               <span className="d-block mb-1"></span>
               <div className="d-flex">
@@ -302,9 +301,9 @@ export default function PostPage() {
                   />
                 </div>
               </div>
-            </div>
+            </FormField>
             <span className="d-block mb-3"></span>
-            <div>
+            <FormField>
               <Label htmlFor="description-field">Description</Label>
               <span className="d-block mb-1"></span>
               <textarea
@@ -314,9 +313,9 @@ export default function PostPage() {
                 placeholder="More information about the item"
                 className="form-control"
               />
-            </div>
+            </FormField>
             <span className="d-block mb-3"></span>
-            <div>
+            <FormField>
               <Label htmlFor="category-field">Category</Label>
               <span className="d-block mb-1"></span>
               <select
@@ -331,11 +330,11 @@ export default function PostPage() {
                 <option value="Phones">Phones</option>
                 <option value="Clothing">Clothing</option>
               </select>
-            </div>
+            </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
           <FormSection>
-            <div>
+            <FormField>
               <Label htmlFor="location-field">City / Country</Label>
               <span className="d-block mb-1"></span>
               <Input
@@ -344,9 +343,9 @@ export default function PostPage() {
                 placeholder=""
                 name="location"
               />
-            </div>
+            </FormField>
             <span className="d-block mb-3"></span>
-            <div>
+            <FormField>
               <Label htmlFor="email-field">Email</Label>
               <span className="d-block mb-1"></span>
               <Input
@@ -355,7 +354,7 @@ export default function PostPage() {
                 placeholder="Your email"
                 name="email"
               />
-            </div>
+            </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
           <div className="p-3 p-md-0">
@@ -373,11 +372,11 @@ export default function PostPage() {
 
 function ImageField() {
   return (
-    <div>
+    <FormField>
       <Label htmlFor="image-field">Image</Label>
       <span className="d-block mb-2"></span>
       <Input name="image" id="image-field" type="file" />
-    </div>
+    </FormField>
   );
 }
 
@@ -385,6 +384,10 @@ function FormSection({ children }) {
   return (
     <div className="p-3 p-md-32px bg-light border rounded">{children}</div>
   );
+}
+
+function FormField({ children }) {
+  return <div>{children}</div>;
 }
 
 function Label({ children, ...rest }) {
