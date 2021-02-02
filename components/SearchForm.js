@@ -10,7 +10,9 @@ export default function SearchForm() {
         aria-label="Search"
         name="search"
       />
-      <Button type="submit">Search</Button>
+      <Button type="submit" outlined purpose="light">
+        Search
+      </Button>
     </form>
   );
 }

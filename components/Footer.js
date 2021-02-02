@@ -3,7 +3,7 @@ import Logo from "./Logo";
 export default function Footer() {
   return (
     <div className="position-relative z-index-0">
-      <div className="bg-white">
+      <div className="bg-dark text-white">
         <FooterDivider />
         <div className="container py-32px">
           <FooterContent />
@@ -16,7 +16,7 @@ export default function Footer() {
 }
 
 function FooterDivider() {
-  return <span className="d-block border border-light"></span>;
+  return <span className="d-block border border-secondary"></span>;
 }
 
 function FooterContent() {
@@ -42,7 +42,11 @@ function FooterNav({ title, links = [] }) {
       <h6 className="mb-0">{title}</h6>
       <span className="d-block mb-2"></span>
       {links.map((link, idx) => (
-        <a key={idx} href={link.url} className="mb-1">
+        <a
+          key={idx}
+          href={link.url}
+          className="mb-1 text-secondary text-decoration-none"
+        >
           <small>{link.text}</small>
         </a>
       ))}
@@ -57,7 +61,7 @@ function FooterCopyright() {
       <Logo />
       <span className="d-block mb-3"></span>
       <span>
-        <small>WANT3D &copy; 2021</small>
+        <small className="text-secondary">WANT3D &copy; 2021</small>
       </span>
     </div>
   );
@@ -66,11 +70,17 @@ function FooterCopyright() {
 function FooterSocialMediaLinks() {
   return (
     <div className="d-flex justify-content-center py-20px">
-      <a href="/">F</a>
+      <a href="/" className="text-white text-decoration-none">
+        F
+      </a>
       <span className="d-block ml-12px mb-3"></span>
-      <a href="/">I</a>
+      <a href="/" className="text-white text-decoration-none">
+        I
+      </a>
       <span className="d-block ml-12px mb-3"></span>
-      <a href="/">T</a>
+      <a href="/" className="text-white text-decoration-none">
+        T
+      </a>
     </div>
   );
 }
@@ -120,3 +130,11 @@ function getLinksData() {
     ],
   };
 }
+
+// footer background-color changed
+
+// all text-color changed
+
+// text-decoration changed
+
+// alignment changed
