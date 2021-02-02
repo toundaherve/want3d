@@ -164,3 +164,7 @@
     max-width: 66.6667%;
   }
 }
+
+.item-divider {
+  height: 1px;
+}

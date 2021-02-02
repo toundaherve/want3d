@@ -306,13 +306,12 @@ export default function PostPage() {
             <FormField>
               <Label htmlFor="description-field">Description</Label>
               <span className="d-block mb-1"></span>
-              <textarea
+              <TextArea
                 id="description-field"
                 rows="3"
                 name="description"
                 placeholder="More information about the item"
-                className="form-control"
-              />
+              ></TextArea>
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
@@ -357,12 +356,7 @@ export default function PostPage() {
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
-          <div className="p-3 p-md-0">
-            <div className="d-grid d-md-block text-end">
-              <Button purpose="success">Post now</Button>
-            </div>
-            <span className="d-block mb-3"></span>
-          </div>
+          <Submit>Post now</Submit>
         </form>
       </div>
       <span className="d-block mb-3"></span>
@@ -380,17 +374,28 @@ function ImageField() {
   );
 }
 
-function FormSection({ children }) {
+export function Submit({ children }) {
+  return (
+    <div className="p-3 p-md-0">
+      <div className="d-grid d-md-block text-end">
+        <Button purpose="success">{children}</Button>
+      </div>
+      <span className="d-block mb-3"></span>
+    </div>
+  );
+}
+
+export function FormSection({ children }) {
   return (
     <div className="p-3 p-md-32px bg-light border rounded">{children}</div>
   );
 }
 
-function FormField({ children }) {
+export function FormField({ children }) {
   return <div>{children}</div>;
 }
 
-function Label({ children, ...rest }) {
+export function Label({ children, ...rest }) {
   return (
     <label className="form-label m-0 p-0 d-block" {...rest}>
       {children}
@@ -398,6 +403,10 @@ function Label({ children, ...rest }) {
   );
 }
 
-function Input(props) {
+export function Input(props) {
   return <input {...props} className="form-control" />;
+}
+
+export function TextArea(props) {
+  return <textarea {...props} className="form-control" />;
 }

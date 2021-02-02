@@ -1,5 +1,7 @@
 import Layout from "./Layout";
 import Button from "./Button";
+import TopAd from "./TopAd";
+import Breadcrumb from "./Breadcrumb";
 
 export default function ResultsPage() {
   return (
@@ -15,20 +17,6 @@ export default function ResultsPage() {
       </div>
       <span className="d-block mb-3"></span>
     </Layout>
-  );
-}
-
-function TopAd() {
-  return (
-    <div className="d-flex justify-content-center">
-      <div className="position-relative">
-        <div className="results-page-top-ad-box">
-          <div className="results-page-top-ad-iframe-box d-inline-block bg-light border">
-            {/* iframe goes here */}
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -65,16 +53,7 @@ function Panel() {
   return (
     <div>
       <span className="d-block mb-2"></span>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb mb-0">
-          <li className="breadcrumb-item">
-            <a href="/">Home</a>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Results
-          </li>
-        </ol>
-      </nav>
+      <Breadcrumb />
       <h1 className="mb-0">Results for wanted "iphone"</h1>
       <span className="d-block mb-12px"></span>
       <div className="d-flex flex-nowrap">
