@@ -125,10 +125,10 @@ export default function ItemPage() {
       <div className="container post-form-width ">
         <TopAd />
         <span className="d-block mb-3"></span>
-        <div className="d-none d-md-block">
+        {/* <div className="d-none d-md-block">
           <Breadcrumb />
           <span className="d-block mb-3"></span>
-        </div>
+        </div> */}
         <div>
           <Item />
           <Contact />
@@ -141,7 +141,7 @@ export default function ItemPage() {
 
 function Item() {
   return (
-    <div>
+    <div className="bg-white p-3 p-md-32px card shadow">
       <h4 className="mb-0">Iphone 6 plus</h4>
       <span className="d-block mb-1"></span>
       <p className="h4 mb-0">$750</p>
@@ -183,10 +183,10 @@ function Divider() {
 
 function Contact() {
   return (
-    <form className="pt-3 ">
-      <h4 className="mb-0">Contact the user</h4>
-      <span className="d-block mb-3"></span>
+    <form className="pt-3">
       <FormSection>
+        <h4 className="mb-0">Contact the user</h4>
+        <span className="d-block mb-3"></span>
         <FormField>
           <Label htmlFor="email-field">Your Email</Label>
           <span className="d-block mb-1"></span>

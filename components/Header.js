@@ -41,7 +41,10 @@ function HeaderContent1() {
         <div className="col-12">
           <div className="d-flex">
             <div className="">
-              <Button purpose="link" link="/post">
+              <Button
+                purpose="link text-white text-decoration-none"
+                link="/post"
+              >
                 POST
               </Button>
             </div>

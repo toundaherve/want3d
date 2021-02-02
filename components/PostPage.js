@@ -262,10 +262,10 @@ export default function PostPage() {
         <form action="">
           <h4 className="mb-0">Make a poster</h4>
           <span className="d-block mb-3"></span>
-          <FormSection>
+          {/* <FormSection>
             <ImageField />
           </FormSection>
-          <span className="d-block mb-3"></span>
+          <span className="d-block mb-3"></span> */}
           <FormSection>
             <FormField>
               <Label htmlFor="name-field">Item name</Label>
@@ -387,7 +387,9 @@ export function Submit({ children }) {
 
 export function FormSection({ children }) {
   return (
-    <div className="p-3 p-md-32px bg-light border rounded">{children}</div>
+    <div className="p-3 p-md-32px bg-white border rounded shadow">
+      {children}
+    </div>
   );
 }
 
