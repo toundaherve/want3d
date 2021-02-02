@@ -7,7 +7,7 @@ export default function Home() {
       <div className="container">
         <div className="hero-height position-relative">
           <div className="position-absolute top-0 start-0 bottom-0 end-0">
-            <div className="w-100 h-100 bg-light"></div>
+            <div className="w-100 h-100 bg-light hero-bg-image"></div>
           </div>
         </div>
       </div>
@@ -15,3 +15,7 @@ export default function Home() {
     </Layout>
   );
 }
+
+// background-image placed
+
+//
