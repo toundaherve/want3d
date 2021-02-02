@@ -178,7 +178,7 @@ function Item() {
 }
 
 function Divider() {
-  return <span className="item-divider d-block my-3 bg-light"></span>;
+  return <span className="item-divider d-block my-3 bg-secondary"></span>;
 }
 
 function Contact() {
@@ -208,9 +208,9 @@ function Contact() {
             placeholder="Given some info about your item"
           ></TextArea>
         </FormField>
+        <span className="d-block mb-3"></span>
+        <Submit>Send now</Submit>
       </FormSection>
-      <span className="d-block mb-3"></span>
-      <Submit>Send now</Submit>
     </form>
   );
 }

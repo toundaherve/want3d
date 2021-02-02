@@ -2,7 +2,6 @@ import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import Button from "./Button";
 import useWindowHasScrolledPastValue from "../hooks/useWindowHasScrolledPastValue";
-import { useEffect, useState } from "react";
 
 export default function Header() {
   const addShadow = useWindowHasScrolledPastValue(2);
