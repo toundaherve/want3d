@@ -51,9 +51,9 @@ function MainContent() {
 
 function Panel() {
   return (
-    <div>
+    <div className="card shadow px-3">
       <span className="d-block mb-2"></span>
-      <Breadcrumb />
+      {/* <Breadcrumb /> */}
       <h1 className="mb-0">Results for wanted "iphone"</h1>
       <span className="d-block mb-12px"></span>
       <div className="d-flex flex-nowrap">
@@ -73,7 +73,7 @@ function Filter() {
     <div className="py-2 px-1">
       <div className="dropdown">
         <button
-          className="btn btn-secondary dropdown-toggle"
+          className="btn btn-outline-secondary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-bs-toggle="dropdown"
@@ -101,10 +101,10 @@ function Grid() {
       <div className="row row-cols-1 row-cols-md-2 g-2">
         {[1, 2, 3, 4].map((card, idx) => (
           <div className="col" key={idx}>
-            <div className="card">
+            <div className="card shadow">
               {/* <img src="..." className="card-img-top" alt="..." /> */}
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
+                <h5 className="card-title text-primary">Card title</h5>
                 <p className="card-text">
                   This is a longer card with supporting text below as a natural
                   lead-in to additional content. This content is a little bit
@@ -116,8 +116,16 @@ function Grid() {
         ))}
       </div>
       <div className="py-3 d-flex justify-content-center">
-        <Button purpose="success">Load more</Button>
+        <Button purpose="success shadow">Load more</Button>
       </div>
     </>
   );
 }
+
+// card shadow activated
+
+// card Heading color primaried
+
+// panel shadow activiated
+
+// panel carded
