@@ -1,4 +1,5 @@
 // import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
+import { useForm } from "react-hook-form";
 import Breadcrumb from "./Breadcrumb";
 import Layout from "./Layout";
 import {
@@ -142,9 +143,9 @@ export default function ItemPage() {
 function Item() {
   return (
     <div className="bg-white p-3 p-md-32px card shadow">
-      <h4 className="mb-0">Iphone 6 plus</h4>
+      <h4 className="mb-0 text-primary fw-bold">Iphone 6 plus</h4>
       <span className="d-block mb-1"></span>
-      <p className="h4 mb-0">$750</p>
+      <p className="h4 mb-0 fw-bold">$750</p>
       <Divider />
       <div className="row">
         <div className="col-12 col-md-6">
@@ -153,7 +154,7 @@ function Item() {
           <div className="d-flex flex-column">
             {[1, 2, 3, 4].map((detail, idx) => (
               <div key={idx}>
-                <span className="d-inline-block">Detail{idx}: </span>
+                <span className="d-inline-block">Detail{idx}:&nbsp;</span>
                 <span className="d-inline-block fw-bold">Value{idx}</span>
               </div>
             ))}
@@ -171,21 +172,23 @@ function Item() {
           </p>
         </div>
       </div>
-
-      <Divider />
     </div>
   );
 }
 
 function Divider() {
-  return <span className="item-divider d-block my-3 bg-secondary"></span>;
+  return <span className="item-divider d-block my-3 bg-light"></span>;
 }
 
 function Contact() {
+  const { register, errors, handleSubmit } = useForm();
   return (
-    <form className="pt-3">
+    <form
+      className="pt-3"
+      onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
+    >
       <FormSection>
-        <h4 className="mb-0">Contact the user</h4>
+        <h4 className="mb-0">Contact the buyer</h4>
         <span className="d-block mb-3"></span>
         <FormField>
           <Label htmlFor="email-field">Your Email</Label>
@@ -195,6 +198,8 @@ function Contact() {
             type="email"
             placeholder="Your email"
             name="email"
+            register={register}
+            error={errors.email && "Please provide your the email."}
           />
         </FormField>
         <span className="d-block mb-3"></span>
@@ -205,7 +210,8 @@ function Contact() {
             id="message-field"
             rows="3"
             name="message"
-            placeholder="Given some info about your item"
+            placeholder="Given some info to the buyer about the item."
+            register={register}
           ></TextArea>
         </FormField>
         <span className="d-block mb-3"></span>

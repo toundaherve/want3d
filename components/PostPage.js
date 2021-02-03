@@ -9,7 +9,7 @@ export default function PostPage() {
       <span className="d-block mb-3"></span>
       <div className="container post-form-width p-0">
         <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
-          <h4 className="mb-0">Make a poster</h4>
+          <h4 className="mb-0 ms-3 ms-md-0">Make a poster</h4>
           <span className="d-block mb-3"></span>
           {/* <FormSection>
             <ImageField />
