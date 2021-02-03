@@ -54,7 +54,7 @@ function Panel() {
     <div className="card shadow px-3">
       <span className="d-block mb-2"></span>
       {/* <Breadcrumb /> */}
-      <h1 className="mb-0">Results for wanted "iphone"</h1>
+      <h1 className="mb-0">Results for i need "iphone"</h1>
       <span className="d-block mb-12px"></span>
       <div className="d-flex flex-nowrap">
         {[1, 2].map((filter, idx) => (
@@ -105,14 +105,14 @@ function Grid() {
               <div className="card shadow">
                 {/* <img src="..." className="card-img-top" alt="..." /> */}
                 <div className="card-header px-2 py-1">
-                  <small>WANTED</small>
+                  <small>Needed</small>
                 </div>
                 <div className="card-body p-2">
                   <h6 className="card-title text-primary p-0 m-0 fw-bold">
                     Iphone 6 plus
                   </h6>
                   <small className="text-secondary">Leeds</small>
-                  <h6 className="card-title  p-0 m-0 fw-bold">$ 750</h6>
+                  <h6 className="card-title  p-0 m-0 fw-bold">$750</h6>
                   <span className="d-block mb-3"></span>
                   <p className="card-text p-0 m-0">
                     This is a longer card with supporting text below as a

@@ -9,7 +9,7 @@ export default function PostPage() {
       <span className="d-block mb-3"></span>
       <div className="container post-form-width p-0">
         <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
-          <h4 className="mb-0 ms-3 ms-md-0">Make a poster</h4>
+          <h4 className="mb-0 ms-3 ms-md-0">Tell us what you need</h4>
           <span className="d-block mb-3"></span>
           {/* <FormSection>
             <ImageField />
@@ -17,12 +17,11 @@ export default function PostPage() {
           <span className="d-block mb-3"></span> */}
           <FormSection>
             <FormField>
-              <Label htmlFor="name-field">Item name</Label>
+              <Label htmlFor="name-field">Name of the item</Label>
               <span className="d-block mb-1"></span>
               <Input
                 id="name-field"
                 type="text"
-                placeholder="The name of the item"
                 name="name"
                 register={register}
                 error={errors.name && "Please provide the name of the item."}
@@ -30,7 +29,21 @@ export default function PostPage() {
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
-              <Label htmlFor="reward-field">Reward</Label>
+              <Label htmlFor="category-field">Category for item</Label>
+              <span className="d-block mb-1"></span>
+              <Select
+                name="category"
+                selector="Select a category"
+                options={["Automobile", "Phones", "Clothing"]}
+                register={register}
+                error={
+                  errors.category && "Please select a category for the item."
+                }
+              />
+            </FormField>
+            <span className="d-block mb-3"></span>
+            <FormField>
+              <Label htmlFor="reward-field">Your budget</Label>
               <span className="d-block mb-1"></span>
               <div className="d-flex align-items-start">
                 <select
@@ -48,7 +61,6 @@ export default function PostPage() {
                     id="reward-field"
                     type="number"
                     name="reward"
-                    placeholder="How much you pay for it?"
                     register={register}
                     error={
                       errors.reward && "Please provide a reward for the item."
@@ -59,40 +71,24 @@ export default function PostPage() {
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
-              <Label htmlFor="description-field">Description</Label>
+              <Label htmlFor="description-field">Note to sellers</Label>
               <span className="d-block mb-1"></span>
               <TextArea
                 id="description-field"
                 rows="3"
                 name="description"
-                placeholder="More information about the item"
                 register={register}
               ></TextArea>
-            </FormField>
-            <span className="d-block mb-3"></span>
-            <FormField>
-              <Label htmlFor="category-field">Category</Label>
-              <span className="d-block mb-1"></span>
-              <Select
-                name="category"
-                selector="Select a category"
-                options={["Automobile", "Phones", "Clothing"]}
-                register={register}
-                error={
-                  errors.category && "Please select a category for the item."
-                }
-              />
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
           <FormSection>
             <FormField>
-              <Label htmlFor="location-field">City / Country</Label>
+              <Label htmlFor="location-field">Your city or country</Label>
               <span className="d-block mb-1"></span>
               <Input
                 id="location-field"
                 type="text"
-                placeholder=""
                 name="location"
                 register={register}
                 error={errors.location && "Please state your city or country."}
@@ -100,16 +96,18 @@ export default function PostPage() {
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
-              <Label htmlFor="email-field">Email</Label>
+              <Label htmlFor="email-field">Your email</Label>
               <span className="d-block mb-1"></span>
               <Input
                 id="email-field"
                 type="email"
-                placeholder="Your email"
                 name="email"
                 register={register}
                 error={errors.email && "Please provide your email."}
               />
+              <div className="form-text">
+                We will never share your email with anyone.
+              </div>
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>

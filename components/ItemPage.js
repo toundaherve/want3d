@@ -143,28 +143,27 @@ export default function ItemPage() {
 function Item() {
   return (
     <div className="bg-white p-3 p-md-32px card shadow">
-      <h4 className="mb-0 text-primary fw-bold">Iphone 6 plus</h4>
+      <h4 className="mb-0 fw-bold text-primary">Iphone 6 plus</h4>
       <span className="d-block mb-1"></span>
       <p className="h4 mb-0 fw-bold">$750</p>
       <Divider />
       <div className="row">
         <div className="col-12 col-md-6">
-          <h5 className="mb-0">Item details</h5>
+          <h5 className="mb-0 text-secondary">Details</h5>
           <span className="d-block mb-2"></span>
           <div className="d-flex flex-column">
-            {[1, 2, 3, 4].map((detail, idx) => (
-              <div key={idx}>
-                <span className="d-inline-block">Detail{idx}:&nbsp;</span>
-                <span className="d-inline-block fw-bold">Value{idx}</span>
-              </div>
-            ))}
+            <Detail name="Name" value="Iphone 6 plus" />
+            <Detail name="Category" value="Automobiles" />
+            <Detail name="Budget" value="$750" />
+            <Detail name="City / Country" value="Leeds, UK" />
+            <Detail name="Date published" value={Date.now().toLocaleString()} />
           </div>
         </div>
         <div className="col-12 d-md-none">
           <Divider />
         </div>
         <div className="col-12 col-md-6">
-          <h5 className="mb-0">Description</h5>
+          <h5 className="mb-0 text-secondary">Note to sellers</h5>
           <span className="d-block mb-2"></span>
           <p className="mb-0">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae neque
@@ -172,6 +171,15 @@ function Item() {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Detail({ name, value }) {
+  return (
+    <div>
+      <span className="d-inline-block text-secondary">{name}:&nbsp;</span>
+      <span className="d-inline-block fw-bold">{value}</span>
     </div>
   );
 }
@@ -196,11 +204,13 @@ function Contact() {
           <Input
             id="email-field"
             type="email"
-            placeholder="Your email"
             name="email"
             register={register}
             error={errors.email && "Please provide your the email."}
           />
+          <div className="form-text">
+            We will never share your email with anyone except this buyer.
+          </div>
         </FormField>
         <span className="d-block mb-3"></span>
         <FormField>
@@ -210,7 +220,6 @@ function Contact() {
             id="message-field"
             rows="3"
             name="message"
-            placeholder="Given some info to the buyer about the item."
             register={register}
           ></TextArea>
         </FormField>

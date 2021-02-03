@@ -24,7 +24,7 @@ function FooterContent() {
   return (
     <div className="row">
       <div className="col-12 col-md-4">
-        <FooterNav title="WANT3D" links={links.wantedLinks} />
+        <FooterNav title="iNeed" links={links.wantedLinks} />
       </div>
       <div className="col-12 col-md-4">
         <FooterNav title="LEGAL" links={links.legalLinks} />
@@ -61,7 +61,7 @@ function FooterCopyright() {
       <Logo />
       <span className="d-block mb-3"></span>
       <span>
-        <small className="text-secondary">WANT3D &copy; 2021</small>
+        <small className="text-secondary">iNeed &copy; 2021</small>
       </span>
     </div>
   );
@@ -89,11 +89,11 @@ function getLinksData() {
   return {
     wantedLinks: [
       {
-        text: "About WANT3D",
+        text: "About iNeed",
         url: "/about",
       },
       {
-        text: "Advertising on WANT3D",
+        text: "Advertising on iNeed",
         url: "/advertising",
       },
       {

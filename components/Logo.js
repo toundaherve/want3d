@@ -1,7 +1,7 @@
 export default function Logo() {
   return (
     <a href="/" className="text-decoration-none">
-      <span className="fs-3 text-white fw-bold">WANT3D</span>
+      <span className="fs-3 text-white fw-bold">iNeed</span>
     </a>
   );
 }
