@@ -16,6 +16,3 @@ export default function Home() {
   );
 }
 
-// background-image placed
-
-//

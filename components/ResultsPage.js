@@ -98,20 +98,29 @@ function Filter() {
 function Grid() {
   return (
     <>
-      <div className="row row-cols-1 row-cols-md-2 g-2">
-        {[1, 2, 3, 4].map((card, idx) => (
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
+        {[1, 2, 3, 4, 5, 6].map((card, idx) => (
           <div className="col" key={idx}>
-            <div className="card shadow">
-              {/* <img src="..." className="card-img-top" alt="..." /> */}
-              <div className="card-body">
-                <h5 className="card-title text-primary">Card title</h5>
-                <p className="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
+            <a href="/item" className="text-decoration-none text-dark">
+              <div className="card shadow">
+                {/* <img src="..." className="card-img-top" alt="..." /> */}
+                <div className="card-header px-2 py-1">
+                  <small>WANTED</small>
+                </div>
+                <div className="card-body p-2">
+                  <h6 className="card-title text-primary p-0 m-0 fw-bold">
+                    Iphone 6 plus
+                  </h6>
+                  <small className="text-secondary">Leeds</small>
+                  <h6 className="card-title  p-0 m-0 fw-bold">$ 750</h6>
+                  <span className="d-block mb-3"></span>
+                  <p className="card-text p-0 m-0">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content.
+                  </p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         ))}
       </div>
@@ -122,10 +131,8 @@ function Grid() {
   );
 }
 
-// card shadow activated
+// card- borders and items distanced
 
-// card Heading color primaried
+// card heading boldened
 
-// panel shadow activiated
-
-// panel carded
+//
