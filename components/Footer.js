@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="container py-32px">
           <FooterContent />
         </div>
-        <FooterDivider />
-        <FooterSocialMediaLinks />
+        {/* <FooterDivider /> */}
+        {/* <FooterSocialMediaLinks /> */}
       </div>
     </div>
   );
