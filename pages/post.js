@@ -67,9 +67,9 @@ export default function Post() {
       ) : newPostId ? (
         <Alert
           heading="Well done!"
-          text="You wanted poster has been successfully created"
+          text={`Your iNeed poster has been successfully advertised.<span class="d-block mb-1"> </span>As soon as a seller contacts us about your poster, we will email you their contact info and you two take it from there.`}
           purpose="success"
-          redirectionText={"You can see your wanted poster here: "}
+          redirectionText={"You can see your iNeed poster here: "}
           redirectionButtonText="View poster"
           redirectionLink={`/item?id=${newPostId}`}
         />

@@ -17,7 +17,7 @@ export default function Alert({
         <div className="post-form-width m-auto">
           <div className={`alert alert-${purpose}`} role="alert">
             <h5 className="alert-heading">{heading}</h5>
-            <p>{text}</p>
+            <p dangerouslySetInnerHTML={{ __html: text }} />
             <hr />
             {redirectionLink && (
               <>
@@ -36,3 +36,9 @@ export default function Alert({
     </Layout>
   );
 }
+
+// innerhtml set  from javascript
+
+// code exposed to XSS
+
+// dangerousety reminded

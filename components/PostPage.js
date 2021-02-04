@@ -9,7 +9,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
       <span className="d-block mb-3"></span>
       <div className="container post-form-width p-0">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h4 className="mb-0 ms-3 ms-md-0">Tell us what you need</h4>
+          <h4 className="mb-0 ms-3 ms-md-0">Create your iNeed poster</h4>
           <span className="d-block mb-3"></span>
           {/* <FormSection>
             <ImageField />
@@ -50,6 +50,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
                   className="form-select flex-grow-0 w-auto"
                   id="curency-field"
                   name="currency"
+                  ref={register()}
                 >
                   <option defaultValue>GBP</option>
                   <option value="EUR">EUR</option>

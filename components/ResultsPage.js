@@ -54,7 +54,7 @@ function Panel() {
     <div className="card shadow px-3">
       <span className="d-block mb-2"></span>
       {/* <Breadcrumb /> */}
-      <h1 className="mb-0">Results for i need "iphone"</h1>
+      <h1 className="mb-0">Results for needed "iphone"</h1>
       <span className="d-block mb-12px"></span>
       <div className="d-flex flex-nowrap">
         {[1, 2].map((filter, idx) => (

@@ -3,7 +3,6 @@ import sequelize from "./";
 
 const Post = sequelize.define("Post", {
   name: { type: DataTypes.STRING },
-  image: { type: DataTypes.BLOB },
   reward: { type: DataTypes.DOUBLE },
   currency: { type: DataTypes.STRING },
   description: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
