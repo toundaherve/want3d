@@ -24,7 +24,7 @@ function HeroText() {
     <div className="d-flex w-100 h-100 justify-content-center">
       <div className="d-flex flex-column hero-text-height justify-content-center">
         <h1 className="display-5 mb-0 text-white fw-bold text-center hero-heading">
-          Wanna sell it ? <br /> Find who needs it
+          WANNA SELL? <br /> FIND WHO NEEDS IT
         </h1>
         <span className="d-block mb-3"></span>
         <SearchForm />
@@ -32,15 +32,3 @@ function HeroText() {
     </div>
   );
 }
-
-// hero-text-container centered
-
-// hero-text-container height set
-
-// hero-text-items direction set column
-
-// hero-text-items centered
-
-// hero-text-items spaced
-
-//

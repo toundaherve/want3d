@@ -213,3 +213,32 @@ body {
 .hero-overlay {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.search-input {
+  border-radius: 0 !important;
+  border-top-left-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+  border-right: 0 !important;
+}
+
+.search-icon {
+  border-radius: 0 !important;
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+  background-color: #ffffff !important;
+  border: 1px solid #ced4da !important;
+  border-left: 0 !important;
+}
+
+.search-icon button {
+  border: 0 !important;
+  background-color: transparent;
+}
+
+.search-icon button:focus {
+  outline: none !important;
+}
+
+.search-container {
+  max-width: 400px;
+}

@@ -5,7 +5,6 @@ import useWindowHasScrolledPastValue from "../hooks/useWindowHasScrolledPastValu
 
 export default function Header() {
   const addShadow = useWindowHasScrolledPastValue(2);
-
   return (
     <div
       className={`sticky-top header-top ${
@@ -38,18 +37,22 @@ function HeaderContent1() {
         <div className="col-12 mb-12px"></div>
 
         <div className="col-12">
-          <div className="d-flex">
-            <div className="">
+          <div className="d-flex justify-content-center">
+            {!isHomePage() && (
+              <>
+                <div className="span d-block mb-3"></div>
+                <div className="flex-grow-1">
+                  <SearchForm />
+                </div>
+              </>
+            )}
+            <div className="ml-12px">
               <Button
-                purpose="link text-white text-decoration-none"
+                purpose="link btn-success text-white text-decoration-none"
                 link="/post"
               >
-                POST
+                POST&nbsp;A&nbsp;NEED
               </Button>
-            </div>
-            <div className="span d-block mb-3 ml-12px"></div>
-            <div className="flex-grow-1">
-              <SearchForm />
             </div>
           </div>
         </div>
@@ -60,22 +63,29 @@ function HeaderContent1() {
 
 function HeaderContent2() {
   return (
-    <div className="d-none d-md-flex align-items-center">
+    <div className="d-none d-md-flex align-items-center justify-content-between">
       <Logo />
       <span className="d-inline-block mb-3 ms-3"></span>
-      <div className="flex-grow-1">
-        <SearchForm />
-      </div>
-      <span className="d-inline-block mb-3 ml-20px"></span>
-      <Button purpose="link text-white text-decoration-none" link="/post">
-        POST
+      {!isHomePage() && (
+        <>
+          <div className="flex-grow-1">
+            <SearchForm />
+          </div>
+          <span className="d-inline-block mb-3 ml-20px"></span>
+        </>
+      )}
+      <Button
+        purpose="link btn-success text-white text-decoration-none"
+        link="/post"
+      >
+        POST A NEED
       </Button>
     </div>
   );
 }
 
-// header background changed
-
-// header text color changed
-
-// button background-color changed
+function isHomePage() {
+  if (global.location) {
+    return location.pathname === "/";
+  }
+}
