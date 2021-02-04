@@ -1,6 +1,4 @@
-// import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
 import { useForm } from "react-hook-form";
-import Breadcrumb from "./Breadcrumb";
 import Layout from "./Layout";
 import {
   FormField,
@@ -10,116 +8,9 @@ import {
   FormSection,
   Submit,
 } from "./PostPage";
-import { currencySymbol } from "./ResultsPage";
 import TopAd from "./TopAd";
 
-// export default function ItemPage({ data }) {
-//   return (
-//     <Layout>
-//       <span className="d-none d-md-block mb-3 w-100 text-white">.</span>
-//       <div className="d-flex flex-wrap flex-grow-1">
-//         <div className="container">
-//           {/* Hidden */}
-//           <div className="row">
-//             <div className="col-12 col-md-7 px-0 pe-md-5">
-//               <div className="bg-secondary w-100 position-relative">
-//                 {/* Poster */}
-//                 <div
-//                   className="d-flex flex-column justify-content-between card p-2 border mx-auto h-100"
-//                   style={{ width: "256px" }}
-//                 >
-//                   <h6 className="text-center mb-0">WANTED</h6>
-//                   <div className="w-100">
-//                     <img
-//                       className="img-fluid"
-//                       src={data.image}
-//                       alt={data.name}
-//                     />
-//                   </div>
-//                   <div className="text-center">
-//                     <small>Reward</small>
-//                     <h6 className="text-center mb-0">{`${currencySymbol(
-//                       data.currency
-//                     )} ${data.reward}`}</h6>
-//                   </div>
-//                 </div>
-//               </div>
-//               {/* Details */}
-//               <div>
-//                 <span className="d-block my-3 border-bottom border-1 border-light"></span>
-//                 <h6 className="fw-bold">Item Details</h6>
-//                 <div className="flex-wrap">
-//                   {Object.keys(data).map((key, idx) => {
-//                     if (
-//                       !["description", "email", "id", "image"].includes(key)
-//                     ) {
-//                       return (
-//                         <div key={idx} className="flex-wrap">
-//                           <span>{capitalize(key)}: </span>
-//                           <span className="fw-bold">
-//                             {Object.values(data)[idx]}
-//                           </span>
-//                         </div>
-//                       );
-//                     }
-//                   })}
-//                 </div>
-//                 <span className="d-block my-3 border-bottom border-1 border-light"></span>
-//                 <h6 className="fw-bold">Description</h6>
-//                 <p>{data.description}</p>
-//                 <span className="d-block my-3 border-bottom border-1 border-light"></span>
-//               </div>
-//             </div>
-//             <div className="col-12 col-md-5 px-0">
-//               {/* Reply */}
-//               <div>
-//                 <h6 className="mb-0">Interested ? Leave your details</h6>
-//                 <span className="d-block mb-3"></span>
-//                 <Form className="d-flex flex-column">
-//                   <FormGroup>
-//                     <Input
-//                       type="email"
-//                       name="email"
-//                       id="exampleEmail"
-//                       placeholder="Email"
-//                     />
-//                   </FormGroup>
-//                   <span className="d-block mb-3"></span>
-//                   <FormGroup>
-//                     <Input
-//                       type="text"
-//                       name="phone"
-//                       id="examplePhone"
-//                       placeholder="Phone"
-//                     />
-//                   </FormGroup>
-//                   <span className="d-block mb-3"></span>
-//                   <FormGroup>
-//                     <Input
-//                       type="textarea"
-//                       name="text"
-//                       id="exampleText"
-//                       placeholder="Message"
-//                     />
-//                   </FormGroup>
-//                   <span className="d-block mb-3"></span>
-//                   <Button color="success">Submit</Button>
-//                 </Form>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//         <span className="d-block mb-4"></span>
-//       </div>
-//     </Layout>
-//   );
-// }
-
-// function capitalize(word) {
-//   return word[0].toUpperCase() + word.substring(1).toLowerCase();
-// }
-
-export default function ItemPage() {
+export default function ItemPage({ data }) {
   return (
     <Layout>
       <span className="d-block mb-2"></span>
@@ -131,7 +22,7 @@ export default function ItemPage() {
           <span className="d-block mb-3"></span>
         </div> */}
         <div>
-          <Item />
+          <Item {...data} />
           <Contact />
         </div>
       </div>
@@ -140,35 +31,45 @@ export default function ItemPage() {
   );
 }
 
-function Item() {
+function Item({
+  name,
+  reward,
+  currency,
+  location,
+  category,
+  createdAt,
+  description,
+}) {
   return (
     <div className="bg-white p-3 p-md-32px card shadow">
-      <h4 className="mb-0 fw-bold text-primary">Iphone 6 plus</h4>
-      <span className="d-block mb-1"></span>
-      <p className="h4 mb-0 fw-bold">$750</p>
+      <h4 className="mb-0 fw-bold text-primary">
+        <span className="text-dark fw-normal">Needed: </span>
+        {name}, {getCurrencySymbol(currency) + reward}
+      </h4>
       <Divider />
       <div className="row">
         <div className="col-12 col-md-6">
-          <h5 className="mb-0 text-secondary">Details</h5>
+          <h5 className="mb-0">Details</h5>
           <span className="d-block mb-2"></span>
           <div className="d-flex flex-column">
-            <Detail name="Name" value="Iphone 6 plus" />
-            <Detail name="Category" value="Automobiles" />
-            <Detail name="Budget" value="$750" />
-            <Detail name="City / Country" value="Leeds, UK" />
-            <Detail name="Date published" value={Date.now().toLocaleString()} />
+            <Detail name="Name" value={name} />
+            <Detail name="Category" value={category} />
+            <Detail
+              name="Budget"
+              value={getCurrencySymbol(currency) + reward}
+            />
+            <Detail name="Currency" value={currency} />
+            <Detail name="City / Country" value={location} />
+            <Detail name="Date published" value={createdAt} />
           </div>
         </div>
         <div className="col-12 d-md-none">
           <Divider />
         </div>
         <div className="col-12 col-md-6">
-          <h5 className="mb-0 text-secondary">Note to sellers</h5>
+          <h5 className="mb-0">Note for sellers</h5>
           <span className="d-block mb-2"></span>
-          <p className="mb-0">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae neque
-            dolore eos, est nihil et vel modi iusto labore recusandae!
-          </p>
+          <p className="mb-0">{description}</p>
         </div>
       </div>
     </div>
@@ -178,14 +79,14 @@ function Item() {
 function Detail({ name, value }) {
   return (
     <div>
-      <span className="d-inline-block text-secondary">{name}:&nbsp;</span>
+      <span className="d-inline-block">{name}:&nbsp;</span>
       <span className="d-inline-block fw-bold">{value}</span>
     </div>
   );
 }
 
 function Divider() {
-  return <span className="item-divider d-block my-3 bg-light"></span>;
+  return <span className="item-divider d-block my-3 divider-bg"></span>;
 }
 
 function Contact() {
@@ -230,4 +131,12 @@ function Contact() {
   );
 }
 
-//
+function getCurrencySymbol(currency) {
+  const symbolsTable = {
+    GBP: "£",
+    USD: "$",
+    EUR: "€",
+  };
+
+  return symbolsTable[currency];
+}

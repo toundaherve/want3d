@@ -180,3 +180,7 @@ body {
   background-size: cover;
   background-position: center center;
 }
+
+.divider-bg {
+  background-color: #ced4da;
+}
