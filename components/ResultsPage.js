@@ -2,8 +2,14 @@ import Layout from "./Layout";
 import Button from "./Button";
 import TopAd from "./TopAd";
 import Breadcrumb from "./Breadcrumb";
+import { getCurrencySymbol } from "./ItemPage";
 
-export default function ResultsPage() {
+let isEmptyResults;
+let more;
+
+export default function ResultsPage({ search, data, hasMoreData, filters }) {
+  isEmptyResults = data.length > 0 ? false : true;
+  more = hasMoreData;
   return (
     <Layout>
       <span className="d-block mb-2"></span>
@@ -11,7 +17,7 @@ export default function ResultsPage() {
         <TopAd />
         <span className="d-block mb-3"></span>
         <div className="d-flex justify-content-between flex-nowrap">
-          <MainContent />
+          <MainContent data={data} search={search} filters={filters} />
           <AsideAd />
         </div>
       </div>
@@ -37,38 +43,43 @@ function AsideAd() {
   );
 }
 
-function MainContent() {
+function MainContent({ search, data, filters }) {
   return (
     <div className="flex-grow-1">
       <div className="position-relative">
-        <Panel />
+        <Panel search={search} filters={filters} />
         <span className="d-block mb-3"></span>
-        <Grid />
+        {!isEmptyResults && <Grid data={data} />}
       </div>
     </div>
   );
 }
 
-function Panel() {
+function Panel({ search, filters }) {
+  const headingText = isEmptyResults
+    ? 'No "' + search + '" needed yet'
+    : 'Results for "' + search + '" needed';
   return (
     <div className="card shadow px-3">
       <span className="d-block mb-2"></span>
       {/* <Breadcrumb /> */}
-      <h1 className="mb-0">Results for needed "iphone"</h1>
+      <h1 className="mb-0">{headingText}</h1>
       <span className="d-block mb-12px"></span>
-      <div className="d-flex flex-nowrap">
-        {[1, 2].map((filter, idx) => (
-          <div key={idx}>
-            <Filter />
-          </div>
-        ))}
-      </div>
+      {!isEmptyResults && (
+        <div className="d-flex flex-nowrap">
+          {filters.map((filter, idx) => (
+            <div key={idx}>
+              <Filter {...filter} />
+            </div>
+          ))}
+        </div>
+      )}
       <span className="d-block pb-3"></span>
     </div>
   );
 }
 
-function Filter() {
+function Filter({ type, options }) {
   return (
     <div className="py-2 px-1">
       <div className="dropdown">
@@ -79,13 +90,13 @@ function Filter() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Filter
+          {type}
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {[1, 2, 3].map((option, idx) => (
+          {options.map((option, idx) => (
             <li key={idx}>
               <a className="dropdown-item" href="#">
-                Action
+                {option}
               </a>
             </li>
           ))}
@@ -95,44 +106,44 @@ function Filter() {
   );
 }
 
-function Grid() {
+function Grid({ data }) {
   return (
     <>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
-        {[1, 2, 3, 4, 5, 6].map((card, idx) => (
-          <div className="col" key={idx}>
-            <a href="/item" className="text-decoration-none text-dark">
-              <div className="card shadow">
-                {/* <img src="..." className="card-img-top" alt="..." /> */}
-                <div className="card-header px-2 py-1">
-                  <small>Needed</small>
+        {data.map(
+          ({ id, name, location, reward, currency, description }, idx) => (
+            <div className="col" key={idx}>
+              <a
+                href={`/item?id=${id}`}
+                className="text-decoration-none text-dark"
+              >
+                <div className="card shadow">
+                  {/* <img src="..." className="card-img-top" alt="..." /> */}
+                  <div className="card-header px-2 py-1">
+                    <small>Needed</small>
+                  </div>
+                  <div className="card-body p-2">
+                    <h6 className="card-title text-primary p-0 m-0 fw-bold">
+                      {name}
+                    </h6>
+                    <small className="text-secondary">{location}</small>
+                    <h6 className="card-title  p-0 m-0 fw-bold">
+                      {getCurrencySymbol(currency) + reward}
+                    </h6>
+                    <span className="d-block mb-3"></span>
+                    <p className="card-text p-0 m-0">{description}</p>
+                  </div>
                 </div>
-                <div className="card-body p-2">
-                  <h6 className="card-title text-primary p-0 m-0 fw-bold">
-                    Iphone 6 plus
-                  </h6>
-                  <small className="text-secondary">Leeds</small>
-                  <h6 className="card-title  p-0 m-0 fw-bold">$750</h6>
-                  <span className="d-block mb-3"></span>
-                  <p className="card-text p-0 m-0">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        ))}
+              </a>
+            </div>
+          )
+        )}
       </div>
-      <div className="py-3 d-flex justify-content-center">
-        <Button purpose="success shadow">Load more</Button>
-      </div>
+      {more && (
+        <div className="py-3 d-flex justify-content-center">
+          <Button purpose="success shadow">Load more</Button>
+        </div>
+      )}
     </>
   );
 }
-
-// card- borders and items distanced
-
-// card heading boldened
-
-//

@@ -131,7 +131,7 @@ function Contact() {
   );
 }
 
-function getCurrencySymbol(currency) {
+export function getCurrencySymbol(currency) {
   const symbolsTable = {
     GBP: "£",
     USD: "$",
