@@ -23,7 +23,7 @@ export default function Post() {
     setErrorMessage(errorMessage);
   }
 
-  function validImage(imageData) {
+  function isValidImage(imageData) {
     return imageData ? true : false;
   }
 
@@ -34,7 +34,7 @@ export default function Post() {
   async function onSubmit(newPost) {
     setIsSubmitting(true);
 
-    if (!validImage(croppedImage)) {
+    if (!isValidImage(croppedImage)) {
       handleError("Invalid image");
     } else {
       const data = {
@@ -61,24 +61,22 @@ export default function Post() {
 
   return (
     <>
-      {errorMessage && (
+      {errorMessage ? (
         <Alert
           heading="Sorry ! We could not perform the operation"
-          message={errorMessage}
-          type="danger"
+          text={errorMessage}
+          purpose="danger"
         />
-      )}
-      {newPostId && (
+      ) : newPostId ? (
         <Alert
           heading="Well done!"
-          message="You wanted poster has been successfully created"
-          type="success"
-          nextMessage={"You can see your wanted poster here: "}
-          nextButtonText="View poster"
-          nextLink={`/item?id=${newPostId}`}
+          text="You wanted poster has been successfully created"
+          purpose="success"
+          redirectionText={"You can see your wanted poster here: "}
+          redirectionButtonText="View poster"
+          redirectionLink={`/item?id=${newPostId}`}
         />
-      )}
-      {!errorMessage && !newPostId && (
+      ) : (
         <PostPage
           isSubmitting={isSubmitting}
           onSubmit={onSubmit}
