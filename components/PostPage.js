@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import Button from "./Button";
 import Layout from "./Layout";
 
-export default function PostPage() {
+export default function PostPage({ onSubmit, isSubmitting }) {
   const { register, errors, handleSubmit } = useForm();
   return (
     <Layout>
       <span className="d-block mb-3"></span>
       <div className="container post-form-width p-0">
-        <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h4 className="mb-0 ms-3 ms-md-0">Tell us what you need</h4>
           <span className="d-block mb-3"></span>
           {/* <FormSection>
@@ -111,7 +111,7 @@ export default function PostPage() {
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
-          <Submit>Post now</Submit>
+          <Submit isSubmitting={isSubmitting}>Post now</Submit>
         </form>
       </div>
       <span className="d-block mb-3"></span>
@@ -129,11 +129,11 @@ function ImageField() {
   );
 }
 
-export function Submit({ children }) {
+export function Submit({ isSubmitting, children }) {
   return (
     <div className="p-3 p-md-0">
       <div className="d-grid d-md-block text-end">
-        <Button type="submit" purpose="success">
+        <Button loading={isSubmitting} type="submit" purpose="success">
           {children}
         </Button>
       </div>

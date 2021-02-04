@@ -7,7 +7,7 @@ export default function Post() {
   const [newPostId, setNewPostId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [croppedImage, setCroppedImage] = useState(null);
+  // const [croppedImage, setCroppedImage] = useState(null);
 
   function handleError(error) {
     let errorMessage;
@@ -23,38 +23,35 @@ export default function Post() {
     setErrorMessage(errorMessage);
   }
 
-  function isValidImage(imageData) {
-    return imageData ? true : false;
-  }
+  // function isValidImage(imageData) {
+  //   return imageData ? true : false;
+  // }
 
-  function collectImageData(imageData) {
-    setCroppedImage(imageData);
-  }
+  // function collectImageData(imageData) {
+  //   setCroppedImage(imageData);
+  // }
 
-  async function onSubmit(newPost) {
+  async function handleSubmit(data) {
     setIsSubmitting(true);
 
-    if (!isValidImage(croppedImage)) {
-      handleError("Invalid image");
-    } else {
-      const data = {
-        ...newPost,
-        image: croppedImage,
-      };
+    let response;
+    try {
+      response = await axios.post("http://192.168.1.68:3000/api/post", data);
 
-      let response;
-      try {
-        response = await axios.post("http://192.168.1.68:3000/api/post", data);
-
-        if (response.data.error) {
-          handleError(response.data.errorMessage);
-        } else {
-          setNewPostId(response.data.newPostId);
-        }
-      } catch (error) {
-        handleError(error);
+      if (response.data.error) {
+        handleError(response.data.errorMessage);
+      } else {
+        setNewPostId(response.data.newPostId);
       }
+    } catch (error) {
+      handleError(error);
     }
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
 
     setIsSubmitting(false);
   }
@@ -77,11 +74,7 @@ export default function Post() {
           redirectionLink={`/item?id=${newPostId}`}
         />
       ) : (
-        <PostPage
-          isSubmitting={isSubmitting}
-          onSubmit={onSubmit}
-          handleImageCropped={collectImageData}
-        />
+        <PostPage isSubmitting={isSubmitting} onSubmit={handleSubmit} />
       )}
     </>
   );
