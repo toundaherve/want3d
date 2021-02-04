@@ -6,7 +6,7 @@ export default function SearchForm() {
       <input
         className="form-control me-2"
         type="search"
-        placeholder="Search what people need"
+        placeholder="Enter item name"
         aria-label="Search"
         name="search"
         required

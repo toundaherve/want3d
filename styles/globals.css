@@ -98,12 +98,12 @@ body {
 }
 
 .hero-height {
-  padding-top: calc(100vh - 108px - 16px - 16px);
+  height: calc(100vh - 108px - 16px - 16px);
 }
 
 @media screen and (min-width: 768px) {
   .hero-height {
-    padding-top: calc(100vh - 62px - 16px - 16px);
+    height: calc(100vh - 62px - 16px - 16px);
   }
 }
 
@@ -174,6 +174,10 @@ body {
   height: 1px;
 }
 
+.hero-gb-image-container {
+  z-index: -1 !important;
+}
+
 .hero-bg-image {
   background-image: url("https://images.unsplash.com/photo-1555421689-d68471e189f2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80");
   background-repeat: no-repeat;
@@ -183,4 +187,29 @@ body {
 
 .divider-bg {
   background-color: #ced4da;
+}
+
+.hero-text-height {
+  height: 70%;
+}
+
+.hero-heading {
+  line-height: 42px !important;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .hero-heading {
+    line-height: 58px !important;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .hero-heading {
+    line-height: 74px !important;
+  }
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
 }
