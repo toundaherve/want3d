@@ -112,7 +112,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
-          <Submit isSubmitting={isSubmitting}>Post now</Submit>
+          <Submit isSubmitting={isSubmitting}>Create now</Submit>
         </form>
       </div>
       <span className="d-block mb-3"></span>

@@ -1,9 +1,17 @@
 import Layout from "../components/Layout";
 import SearchForm from "../components/SearchForm";
+import {Helmet} from "react-helmet"
+import Button from "../components/Button";
 
 export default function Home() {
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="uft-8"/>
+        <title>iNeed | Where Dreams Come True</title>
+        <meta name="description" content="If you need something, say something and let it come to you."/>
+        <link rel="canonical" href="https://www.ineed.com"/>
+      </Helmet>
       <span className="d-block mb-3"></span>
       <div className="container">
         <div className="hero-height position-relative">
@@ -24,11 +32,33 @@ function HeroText() {
     <div className="d-flex w-100 h-100 justify-content-center">
       <div className="d-flex flex-column hero-text-height justify-content-center">
         <h1 className="display-5 mb-0 text-white fw-bold text-center hero-heading">
-          WANNA SELL? <br /> FIND WHO NEEDS IT
+          NEED SOMETHING,<br /> SAY SOMETHING
         </h1>
         <span className="d-block mb-3"></span>
-        <SearchForm />
+        <Button link="/post" purpose="success">CREATE A NEED</Button>
       </div>
     </div>
   );
 }
+
+// Meta
+
+  // page title activated
+
+  // page description activated
+
+  // page url canonicaled
+
+  // language activated
+
+  // link alt activated
+
+  // docktype typed
+
+  // favicon linked
+
+
+
+// Helment status tag loaded
+
+// Helment status tag output

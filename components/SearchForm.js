@@ -8,7 +8,7 @@ export default function SearchForm() {
         <input
           className="form-control search-input"
           type="search"
-          placeholder="e.g. iphone X"
+          placeholder="Search what people need..."
           aria-label="Search"
           name="search"
           required

@@ -147,3 +147,27 @@ function Grid({ data }) {
     </>
   );
 }
+
+// iNeed is profitable
+
+// money added
+
+// ad space filled
+
+// device detected -> ad size optimized
+
+// code dropped | ad showing set to automatic
+
+// yearly revenue calculated
+
+// adsense network largest -> ad space bidded
+
+// ad screening terminated -> ad relevancy and quality to audience validated
+
+// ad blocked | ad location customized |
+
+// google account created
+
+// bank account phone|mail verified  ->  bank account paid
+
+// iNeed conneted

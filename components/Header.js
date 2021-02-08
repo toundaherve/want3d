@@ -38,22 +38,23 @@ function HeaderContent1() {
 
         <div className="col-12">
           <div className="d-flex justify-content-center">
-            {!isHomePage() && (
-              <>
-                <div className="span d-block mb-3"></div>
-                <div className="flex-grow-1">
-                  <SearchForm />
-                </div>
-              </>
-            )}
-            <div className="ml-12px">
+            
+            <div className="">
               <Button
                 purpose="link btn-success text-white text-decoration-none"
                 link="/post"
               >
-                POST&nbsp;A&nbsp;NEED
+                CREATE&nbsp;A&nbsp;NEED
               </Button>
             </div>
+            {!isHomePage() && (
+              <>
+                <div className="span d-block mb-3"></div>
+                <div className="flex-grow-1 ml-12px">
+                  <SearchForm />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -78,14 +79,16 @@ function HeaderContent2() {
         purpose="link btn-success text-white text-decoration-none"
         link="/post"
       >
-        POST A NEED
+        CREATE A NEED
       </Button>
     </div>
   );
 }
 
 function isHomePage() {
-  if (global.location) {
-    return location.pathname === "/";
-  }
+  // if (global.location) {
+  //   return location.pathname === "/";
+  // }
+
+  return false
 }
