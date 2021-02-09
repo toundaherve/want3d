@@ -1,15 +1,21 @@
 import { useForm } from "react-hook-form";
 import Button from "./Button";
 import Layout from "./Layout";
+import {Helmet} from "react-helmet"
 
 export default function PostPage({ onSubmit, isSubmitting }) {
   const { register, errors, handleSubmit } = useForm();
   return (
     <Layout>
+      <Helmet>
+        <title>Say what you need here</title>
+        <meta name="description" content="Let the world know what you need"/>
+        <link rel="stylesheet" href="https://www.ineed.com/post"/>
+      </Helmet>
       <span className="d-block mb-3"></span>
       <div className="container post-form-width p-0">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h4 className="mb-0 ms-3 ms-md-0">Create your iNeed poster</h4>
+          <h1 className="h4 mb-0 ms-3 ms-md-0">Say what you need</h1>
           <span className="d-block mb-3"></span>
           {/* <FormSection>
             <ImageField />
@@ -17,19 +23,20 @@ export default function PostPage({ onSubmit, isSubmitting }) {
           <span className="d-block mb-3"></span> */}
           <FormSection>
             <FormField>
-              <Label htmlFor="name-field">Name of the item</Label>
+              <Label htmlFor="name-field">I need</Label>
               <span className="d-block mb-1"></span>
               <Input
                 id="name-field"
                 type="text"
                 name="name"
+                placeholder="Name of the item"
                 register={register}
                 error={errors.name && "Please provide the name of the item."}
               />
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
-              <Label htmlFor="category-field">Category for item</Label>
+              <Label htmlFor="category-field">Category</Label>
               <span className="d-block mb-1"></span>
               <Select
                 name="category"
@@ -43,7 +50,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
-              <Label htmlFor="reward-field">Your budget</Label>
+              <Label htmlFor="reward-field">My budget</Label>
               <span className="d-block mb-1"></span>
               <div className="d-flex align-items-start">
                 <select
@@ -85,7 +92,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
           <span className="d-block mb-3"></span>
           <FormSection>
             <FormField>
-              <Label htmlFor="location-field">Your city or country</Label>
+              <Label htmlFor="location-field">City / Country</Label>
               <span className="d-block mb-1"></span>
               <Input
                 id="location-field"
@@ -97,7 +104,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
             </FormField>
             <span className="d-block mb-3"></span>
             <FormField>
-              <Label htmlFor="email-field">Your email</Label>
+              <Label htmlFor="email-field">My Email</Label>
               <span className="d-block mb-1"></span>
               <Input
                 id="email-field"
@@ -112,7 +119,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
-          <Submit isSubmitting={isSubmitting}>Create now</Submit>
+          <Submit isSubmitting={isSubmitting}>Send</Submit>
         </form>
       </div>
       <span className="d-block mb-3"></span>

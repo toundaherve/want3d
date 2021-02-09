@@ -9,10 +9,16 @@ import {
   Submit,
 } from "./PostPage";
 import TopAd from "./TopAd";
+import {Helmet} from "react-helmet"
 
 export default function ItemPage({ data }) {
   return (
     <Layout>
+      <Helmet>
+        <title>{`I need ${data.name}`}</title>
+        <meta name="description" content={`I need ${data.name}. ${data.description}`}/>
+        <link rel="canonical" href={`https://www.ineed.com/item/${data.id}`} />
+      </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container post-form-width ">
         <TopAd />
@@ -42,14 +48,14 @@ function Item({
 }) {
   return (
     <div className="bg-white p-3 p-md-32px card shadow">
-      <h4 className="mb-0 fw-bold text-primary">
-        <span className="text-dark fw-normal">Needed: </span>
+      <h1 className="h4 mb-0 fw-bold text-primary">
+        <span className="text-dark">I need </span>
         {name}, {getCurrencySymbol(currency) + reward}
-      </h4>
+      </h1>
       <Divider />
       <div className="row">
         <div className="col-12 col-md-6">
-          <h5 className="mb-0">Details</h5>
+          <div className="h5 mb-0">Details</div>
           <span className="d-block mb-2"></span>
           <div className="d-flex flex-column">
             <Detail name="Name" value={name} />
@@ -67,7 +73,7 @@ function Item({
           <Divider />
         </div>
         <div className="col-12 col-md-6">
-          <h5 className="mb-0">Note for sellers</h5>
+          <div className="h5 mb-0">Note for sellers</div>
           <span className="d-block mb-2"></span>
           <p className="mb-0">{description}</p>
         </div>
@@ -97,7 +103,7 @@ function Contact() {
       onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
     >
       <FormSection>
-        <h4 className="mb-0">Contact the buyer</h4>
+        <h2 className="h4 mb-0">Contact the buyer</h2>
         <span className="d-block mb-3"></span>
         <FormField>
           <Label htmlFor="email-field">Your Email</Label>
@@ -140,3 +146,9 @@ export function getCurrencySymbol(currency) {
 
   return symbolsTable[currency];
 }
+
+// Page title set
+
+// Page meta description set
+
+// Page link canonical set

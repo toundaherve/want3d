@@ -79,7 +79,7 @@ function HeaderContent2() {
         purpose="link btn-success text-white text-decoration-none"
         link="/post"
       >
-        CREATE A NEED
+        SAY IT NOW
       </Button>
     </div>
   );

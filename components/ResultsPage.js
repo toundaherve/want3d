@@ -3,6 +3,7 @@ import Button from "./Button";
 import TopAd from "./TopAd";
 import Breadcrumb from "./Breadcrumb";
 import { getCurrencySymbol } from "./ItemPage";
+import {Helmet} from "react-helmet"
 
 let isEmptyResults;
 let more;
@@ -12,6 +13,12 @@ export default function ResultsPage({ search, data, hasMoreData, filters }) {
   more = hasMoreData;
   return (
     <Layout>
+        <Helmet>
+          <title>Search - iNeed</title>
+          <meta name="description" content="Search what people need ..."/>
+          <link rel="canonical" href="https://www.ineed.com/search"/>
+
+        </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container">
         <TopAd />
@@ -57,10 +64,10 @@ function MainContent({ search, data, filters }) {
 
 function Panel({ search, filters }) {
   const headingText = isEmptyResults
-    ? 'No "' + search + '" needed yet'
-    : 'Results for "' + search + '" needed';
+    ? 'Nobody needs "' + search + '" yet'
+    : 'People who need "' + search + '"';
   return (
-    <div className="card shadow px-3">
+    <div className="card px-3">
       <span className="d-block mb-2"></span>
       {/* <Breadcrumb /> */}
       <h1 className="mb-0">{headingText}</h1>
@@ -119,17 +126,17 @@ function Grid({ data }) {
               >
                 <div className="card shadow">
                   {/* <img src="..." className="card-img-top" alt="..." /> */}
-                  <div className="card-header px-2 py-1">
+                  {/* <div className="card-header px-2 py-1">
                     <small>Needed</small>
-                  </div>
+                  </div> */}
                   <div className="card-body p-2">
-                    <h6 className="card-title text-primary p-0 m-0 fw-bold">
-                      {name}
-                    </h6>
+                    <div className="h6 card-title p-0 m-0 fw-bold">
+                     <span>I need</span> <span className="text-primary fw-bold">{name}</span>
+                    </div>
                     <small className="text-secondary">{location}</small>
-                    <h6 className="card-title  p-0 m-0 fw-bold">
+                    <div className="h6 card-title  p-0 m-0 fw-bold">
                       {getCurrencySymbol(currency) + reward}
-                    </h6>
+                    </div>
                     <span className="d-block mb-3"></span>
                     <p className="card-text p-0 m-0">{description}</p>
                   </div>
@@ -148,26 +155,3 @@ function Grid({ data }) {
   );
 }
 
-// iNeed is profitable
-
-// money added
-
-// ad space filled
-
-// device detected -> ad size optimized
-
-// code dropped | ad showing set to automatic
-
-// yearly revenue calculated
-
-// adsense network largest -> ad space bidded
-
-// ad screening terminated -> ad relevancy and quality to audience validated
-
-// ad blocked | ad location customized |
-
-// google account created
-
-// bank account phone|mail verified  ->  bank account paid
-
-// iNeed conneted

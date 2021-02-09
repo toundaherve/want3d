@@ -35,30 +35,8 @@ function HeroText() {
           NEED SOMETHING,<br /> SAY SOMETHING
         </h1>
         <span className="d-block mb-3"></span>
-        <Button link="/post" purpose="success">CREATE A NEED</Button>
+        <Button link="/post" purpose="success">SAY IT NOW</Button>
       </div>
     </div>
   );
 }
-
-// Meta
-
-  // page title activated
-
-  // page description activated
-
-  // page url canonicaled
-
-  // language activated
-
-  // link alt activated
-
-  // docktype typed
-
-  // favicon linked
-
-
-
-// Helment status tag loaded
-
-// Helment status tag output
