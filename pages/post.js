@@ -62,7 +62,7 @@ export default function Post() {
         <Alert
           heading="Sorry ! We could not perform the operation"
           text={errorMessage}
-          purpose="danger"
+          purpose="warning"
         />
       ) : newPostId ? (
         <Alert

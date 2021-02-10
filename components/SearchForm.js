@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 export default function SearchForm() {
   return (
     <form className="d-flex" action="/results">
-      <div className="d-flex w-100 ">
+      <div className="d-flex w-100 search-container">
         <input
           className="form-control search-input"
           type="search"

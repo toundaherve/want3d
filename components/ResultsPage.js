@@ -124,7 +124,7 @@ function Grid({ data }) {
                 href={`/item?id=${id}`}
                 className="text-decoration-none text-dark"
               >
-                <div className="card shadow">
+                <div className="card card-hover">
                   {/* <img src="..." className="card-img-top" alt="..." /> */}
                   {/* <div className="card-header px-2 py-1">
                     <small>Needed</small>

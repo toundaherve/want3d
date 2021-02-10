@@ -1,3 +1,4 @@
+import {MdMenu} from "react-icons/md"
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import Button from "./Button";
@@ -7,11 +8,11 @@ export default function Header() {
   const addShadow = useWindowHasScrolledPastValue(2);
   return (
     <div
-      className={`sticky-top header-top ${
+      className={`sticky-top border-bottom header-top ${
         addShadow ? "shadow" : "shadow-none"
       }`}
     >
-      <div className="bg-primary">
+      <div className="bg-white">
         <div className="header-height">
           <div className="container">
             <div className="header-content-wrapping">
@@ -37,15 +38,18 @@ function HeaderContent1() {
         <div className="col-12 mb-12px"></div>
 
         <div className="col-12">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center align-items-center">
             
-            <div className="">
+            <div className="d-none">
               <Button
-                purpose="link btn-success text-white text-decoration-none"
+                purpose="link btn-warning text-white text-decoration-none"
                 link="/post"
               >
                 CREATE&nbsp;A&nbsp;NEED
               </Button>
+            </div>
+            <div className="">
+                <MdMenu size={32} />
             </div>
             {!isHomePage() && (
               <>
@@ -76,7 +80,7 @@ function HeaderContent2() {
         </>
       )}
       <Button
-        purpose="link btn-success text-white text-decoration-none"
+        purpose="link btn-warning text-white text-decoration-none"
         link="/post"
       >
         SAY IT NOW

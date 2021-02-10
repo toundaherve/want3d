@@ -16,7 +16,7 @@ export default function Footer() {
 }
 
 function FooterDivider() {
-  return <span className="d-block border border-secondary"></span>;
+  return <span className="d-block"></span>;
 }
 
 function FooterContent() {
@@ -45,7 +45,7 @@ function FooterNav({ title, links = [] }) {
         <a
           key={idx}
           href={link.url}
-          className="mb-1 text-secondary text-decoration-none"
+          className="mb-1 text-light text-decoration-none"
         >
           <small>{link.text}</small>
         </a>
@@ -61,7 +61,7 @@ function FooterCopyright() {
       <Logo />
       <span className="d-block mb-3"></span>
       <span>
-        <small className="text-secondary">iNeed &copy; 2021</small>
+        <small className="text-light">iNeed &copy; 2021</small>
       </span>
     </div>
   );

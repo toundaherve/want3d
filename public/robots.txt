@@ -1,0 +1,6 @@
+# ineed.com/robots.txt
+
+User-agent: googlebot
+# Disallow: /blocked-page1
+# Disallow: /blocked-page2
+# Disallow: /internal-search-engine

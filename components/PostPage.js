@@ -119,7 +119,7 @@ export default function PostPage({ onSubmit, isSubmitting }) {
             </FormField>
           </FormSection>
           <span className="d-block mb-3"></span>
-          <Submit isSubmitting={isSubmitting}>Send</Submit>
+          <Submit isSubmitting={isSubmitting}>SEND</Submit>
         </form>
       </div>
       <span className="d-block mb-3"></span>
@@ -141,7 +141,7 @@ export function Submit({ isSubmitting, children }) {
   return (
     <div className="p-3 p-md-0">
       <div className="d-grid d-md-block text-end">
-        <Button loading={isSubmitting} type="submit" purpose="success">
+        <Button loading={isSubmitting} type="submit" purpose="primary">
           {children}
         </Button>
       </div>
@@ -152,7 +152,7 @@ export function Submit({ isSubmitting, children }) {
 
 export function FormSection({ children }) {
   return (
-    <div className="p-3 p-md-32px bg-white border rounded shadow">
+    <div className="p-3 p-md-32px bg-white border rounded">
       {children}
     </div>
   );
