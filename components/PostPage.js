@@ -152,7 +152,7 @@ export function Submit({ isSubmitting, children }) {
 
 export function FormSection({ children }) {
   return (
-    <div className="p-3 p-md-32px bg-white border rounded">
+    <div className="p-3 p-md-32px bg-light border rounded">
       {children}
     </div>
   );

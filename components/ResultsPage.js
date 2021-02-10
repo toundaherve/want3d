@@ -67,7 +67,7 @@ function Panel({ search, filters }) {
     ? 'Nobody needs "' + search + '" yet'
     : 'People who need "' + search + '"';
   return (
-    <div className="card px-3">
+    <div className="">
       <span className="d-block mb-2"></span>
       {/* <Breadcrumb /> */}
       <h1 className="mb-0">{headingText}</h1>

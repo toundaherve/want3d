@@ -47,7 +47,7 @@ function Item({
   description,
 }) {
   return (
-    <div className="bg-white p-3 p-md-32px card shadow">
+    <div className="bg-white py-3 py-md-32px">
       <h1 className="h4 mb-0 fw-bold text-primary">
         <span className="text-dark">I need </span>
         {name}, {getCurrencySymbol(currency) + reward}

@@ -1,5 +1,5 @@
 body {
-  background-color: #f8f9fa !important;
+  /* background-color: #f8f9fa !important; */
   font-family: "Lato", sans-serif !important;
 }
 
@@ -35,6 +35,11 @@ body {
 @media screen and (min-width: 768px) {
   .p-md-32px {
     padding: 32px !important;
+  }
+
+  .py-md-32px {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
   }
 }
 
