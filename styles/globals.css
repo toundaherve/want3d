@@ -7,6 +7,11 @@ body {
   padding: 12px !important;
 }
 
+.px-12px {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
 .pt-12px {
   padding-top: 12px !important;
 }
@@ -21,6 +26,22 @@ body {
 
 .pr-12px {
   padding-right: 12pc !important;
+}
+
+@media screen and (min-width: 768px) {
+  .p-md-12px {
+    padding: 12px !important;
+  }
+
+  .px-md-12px {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .py-md-12px {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
 }
 
 .py-20px {
@@ -235,9 +256,26 @@ body {
 }
 
 .search-container {
-  max-width: 768px;
+  max-width: 400px;
 }
 
 .card-hover:hover {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.post-card-container {
+  width: 540px !important;
+  min-height: 64px !important;
+}
+
+.post-page-container {
+  min-height: calc(100vh - 16px - 108px);
+}
+
+.post-input-title {
+  font-size: 42px !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
 }

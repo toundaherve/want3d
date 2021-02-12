@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Alert from "../components/Alert";
 import PostPage from "../components/PostPage";
+import PostPage2 from "../components/PostPage2";
 
 export default function Post() {
   const [newPostId, setNewPostId] = useState("");
@@ -74,7 +75,7 @@ export default function Post() {
           redirectionLink={`/item?id=${newPostId}`}
         />
       ) : (
-        <PostPage isSubmitting={isSubmitting} onSubmit={handleSubmit} />
+        <PostPage2 isSubmitting={isSubmitting} onSubmit={handleSubmit} />
       )}
     </>
   );
