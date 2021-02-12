@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import Button from "./Button";
 import Layout from "./Layout";
 import { Helmet } from "react-helmet";
+import Breadcrumb from "./Breadcrumb";
 
 export default function PostPage2({ onSubmit, isSubmitting }) {
   const { register, errors, handleSubmit } = useForm();
@@ -13,9 +14,13 @@ export default function PostPage2({ onSubmit, isSubmitting }) {
         <link rel="stylesheet" href="https://www.ineed.com/post" />
       </Helmet>
       <span className="d-block mb-3"></span>
-      <div className="container bg-light">
-        <div className="w-100 post-page-container d-flex justify-content-center align-items-center">
-          <PostForm />
+      <div className="container">
+        <Breadcrumb />
+        <span className="d-block mb-3"></span>
+        <div className="bg-light">
+          <div className="w-100 post-page-container d-flex justify-content-center align-items-center">
+            <PostForm />
+          </div>
         </div>
       </div>
       <span className="d-block mb-3"></span>
@@ -39,7 +44,7 @@ function PostForm() {
             name="descrition"
             id="description-id"
             cols="30"
-            rows="4"
+            rows="2"
             className="d-block form-control border-0"
             placeholder="Your text here"
           />

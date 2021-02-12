@@ -269,7 +269,13 @@ body {
 }
 
 .post-page-container {
-  min-height: calc(100vh - 16px - 108px);
+  min-height: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .post-page-container {
+    min-height: calc(100vh - 16px - 62px - 16px - 16px - 24px);
+  }
 }
 
 .post-input-title {

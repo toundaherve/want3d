@@ -1,4 +1,5 @@
 import { MdMenu } from "react-icons/md";
+import { IoIosCreate } from "react-icons/io";
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import Button from "./Button";
@@ -24,8 +25,8 @@ export default function Header() {
                     </div>
                     <div className="col-12 mb-12px" />
                     <div className="col-12">
-                      <div className="d-flex justify-content-center align-items-center">
-                        <MdMenu size={32} />
+                      <div className="d-flex justify-content-center align-items-start">
+                        <IoIosCreate className="text-warning" size={32} />
                         <div className="span d-block mb-3"></div>
                         <div className="flex-grow-1 ml-12px">
                           <SearchForm />
@@ -42,12 +43,11 @@ export default function Header() {
                     <SearchForm />
                   </div>
                   <span className="d-inline-block mb-3 ml-20px"></span>
-                  <Button
+                  {/* <Button
                     purpose="link btn-warning text-white text-decoration-none"
                     link="/post"
-                  >
-                    SAY IT NOW
-                  </Button>
+                  ></Button> */}
+                  <IoIosCreate className="text-warning" size={32} />
                 </div>
               </div>
             </div>
