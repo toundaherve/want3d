@@ -3,7 +3,7 @@ import Button from "./Button";
 import TopAd from "./TopAd";
 import Breadcrumb from "./Breadcrumb";
 import { getCurrencySymbol } from "./ItemPage";
-import {Helmet} from "react-helmet"
+import { Helmet } from "react-helmet";
 
 let isEmptyResults;
 let more;
@@ -13,52 +13,48 @@ export default function ResultsPage({ search, data, hasMoreData, filters }) {
   more = hasMoreData;
   return (
     <Layout>
-        <Helmet>
-          <title>Search - iNeed</title>
-          <meta name="description" content="Search what people need ..."/>
-          <link rel="canonical" href="https://www.ineed.com/search"/>
-
-        </Helmet>
+      <Helmet>
+        <title>Search - iNeed</title>
+        <meta name="description" content="Search what people need ..." />
+        <link rel="canonical" href="https://www.ineed.com/search" />
+      </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container">
         <TopAd />
         <span className="d-block mb-3"></span>
         <div className="d-flex justify-content-between flex-nowrap">
-          <MainContent data={data} search={search} filters={filters} />
-          <AsideAd />
+          <div className="flex-grow-1">
+            <div className="position-relative">
+              <Panel search={search} filters={filters} />
+              <span className="d-block mb-3"></span>
+              {!isEmptyResults && (
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
+                  {data.map((item, idx) => (
+                    <div className="col" key={idx}>
+                      <a
+                        href={`/item?id=${item.id}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        <Card {...item} />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {more && (
+                <div className="py-3 d-flex justify-content-center">
+                  <Button purpose="success shadow">Load more</Button>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="d-none d-lg-block  ms-3">
+            <AsideAd />
+          </div>
         </div>
       </div>
       <span className="d-block mb-3"></span>
     </Layout>
-  );
-}
-
-function AsideAd() {
-  return (
-    <div className="d-none d-lg-block results-page-aside-ad-box ms-3">
-      {/* // TODO : Stick at ~91px */}
-      <div className="results-page-aside-ad-top border">
-        <div className="d-flex justify-content-start">
-          <div className="position-relative">
-            <div className="results-page-aside-ad-iframe-box bg-light">
-              {/* iframe goes here */}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MainContent({ search, data, filters }) {
-  return (
-    <div className="flex-grow-1">
-      <div className="position-relative">
-        <Panel search={search} filters={filters} />
-        <span className="d-block mb-3"></span>
-        {!isEmptyResults && <Grid data={data} />}
-      </div>
-    </div>
   );
 }
 
@@ -67,7 +63,7 @@ function Panel({ search, filters }) {
     ? 'Nobody needs "' + search + '" yet'
     : 'People who need "' + search + '"';
   return (
-    <div className="">
+    <div>
       <span className="d-block mb-2"></span>
       {/* <Breadcrumb /> */}
       <h1 className="mb-0">{headingText}</h1>
@@ -113,45 +109,42 @@ function Filter({ type, options }) {
   );
 }
 
-function Grid({ data }) {
+function Card({ name, location, currency, reward, description }) {
   return (
-    <>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
-        {data.map(
-          ({ id, name, location, reward, currency, description }, idx) => (
-            <div className="col" key={idx}>
-              <a
-                href={`/item?id=${id}`}
-                className="text-decoration-none text-dark"
-              >
-                <div className="card card-hover">
-                  {/* <img src="..." className="card-img-top" alt="..." /> */}
-                  {/* <div className="card-header px-2 py-1">
+    <div className="card card-hover">
+      {/* <img src="..." className="card-img-top" alt="..." /> */}
+      {/* <div className="card-header px-2 py-1">
                     <small>Needed</small>
                   </div> */}
-                  <div className="card-body p-2">
-                    <div className="h6 card-title p-0 m-0 fw-bold">
-                     <span>I need</span> <span className="text-primary fw-bold">{name}</span>
-                    </div>
-                    <small className="text-secondary">{location}</small>
-                    <div className="h6 card-title  p-0 m-0 fw-bold">
-                      {getCurrencySymbol(currency) + reward}
-                    </div>
-                    <span className="d-block mb-3"></span>
-                    <p className="card-text p-0 m-0">{description}</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          )
-        )}
-      </div>
-      {more && (
-        <div className="py-3 d-flex justify-content-center">
-          <Button purpose="success shadow">Load more</Button>
+      <div className="card-body p-2">
+        <div className="h6 card-title p-0 m-0 fw-bold">
+          <span>I need</span>{" "}
+          <span className="text-primary fw-bold">{name}</span>
         </div>
-      )}
-    </>
+        <small className="text-secondary">{location}</small>
+        <div className="h6 card-title  p-0 m-0 fw-bold">
+          {getCurrencySymbol(currency) + reward}
+        </div>
+        <span className="d-block mb-3"></span>
+        <p className="card-text p-0 m-0">{description}</p>
+      </div>
+    </div>
   );
 }
 
+function AsideAd() {
+  return (
+    <div className="results-page-aside-ad-box">
+      <div className="results-page-aside-ad-top border">
+        {/* // TODO : Stick at ~91px */}
+        <div className="d-flex justify-content-start">
+          <div className="position-relative">
+            <div className="results-page-aside-ad-iframe-box bg-light">
+              {/* iframe goes here */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
