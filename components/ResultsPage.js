@@ -20,8 +20,8 @@ export default function ResultsPage({ search, data, hasMoreData, filters }) {
       </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container">
-        <TopAd />
-        <span className="d-block mb-3"></span>
+        {/* <TopAd />
+        <span className="d-block mb-3"></span> */}
         <div className="d-flex justify-content-between flex-nowrap">
           <div className="flex-grow-1">
             <div className="position-relative">
@@ -35,7 +35,7 @@ export default function ResultsPage({ search, data, hasMoreData, filters }) {
                         href={`/item?id=${item.id}`}
                         className="text-decoration-none text-dark"
                       >
-                        <Card {...item} />
+                        <Card2 {...item} />
                       </a>
                     </div>
                   ))}
@@ -48,9 +48,9 @@ export default function ResultsPage({ search, data, hasMoreData, filters }) {
               )}
             </div>
           </div>
-          <div className="d-none d-lg-block  ms-3">
+          {/* <div className="d-none d-lg-block  ms-3">
             <AsideAd />
-          </div>
+          </div> */}
         </div>
       </div>
       <span className="d-block mb-3"></span>
@@ -148,3 +148,40 @@ function AsideAd() {
     </div>
   );
 }
+
+function Card2() {
+  return (
+    <div className="card m-0 bg-light">
+      <div className="card-header bg-warning p-2 m-0">
+        <small>iNeed Poster</small>
+      </div>
+      <div className="card-body bg-light p-2 m-0">
+        <h6 className="p-0 m-0 pb-3">Iphone X10</h6>
+        <span className="d-block mb-3"></span>
+        <p className="p-0 m-0">Lorem: ipsum dolor sit amet.</p>
+        <span className="d-block mb-3"></span>
+        <p className="p-0 m-0">Lorem: ipsum dolor sit amet.</p>
+        <span className="d-block mb-3"></span>
+        <p className="p-0 m-0">Lorem: ipsum dolor sit amet.</p>
+        <span className="d-block mb-3"></span>
+        <ul className="list-unstyled d-flex flex-wrap m-0 p-0">
+          <li className="m-0 p-0 me-1">#iphoneX10</li>
+          <li className="m-0 p-0 me-1">#iphoneX10</li>
+          <li className="m-0 p-0 me-1">#iphoneX10</li>
+          <li className="m-0 p-0 me-1">#iphoneX10</li>
+        </ul>
+      </div>
+      {/* <div className="card-footer bg-white p-2 m-0">></div> */}
+    </div>
+  );
+}
+
+// card header padded | bg colored
+
+// card body padded
+
+// card body-items spaced
+
+// card tags flexed | margined left
+
+// card footer padded
