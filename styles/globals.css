@@ -263,18 +263,27 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-.post-card-container {
-  width: 540px !important;
+.post-form-container {
+  width: 100%;
   min-height: 64px !important;
 }
 
-.post-page-container {
+@media screen and (min-width: 768px) {
+  .post-form-container {
+    max-width: 540px !important;
+    min-height: 64px !important;
+  }
+}
+
+.post-content-container {
   min-height: auto;
 }
 
 @media screen and (min-width: 768px) {
-  .post-page-container {
-    min-height: calc(100vh - 16px - 62px - 16px - 16px - 24px);
+  .post-content-container {
+    min-height: calc(
+      100vh - 16px - 62px - 16px - 16px - 24px - 4px - 16px - 24px - 28px - 24px
+    );
   }
 }
 

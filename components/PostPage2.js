@@ -17,9 +17,34 @@ export default function PostPage2({ onSubmit, isSubmitting }) {
       <div className="container">
         <Breadcrumb />
         <span className="d-block mb-3"></span>
+        <h1 className="h4 mb-0">New Post</h1>
+        <span className="d-block mb-1"></span>
+        <p className="p-0 m-0">
+          Say what you need in the form below. <br />
+          Give details such as:{" "}
+          <strong>
+            <em>name of item</em>
+          </strong>
+          ,{" "}
+          <strong>
+            <em>your budget</em>
+          </strong>
+          ,{" "}
+          <strong>
+            <em>prefered color</em>
+          </strong>
+          ,{" "}
+          <strong>
+            <em>condition</em>
+          </strong>
+          , ...
+        </p>
+        <span className="d-block mb-3"></span>
         <div className="bg-light">
-          <div className="w-100 post-page-container d-flex justify-content-center align-items-center">
-            <PostForm />
+          <div className="w-100 post-content-container d-flex flex-column justify-content-center align-items-center">
+            <div className="post-form-container">
+              <PostForm />
+            </div>
           </div>
         </div>
       </div>
@@ -30,62 +55,44 @@ export default function PostPage2({ onSubmit, isSubmitting }) {
 
 function PostForm() {
   return (
-    <form className="card post-card-container">
-      <div>
-        <span className="d-block mb-12px"></span>
-        <div className="px-md-4">
-          <input
-            type="text"
-            placeholder="Title"
-            className="d-block form-control border-0 post-input-title"
-          />
-          <span className="d-block mb-12px"></span>
-          <textarea
-            name="descrition"
-            id="description-id"
-            cols="30"
-            rows="2"
-            className="d-block form-control border-0"
-            placeholder="Your text here"
-          />
-          <span className="d-block mb-12px"></span>
-          <input
-            type="text"
-            placeholder="#tags"
-            className="d-block form-control border-0"
-          />
-          <span className="d-block mb-12px"></span>
-          <input
-            type="email"
-            placeholder="Your email"
-            className="d-block form-control border-0"
-          />
-          <span className="d-block mb-12px"></span>
-          <input
-            type="text"
-            placeholder="Your location"
-            className="d-block form-control border-0"
-          />
-          <span className="d-block mb-12px"></span>
-        </div>
+    <form className="card">
+      <div className="p-3">
+        <input
+          type="text"
+          placeholder="Title"
+          className="d-block form-control border-0 post-input-title"
+        />
+        <span className="d-block mb-3"></span>
+        <textarea
+          name="descrition"
+          id="description-id"
+          cols="30"
+          rows="2"
+          className="d-block form-control border-0"
+          placeholder="Your text here"
+        />
+        <span className="d-block mb-3"></span>
+        <input
+          type="text"
+          placeholder="#tags"
+          className="d-block form-control border-0"
+        />
+        <span className="d-block mb-3"></span>
+        <input
+          type="email"
+          placeholder="Your email"
+          className="d-block form-control border-0"
+        />
+        <span className="d-block mb-3"></span>
+        <input
+          type="text"
+          placeholder="Your location"
+          className="d-block form-control border-0"
+        />
       </div>
-      <div className="d-flex justify-content-end px-12px px-md-4 py-3 border-top">
+      <div className="d-flex justify-content-end p-3 border-top">
         <Button>Post</Button>
       </div>
     </form>
   );
 }
-
-// contained
-
-// container width fixed
-
-// container height min-fixed
-
-// bg colored
-
-//
-
-//87.5
-
-//
