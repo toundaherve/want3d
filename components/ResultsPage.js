@@ -152,18 +152,18 @@ function AsideAd() {
 function Card2() {
   return (
     <div className="card m-0 bg-light">
-      <div className="card-header bg-warning p-2 m-0">
-        <small>iNeed Poster</small>
-      </div>
+      {/* <div className="card-header bg-warning p-2 m-0">Iphone10X</div> */}
       <div className="card-body bg-light p-2 m-0">
-        <h6 className="p-0 m-0 pb-3">Iphone X10</h6>
-        <span className="d-block mb-3"></span>
+        <h6 className="p-0 m-0 pb-3 ">
+          <u>I need Iphone X10</u>
+        </h6>
+        <span className="d-block mb-3" />
         <p className="p-0 m-0">Lorem: ipsum dolor sit amet.</p>
-        <span className="d-block mb-3"></span>
+        <span className="d-block mb-3" />
         <p className="p-0 m-0">Lorem: ipsum dolor sit amet.</p>
-        <span className="d-block mb-3"></span>
+        <span className="d-block mb-3" />
         <p className="p-0 m-0">Lorem: ipsum dolor sit amet.</p>
-        <span className="d-block mb-3"></span>
+        <span className="d-block mb-3" />
         <ul className="list-unstyled d-flex flex-wrap m-0 p-0">
           <li className="m-0 p-0 me-1">#iphoneX10</li>
           <li className="m-0 p-0 me-1">#iphoneX10</li>
