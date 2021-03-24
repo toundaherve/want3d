@@ -1,4 +1,4 @@
-# ineed.com/robots.txt
+# bonvih.com/robots.txt
 
 User-agent: googlebot
 # Disallow: /blocked-page1

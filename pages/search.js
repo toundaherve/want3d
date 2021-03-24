@@ -1,5 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { GiMoneyStack } from "react-icons/gi";
+import { MdLocationOn, MdMessage } from "react-icons/md";
 import needModel from "../db/Need";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
@@ -22,9 +24,9 @@ export default function Search({ search, needs, moreResults = false }) {
   return (
     <Layout>
       <Helmet>
-        <title>Search - iNeed</title>
+        <title>Search - BONVIH</title>
         <meta name="description" content="Search what people need ..." />
-        <link rel="canonical" href="https://www.ineed.com/search" />
+        <link rel="canonical" href="https://www.bonvih.com/search" />
       </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container">
@@ -135,15 +137,19 @@ function NeedView({ name, location, currency, budget, description }) {
                   </div> */}
       <div className="card-body p-2">
         <div className="h6 card-title p-0 m-0 fw-bold">
-          <span>I need</span>{" "}
+          {/* <span>I need</span>{" "} */}
           <span className="text-primary fw-bold">{name}</span>
         </div>
-        <small className="text-secondary">{location}</small>
+        <small className="text-secondary">
+          <MdLocationOn /> {location}
+        </small>
         <div className="h6 card-title  p-0 m-0 fw-bold">
-          {getCurrencySymbol(currency) + budget}
+          <GiMoneyStack /> {getCurrencySymbol(currency) + budget}
         </div>
         <span className="d-block mb-3"></span>
-        <p className="card-text p-0 m-0">{description}</p>
+        <p className="card-text p-0 m-0">
+          <MdMessage /> {description}
+        </p>
       </div>
     </div>
   );

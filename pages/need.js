@@ -4,7 +4,14 @@ import needModel from "../db/Need";
 import getCurrencySymbol from "../utils/getCurrencySymbol";
 import Layout from "../components/Layout";
 import Breadcrumb from "../components/Breadcrumb";
-import { Input, Label, Section, TextArea, Form } from "../components/Form";
+import {
+  Input,
+  Label,
+  Section,
+  TextArea,
+  Form,
+  ErrorMessage,
+} from "../components/Form";
 
 export default function Need({ data }) {
   const { register, errors, handleSubmit } = useForm();
@@ -24,7 +31,7 @@ export default function Need({ data }) {
       <Helmet>
         <title>{`I need ${name}`}</title>
         <meta name="description" content={`I need ${name}. ${description}`} />
-        <link rel="canonical" href={`https://www.ineed.com/item/${id}`} />
+        <link rel="canonical" href={`https://www.bonvih.com/item/${id}`} />
       </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container post-form-width ">
@@ -34,38 +41,40 @@ export default function Need({ data }) {
           <span className="d-block mb-3"></span>
         </div>
         <div>
-          <div className="bg-white py-3 py-md-32px">
-            <h1 className="h4 mb-0 fw-bold text-primary">
-              <span className="text-dark">I need </span>
-              {`${name}, ${getCurrencySymbol(currency)}${budget}`}
-            </h1>
-            <Divider />
-            <div className="row">
-              <div className="col-12 col-md-6">
-                <div className="h5 mb-0">Details</div>
-                <span className="d-block mb-2"></span>
-                <div className="d-flex flex-column">
-                  <Field name="Name" value={name} />
-                  <Field name="Category" value={category} />
-                  <Field
-                    name="Budget"
-                    value={getCurrencySymbol(currency) + budget}
-                  />
-                  <Field name="Currency" value={currency} />
-                  <Field name="City / Country" value={location} />
-                  <Field name="Date published" value={createdAt} />
+          <Section>
+            <div className="">
+              <h1 className="h4 mb-0 fw-bold text-primary">
+                <span className="text-dark">I need </span>
+                {`${name}, ${getCurrencySymbol(currency)}${budget}`}
+              </h1>
+              <Divider />
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="h5 mb-0">Details</div>
+                  <span className="d-block mb-2"></span>
+                  <div className="d-flex flex-column">
+                    <Field name="Name" value={name} />
+                    <Field name="Category" value={category} />
+                    <Field
+                      name="Budget"
+                      value={getCurrencySymbol(currency) + budget}
+                    />
+                    <Field name="Currency" value={currency} />
+                    <Field name="City / Country" value={location} />
+                    <Field name="Date published" value={createdAt} />
+                  </div>
+                </div>
+                <div className="col-12 d-md-none">
+                  <Divider />
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="h5 mb-0">Note for sellers</div>
+                  <span className="d-block mb-2"></span>
+                  <p className="mb-0">{description}</p>
                 </div>
               </div>
-              <div className="col-12 d-md-none">
-                <Divider />
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="h5 mb-0">Note for sellers</div>
-                <span className="d-block mb-2"></span>
-                <p className="mb-0">{description}</p>
-              </div>
             </div>
-          </div>
+          </Section>
           <Form
             className="pt-3"
             onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}

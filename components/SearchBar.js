@@ -1,10 +1,10 @@
-import Button from "./Button";
 import { BsSearch } from "react-icons/bs";
 
-export default function SearchBar() {
+export default function SearchBar({ fullWidth = false }) {
+  const maxWidth = fullWidth ? "100%" : "400px";
   return (
     <form className="d-flex" action="/search">
-      <div className="d-flex w-100 search-container position-relative">
+      <div className="d-flex w-100 position-relative" style={{ maxWidth }}>
         <input
           className="form-control"
           type="search"

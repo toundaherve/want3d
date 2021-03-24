@@ -8,17 +8,17 @@ export default function Home() {
     <Layout>
       <Helmet>
         <meta charSet="uft-8" />
-        <title>iNeed | Where Dreams Come True</title>
+        <title>BONVIH | Where Dreams Come True</title>
         <meta
           name="description"
-          content="iNeed is a platform where user can advertise what item they need to potential sellers."
+          content="BONVIH is a platform where user can advertise what item they need to potential sellers."
         />
-        <link rel="canonical" href="https://www.ineed.com" />
+        <link rel="canonical" href="https://www.bonvih.com" />
       </Helmet>
       <span className="d-block mb-3"></span>
       <div className="container">
         <div className="row">
-          <div className="col-12 col-md-6">
+          <div className="d-none d-md-block col-12 col-md-6">
             <div className="hero-height">
               <img
                 src="https://cdn.dribbble.com/users/1355613/screenshots/6533809/invoice_maker.jpg"
@@ -32,13 +32,11 @@ export default function Home() {
             <div className="d-flex hero-height justify-content-center">
               <div className="d-flex flex-column hero-text-height justify-content-center">
                 <h1 className="display-5 mb-0 text-dark fw-bold text-center hero-heading">
-                  NEED SOMETHING,
-                  <br /> SAY SOMETHING
+                  WANNA SELL
+                  <br /> FIND WHO NEEDS IT
                 </h1>
                 <span className="d-block mb-3"></span>
-                <Button link="/post" purpose="primary text-white">
-                  SAY IT NOW
-                </Button>
+                <SearchBar fullWidth />
               </div>
             </div>
           </div>

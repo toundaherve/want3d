@@ -26,7 +26,7 @@ export function Form({
 
 export function Section({ children }) {
   return (
-    <div className="p-3 p-md-32px bg-light border rounded">{children}</div>
+    <div className="p-3 p-md-32px bg-white border rounded">{children}</div>
   );
 }
 

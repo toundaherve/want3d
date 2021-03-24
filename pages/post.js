@@ -36,7 +36,7 @@ export default function Post() {
       <Helmet>
         <title>Say what you need here</title>
         <meta name="description" content="Let the world know what you need" />
-        <link rel="stylesheet" href="https://www.ineed.com/post" />
+        <link rel="stylesheet" href="https://www.bonvih.com/post" />
       </Helmet>
       <span className="d-block mb-3"></span>
       {error ? (

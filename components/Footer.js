@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="container py-32px">
           <div className="row">
             <div className="col-12 col-md-4">
-              <FooterNav title="iNeed" links={links.wantedLinks} />
+              <FooterNav title="BONVIH" links={links.wantedLinks} />
             </div>
             <div className="col-12 col-md-4">
               <FooterNav title="LEGAL" links={links.legalLinks} />
@@ -67,7 +67,7 @@ function Coyright() {
       <Logo />
       <span className="d-block mb-3"></span>
       <span>
-        <small className="text-light">iNeed &copy; 2021</small>
+        <small className="text-light">BONVIH &copy; 2021</small>
       </span>
     </div>
   );
@@ -77,11 +77,11 @@ function getLinksData() {
   return {
     wantedLinks: [
       {
-        text: "About iNeed",
+        text: "About BONVIH",
         url: "/about",
       },
       {
-        text: "Advertising on iNeed",
+        text: "Advertising on BONVIH",
         url: "/advertising",
       },
       {
