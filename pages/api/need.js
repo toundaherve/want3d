@@ -1,15 +1,15 @@
-import { savePostToDb } from "../../db/Post";
+import needModel from "../../db/Need";
 
-async function newPostHandler(req, res) {
+async function postHandler(req, res) {
   const data = req.body;
 
   try {
-    const newPost = await savePostToDb({ ...data });
+    const need = await needModel.create(data);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(
       JSON.stringify({
         error: false,
-        newPostId: newPost.id,
+        ID: need.id,
       })
     );
     res.end();
@@ -18,18 +18,17 @@ async function newPostHandler(req, res) {
     res.write(
       JSON.stringify({
         error: true,
-        error: "Internal server error",
+        message: "Internal server error",
       })
     );
     res.end();
-    console.log(error);
     return;
   }
 }
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    newPostHandler(req, res);
+    postHandler(req, res);
     return;
   }
 }

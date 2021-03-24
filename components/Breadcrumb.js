@@ -1,4 +1,6 @@
-export default function Breadcrumb() {
+import Reat from "react";
+
+const Breadcrumb = () => {
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb mb-0">
@@ -11,4 +13,6 @@ export default function Breadcrumb() {
       </ol>
     </nav>
   );
-}
+};
+
+export default Breadcrumb;

@@ -1,9 +1,9 @@
 import Button from "./Button";
 import { BsSearch } from "react-icons/bs";
 
-export default function SearchForm() {
+export default function SearchBar() {
   return (
-    <form className="d-flex" action="/results">
+    <form className="d-flex" action="/search">
       <div className="d-flex w-100 search-container position-relative">
         <input
           className="form-control"
@@ -19,7 +19,7 @@ export default function SearchForm() {
               <button type="submit" className="px-2 ">
                 <BsSearch size={18} />
               </button>
-            </span> 
+            </span>
           </div>
         </div>
       </div>

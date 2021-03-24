@@ -1,9 +1,9 @@
 import { DataTypes, Op } from "sequelize";
-import sequelize from "./";
+import sequelize from ".";
 
-const Post = sequelize.define("Post", {
+const Need = sequelize.define("Need", {
   name: { type: DataTypes.STRING },
-  reward: { type: DataTypes.DOUBLE },
+  budget: { type: DataTypes.DOUBLE },
   currency: { type: DataTypes.STRING },
   description: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
   category: { type: DataTypes.STRING },
@@ -11,32 +11,32 @@ const Post = sequelize.define("Post", {
   email: { type: DataTypes.STRING },
 });
 
-export async function savePostToDb(data) {
+async function create(data) {
   try {
-    await Post.sync();
+    await Need.sync();
 
-    const newPost = await Post.create(data);
-    return newPost;
+    const created = await Need.create(data);
+    return created;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getPostFromDb(id) {
+async function findOne(id) {
   let pk = id;
   if (typeof id === "string") {
     pk = parseInt(id);
   }
   try {
-    const newPost = await Post.findByPk(pk, { raw: true });
-    return newPost;
+    const found = await Need.findByPk(pk, { raw: true });
+    return found;
   } catch (error) {
     throw error;
   }
 }
 
-export async function searchPostsInDb(text, limit = 10, offset = 0) {
-  const splited = text.split(" ");
+async function findAll(search, limit = 10, offset = 0) {
+  const splited = search.split(" ");
 
   const clauses = {};
   splited.forEach((word) => {
@@ -44,7 +44,7 @@ export async function searchPostsInDb(text, limit = 10, offset = 0) {
   });
 
   try {
-    const posts = Post.findAll({
+    const needs = Need.findAll({
       where: {
         name: {
           [Op.and]: clauses,
@@ -55,8 +55,14 @@ export async function searchPostsInDb(text, limit = 10, offset = 0) {
       raw: true,
     });
 
-    return posts;
+    return needs;
   } catch (error) {
     throw error;
   }
 }
+
+export default {
+  findAll,
+  findOne,
+  create,
+};

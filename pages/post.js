@@ -1,82 +1,179 @@
-import axios from "axios";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import useFetch from "use-http";
+import { Helmet } from "react-helmet";
 import Alert from "../components/Alert";
-import PostPage from "../components/PostPage";
-import PostPage2 from "../components/PostPage2";
+import Layout from "../components/Layout";
+import {
+  Input,
+  Label,
+  Section,
+  TextArea,
+  Select,
+  Form,
+  ErrorMessage,
+} from "../components/Form";
 
 export default function Post() {
-  const [newPostId, setNewPostId] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  // const [croppedImage, setCroppedImage] = useState(null);
+  const [ID, setID] = useState("");
+  const { register, errors, handleSubmit } = useForm();
+  const { post, response, loading, error } = useFetch(
+    `http://${process.env.API_HOST}:${process.env.API_PORT}`
+  );
 
-  function handleError(error) {
-    let errorMessage;
-
-    if (typeof error === "String") {
-      errorMessage = error;
-    }
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
-    setErrorMessage(errorMessage);
-  }
-
-  // function isValidImage(imageData) {
-  //   return imageData ? true : false;
-  // }
-
-  // function collectImageData(imageData) {
-  //   setCroppedImage(imageData);
-  // }
-
-  async function handleSubmit(data) {
-    setIsSubmitting(true);
-
-    let response;
-    try {
-      response = await axios.post("http://192.168.1.68:3000/api/post", data);
-
-      if (response.data.error) {
-        handleError(response.data.errorMessage);
-      } else {
-        setNewPostId(response.data.newPostId);
-      }
-    } catch (error) {
-      handleError(error);
-    }
-
+  async function onSubmit(data) {
+    const ID = await post("/api/need", data);
+    if (response.ok) setID(ID);
     window.scroll({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-
-    setIsSubmitting(false);
   }
 
   return (
-    <>
-      {errorMessage ? (
+    <Layout>
+      <Helmet>
+        <title>Say what you need here</title>
+        <meta name="description" content="Let the world know what you need" />
+        <link rel="stylesheet" href="https://www.ineed.com/post" />
+      </Helmet>
+      <span className="d-block mb-3"></span>
+      {error ? (
         <Alert
-          heading="Sorry ! We could not perform the operation"
-          text={errorMessage}
-          purpose="warning"
+          message="Sorry! the operation failed ! Retry later"
+          context="danger"
         />
-      ) : newPostId ? (
+      ) : response.ok ? (
         <Alert
-          heading="Well done!"
-          text={`Your iNeed poster has been successfully advertised.<span class="d-block mb-1"> </span>As soon as a seller contacts us about your poster, we will email you their contact info and you two take it from there.`}
-          purpose="success"
-          redirectionText={"You can see your iNeed poster here: "}
-          redirectionButtonText="View poster"
-          redirectionLink={`/item?id=${newPostId}`}
+          message="Well done! your need has beed succesfully created."
+          context="success"
         />
       ) : (
-        <PostPage2 isSubmitting={isSubmitting} onSubmit={handleSubmit} />
+        <div className="container post-form-width p-0">
+          <Form onSubmit={handleSubmit(onSubmit)} loading={loading}>
+            <h1 className="h4 mb-0 ms-3 ms-md-0">Say what you need</h1>
+            <span className="d-block mb-3"></span>
+            <Section>
+              <div>
+                <Label htmlFor="name-field">I need</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="name-field"
+                  type="text"
+                  name="name"
+                  placeholder="Name of the item"
+                  register={register}
+                  isInvalid={errors.name}
+                />
+                {errors.name && (
+                  <ErrorMessage>
+                    Please provide the name of the item.
+                  </ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="category-field">Category</Label>
+                <span className="d-block mb-1"></span>
+                <Select
+                  name="category"
+                  type="Select a category"
+                  options={["Automobile", "Phones", "Clothing"]}
+                  register={() => register({ required: true })}
+                  isInvalid={errors.category}
+                />
+                {errors.category && (
+                  <ErrorMessage>
+                    Please select a category for the item.
+                  </ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="reward-field">My budget</Label>
+                <span className="d-block mb-1"></span>
+                <div className="d-flex align-items-start">
+                  <div className="d-flex flex-column">
+                    <Select
+                      className="form-select flex-grow-0 w-auto"
+                      id="curency-field"
+                      name="currency"
+                      register={() => register({ required: true })}
+                      type="Select a currency"
+                      options={["GBP", "EUR", "USD"]}
+                      isInvalid={errors.currency}
+                    />
+                    {errors.currency && (
+                      <ErrorMessage>Please select a currency.</ErrorMessage>
+                    )}
+                  </div>
+                  <span className="d-block mb-3 ms-2"></span>
+                  <div className="flex-grow-1">
+                    <Input
+                      id="budget-field"
+                      type="number"
+                      name="budget"
+                      register={() => register({ required: true })}
+                      isInvalid={errors.budget}
+                    />
+                    {errors.budget && (
+                      <ErrorMessage>Please provide your budget.</ErrorMessage>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="description-field">Note to sellers</Label>
+                <span className="d-block mb-1"></span>
+                <TextArea
+                  id="description-field"
+                  rows="3"
+                  name="description"
+                  register={register}
+                ></TextArea>
+              </div>
+            </Section>
+            <span className="d-block mb-3"></span>
+            <Section>
+              <div>
+                <Label htmlFor="location-field">City / Country</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="location-field"
+                  type="text"
+                  name="location"
+                  register={() => register({ required: true })}
+                  error={errors.location}
+                />
+                {errors.location && (
+                  <ErrorMessage>Please provide your location.</ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="email-field">My Email</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="email-field"
+                  type="email"
+                  name="email"
+                  register={() => register({ required: true })}
+                  error={errors.email}
+                />
+                {errors.email && (
+                  <ErrorMessage>Please provide your email.</ErrorMessage>
+                )}
+                <div className="form-text">
+                  We will never share your email with anyone.
+                </div>
+              </div>
+            </Section>
+          </Form>
+        </div>
       )}
-    </>
+      <span className="d-block mb-3"></span>
+    </Layout>
   );
 }

@@ -118,11 +118,3 @@ function getLinksData() {
     ],
   };
 }
-
-// footer background-color changed
-
-// all text-color changed
-
-// text-decoration changed
-
-// alignment changed
