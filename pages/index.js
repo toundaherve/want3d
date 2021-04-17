@@ -18,16 +18,6 @@ export default function Home() {
       <span className="d-block mb-3"></span>
       <div className="container">
         <div className="row">
-          <div className="d-none d-md-block col-12 col-md-6">
-            <div className="hero-height">
-              <img
-                src="https://cdn.dribbble.com/users/1355613/screenshots/6533809/invoice_maker.jpg"
-                alt="person-on-computer"
-                className="hero-image"
-              />
-              {/* <div className="position-absolute top-0 start-0 bottom-0 end-0 hero-overlay" /> */}
-            </div>
-          </div>
           <div className="col-12 col-md-6">
             <div className="d-flex hero-height justify-content-center">
               <div className="d-flex flex-column hero-text-height justify-content-center">
@@ -40,9 +30,19 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="d-none d-md-block col-12 col-md-6">
+            <div className="hero-height">
+              <img
+                src="https://cdn.dribbble.com/users/1355613/screenshots/6533809/invoice_maker.jpg"
+                alt="person-on-computer"
+                className="hero-image"
+              />
+              {/* <div className="position-absolute top-0 start-0 bottom-0 end-0 hero-overlay" /> */}
+            </div>
+          </div>
         </div>
       </div>
-      <span className="d-block mb-3"></span>
+      <span className="d-block mb-3 "></span>
     </Layout>
   );
 }
