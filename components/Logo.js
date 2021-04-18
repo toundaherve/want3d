@@ -1,7 +1,7 @@
 export default function Logo() {
   return (
     <a href="/" className="text-decoration-none">
-      <span className="fs-3 text-primary fw-normal">BONVIH</span>
+      <span className="fs-3 text-white fw-normal">BONVIH</span>
     </a>
   );
 }

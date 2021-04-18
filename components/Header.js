@@ -13,7 +13,7 @@ export default function Header() {
         addShadow ? "shadow" : "shadow-none"
       }`}
     >
-      <div className="bg-white">
+      <div className="bg-primary">
         <div className="header-height">
           <div className="container">
             <div className="header-content-wrapping">
@@ -27,7 +27,7 @@ export default function Header() {
                     <div className="col-12">
                       <div className="d-flex justify-content-center align-items-start">
                         <Button
-                          purpose="link btn-warning text-white text-decoration-none"
+                          purpose="link btn-success text-white text-decoration-none"
                           link="/post"
                         >
                           POST
@@ -49,7 +49,7 @@ export default function Header() {
                   </div>
                   <span className="d-inline-block mb-3 ml-20px"></span>
                   <Button
-                    purpose="link btn-warning text-white text-decoration-none"
+                    purpose="link btn-success text-white text-decoration-none"
                     link="/post"
                   >
                     POST A NEED

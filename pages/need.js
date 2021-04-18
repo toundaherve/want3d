@@ -37,15 +37,15 @@ export default function Need({ data }) {
       <div className="container post-form-width ">
         <span className="d-block mb-3"></span>
         <div className="d-none d-md-block">
-          <Breadcrumb />
+          <Breadcrumb current={name} />
           <span className="d-block mb-3"></span>
         </div>
         <div>
           <Section>
             <div className="">
               <h1 className="h4 mb-0 fw-bold text-primary">
-                <span className="text-dark">I need </span>
-                {`${name}, ${getCurrencySymbol(currency)}${budget}`}
+                {/* <span className="text-dark">I need </span> */}
+                {`${name},${getCurrencySymbol(currency)}${budget}`}
               </h1>
               <Divider />
               <div className="row">

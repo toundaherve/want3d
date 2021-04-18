@@ -1,12 +1,14 @@
 import React from "react";
+import useSWR from "swr";
 import { Helmet } from "react-helmet";
-import { GiMoneyStack } from "react-icons/gi";
-import { MdLocationOn, MdMessage } from "react-icons/md";
-import needModel from "../db/Need";
+// import { GiMoneyStack } from "react-icons/gi";
+// import { MdLocationOn, MdMessage } from "react-icons/md";
+// import needModel from "../db/Need";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import Breadcrumb from "../components/Breadcrumb";
 import getCurrencySymbol from "../utils/getCurrencySymbol";
+import Loading from "../components/Loading";
 
 const filters = [
   {
@@ -15,11 +17,21 @@ const filters = [
   },
 ];
 
-export default function Search({ search, needs, moreResults = false }) {
-  const resultsFound = needs.length > 0;
-  const resultsFoundText = 'People who need "' + search + '"';
-  const noResultsFoundText = 'Nobody needs "' + search + '" yet';
-  const headingText = resultsFound ? resultsFoundText : noResultsFoundText;
+export default function Search() {
+  const {data, error} = useSWR("/api/need?search=", url => {
+    const query = location.search.split("=")[1]
+    return fetch(`${url}${query}`).then(r => r.json())
+  })
+  
+  if (error) return <div>Failed to load</div>
+  if (!data) return <Loading />
+
+  const {needs, search} = data
+  let resultsFound = needs.length > 0;
+  let resultsFoundText = 'People who need "' + search + '"';
+  let noResultsFoundText = 'Nobody needs "' + search + '" yet';
+  let headingText = resultsFound ? resultsFoundText : noResultsFoundText;
+  let moreResults = false
 
   return (
     <Layout>
@@ -45,7 +57,7 @@ export default function Search({ search, needs, moreResults = false }) {
             <div className="position-relative">
               <div>
                 <span className="d-block mb-2"></span>
-                <Breadcrumb />
+                <Breadcrumb current="Results" />
                 <h1 className="mb-0">{headingText}</h1>
                 <span className="d-block mb-12px"></span>
                 {resultsFound && (
@@ -98,7 +110,7 @@ export default function Search({ search, needs, moreResults = false }) {
       </div>
       <span className="d-block mb-3"></span>
     </Layout>
-  );
+  ) 
 }
 
 function FilterView({ type, options }) {
@@ -132,62 +144,62 @@ function NeedView({ name, location, currency, budget, description }) {
   return (
     <div className="card card-hover">
       {/* <img src="..." className="card-img-top" alt="..." /> */}
-      {/* <div className="card-header px-2 py-1">
+      <div className="card-header px-2 py-1">
                     <small>Needed</small>
-                  </div> */}
+                  </div>
       <div className="card-body p-2">
         <div className="h6 card-title p-0 m-0 fw-bold">
           {/* <span>I need</span>{" "} */}
           <span className="text-primary fw-bold">{name}</span>
         </div>
         <small className="text-secondary">
-          <MdLocationOn /> {location}
+           {location}
         </small>
         <div className="h6 card-title  p-0 m-0 fw-bold">
-          <GiMoneyStack /> {getCurrencySymbol(currency) + budget}
+           {getCurrencySymbol(currency) + budget}
         </div>
         <span className="d-block mb-3"></span>
         <p className="card-text p-0 m-0">
-          <MdMessage /> {description}
+           {description}
         </p>
       </div>
     </div>
   );
 }
 
-export async function getServerSideProps(context) {
-  const search = context.query.search;
-  if (!search) {
-    context.res.writeHead(400, { "Context-Type": "text/plain" });
-    context.res.end("Missing search text");
-    return {
-      props: null,
-    };
-  }
+// export async function getServerSideProps(context) {
+//   const search = context.query.search;
+//   if (!search) {
+//     context.res.writeHead(400, { "Context-Type": "text/plain" });
+//     context.res.end("Missing search text");
+//     return {
+//       props: null,
+//     };
+//   }
 
-  const limit = context.query.limit ? context.query.limit : 10;
-  const offset = context.query.offset ? context.query.offset : 0;
+//   const limit = context.query.limit ? context.query.limit : 10;
+//   const offset = context.query.offset ? context.query.offset : 0;
 
-  let needs;
-  try {
-    needs = await needModel.findAll(search, limit, offset);
-  } catch (error) {
-    context.res.writeHead(500, { "Context-Type": "text/plain" });
-    context.res.end("Internal server error");
-    return {
-      props: null,
-    };
-  }
+//   let needs;
+//   try {
+//     needs = await needModel.findAll(search, limit, offset);
+//   } catch (error) {
+//     context.res.writeHead(500, { "Context-Type": "text/plain" });
+//     context.res.end("Internal server error");
+//     return {
+//       props: null,
+//     };
+//   }
 
-  needs.forEach((need) => {
-    delete need.createdAt; // not needed
-    delete need.updatedAt; // not needed
-  });
+//   needs.forEach((need) => {
+//     delete need.createdAt; // not needed
+//     delete need.updatedAt; // not needed
+//   });
 
-  return {
-    props: {
-      needs,
-      search,
-    },
-  };
-}
+//   return {
+//     props: {
+//       needs,
+//       search,
+//     },
+//   };
+// }

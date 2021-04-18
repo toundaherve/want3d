@@ -56,7 +56,7 @@ export default function Post() {
             <span className="d-block mb-3"></span>
             <Section>
               <div>
-                <Label htmlFor="name-field">I need</Label>
+                <Label htmlFor="name-field">Name</Label>
                 <span className="d-block mb-1"></span>
                 <Input
                   id="name-field"
@@ -91,7 +91,7 @@ export default function Post() {
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="reward-field">My budget</Label>
+                <Label htmlFor="reward-field">Budget</Label>
                 <span className="d-block mb-1"></span>
                 <div className="d-flex align-items-start">
                   <div className="d-flex flex-column">
@@ -100,7 +100,7 @@ export default function Post() {
                       id="curency-field"
                       name="currency"
                       register={() => register({ required: true })}
-                      type="Select a currency"
+                      type="Currency"
                       options={["GBP", "EUR", "USD"]}
                       isInvalid={errors.currency}
                     />
@@ -153,7 +153,7 @@ export default function Post() {
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="email-field">My Email</Label>
+                <Label htmlFor="email-field">Email</Label>
                 <span className="d-block mb-1"></span>
                 <Input
                   id="email-field"

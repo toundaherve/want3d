@@ -7,7 +7,7 @@ export default function SearchBar({ fullWidth = false }) {
       <div className="d-flex w-100 position-relative" style={{ maxWidth }}>
         <input
           className="form-control"
-          type="search"
+          type="text"
           placeholder="Search what people need..."
           aria-label="Search"
           name="search"

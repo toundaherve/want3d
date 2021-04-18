@@ -24,6 +24,7 @@
     "react-icons": "^4.1.0",
     "reactstrap": "^8.9.0",
     "sequelize": "^6.5.0",
+    "swr": "^0.5.5",
     "use-http": "^1.0.18",
     "uuid": "^8.3.2"
   }

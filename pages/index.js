@@ -17,30 +17,20 @@ export default function Home() {
       </Helmet>
       <span className="d-block mb-3"></span>
       <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <div className="d-flex hero-height justify-content-center">
-              <div className="d-flex flex-column hero-text-height justify-content-center">
-                <h1 className="display-5 mb-0 text-dark fw-bold text-center hero-heading">
-                  WANNA SELL
-                  <br /> FIND WHO NEEDS IT
-                </h1>
-                <span className="d-block mb-3"></span>
-                <SearchBar fullWidth />
-              </div>
+          <div className="d-flex hero-height justify-content-center position-relative" >
+            <div className="d-flex flex-column hero-text-height justify-content-center">
+              <h1 className="display-5 mb-0 text-white fw-bold text-center hero-heading">
+                WANNA SELL
+                <br /> FIND WHO NEEDS IT
+              </h1>
+              <span className="d-block mb-3"></span>
+              <SearchBar fullWidth />
             </div>
-          </div>
-          <div className="d-none d-md-block col-12 col-md-6">
-            <div className="hero-height">
-              <img
-                src="https://cdn.dribbble.com/users/1355613/screenshots/6533809/invoice_maker.jpg"
-                alt="person-on-computer"
-                className="hero-image"
-              />
-              {/* <div className="position-absolute top-0 start-0 bottom-0 end-0 hero-overlay" /> */}
+            <div className="position-absolute top-0 start-0 end-0 bottom-0 w-100 bg-dark" style={{zIndex: "-2"}}>
+                <img src="https://images.unsplash.com/photo-1555421689-d68471e189f2?auto=format&fit=crop&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&q=80&w=750" alt="" style={{width: "100%", height: "100%", objectFit: "cover"}}/>
             </div>
+            <div className="position-absolute top-0 start-0 end-0 bottom-0 w-100" style={{backgroundColor: "rgba(0,0,0,0.5)", zIndex: "-1"}}> </div>
           </div>
-        </div>
       </div>
       <span className="d-block mb-3 "></span>
     </Layout>

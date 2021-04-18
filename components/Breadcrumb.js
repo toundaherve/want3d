@@ -1,6 +1,6 @@
 import Reat from "react";
 
-const Breadcrumb = () => {
+const Breadcrumb = ({current = ""}) => {
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb mb-0">
@@ -10,7 +10,7 @@ const Breadcrumb = () => {
           </a>
         </li>
         <li className="breadcrumb-item active" aria-current="page">
-          Results
+          {current}
         </li>
       </ol>
     </nav>
