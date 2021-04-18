@@ -6,9 +6,10 @@ export default function SearchBar({ fullWidth = false }) {
     <form className="d-flex" action="/search">
       <div className="d-flex w-100 position-relative" style={{ maxWidth }}>
         <input
+          autoComplete="off"
           className="form-control"
           type="text"
-          placeholder="Search what people need..."
+          placeholder="ie: Iphone X"
           aria-label="Search"
           name="search"
           required
