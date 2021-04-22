@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/bonvih/website
+hooks:
+  BeforeInstall:
+    - location: scrips/before-install.sh
+  After:
+    - location: scripts/after-install.sh
+    runas: root
+    timeout: 300
+  ApplicationStart:
+    - location: scripts/service-start.sh
+    runas: root
+    timeout: 60
