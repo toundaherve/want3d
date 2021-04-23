@@ -4,6 +4,9 @@ files:
   - source: /
     destination: /home/ubuntu/bonvih/website
 hooks:
+  ApplicationStop:
+    - location: Scripts/application-stop.sh
+      runas: root
   BeforeInstall:
     - location: Scripts/before-install.sh
       runas: root
@@ -12,6 +15,6 @@ hooks:
       runas: root
       timeout: 180
   ApplicationStart:
-    - location: Scripts/service-start.sh
+    - location: Scripts/application-start.sh
       runas: root
       timeout: 3600
