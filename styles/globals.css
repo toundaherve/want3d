@@ -310,19 +310,6 @@ body {
   }
 }
 
-.hero-wrapper {
-  /* height: calc(100vh - 108px - 16px - 16px -16px); */
-  /* max-height: calc(100vh - 108px); */
-}
-
-@media screen and (min-width: 576px) {
-  .hero-wrapper {
-    /* height: calc(100vh - 108px - 16px); */
-    /* height: 100vh; */
-    /* max-height: calc(100vh - 108px - 16px) */
-    /* margin-bottom: 16px; */
-  }
-}
 
 .invalid-input {
   border-color: #dc3545;
