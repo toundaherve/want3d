@@ -1,3 +1,3 @@
 #! /usr/bin/bash
 
-cd /home/ubuntu/bonvih/website && npm install && sudo npx next start -p 80
+cd /home/ubuntu/bonvih/website && npm install && sudo npx next build --debug
