@@ -5,12 +5,10 @@ files:
     destination: /home/ubuntu/bonvih/website
 hooks:
   BeforeInstall:
-    - location: scripts/before-install.sh
+    - location: Scripts/before-install.sh
   AfterInstall:
-    - location: scripts/after-install.sh
-    runas: root
-    timeout: 300
+    - location: Scripts/after-install.sh
+      timeout: 180
   ApplicationStart:
-    - location: scripts/service-start.sh
-    runas: root
-    timeout: 60
+    - location: Scripts/service-start.sh
+      timeout: 3600
