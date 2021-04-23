@@ -20,7 +20,7 @@ export default function Home() {
           <div className="d-flex hero-height justify-content-center position-relative" >
             <div className="d-flex flex-column hero-text-height justify-content-center">
               <h1 className="display-5 mb-0 text-white fw-bold text-center hero-heading">
-                WANNA SELL ?
+                WANNA SELL?
                 <br /> FIND WHO NEEDS IT
               </h1>
               <span className="d-block mb-3"></span>
