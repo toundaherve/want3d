@@ -2,7 +2,7 @@ require("dotenv").config();
 const testDbConnection = require("./db/testConnection");
 
 module.exports = (phase, { defaultConfig }) => {
-  testDbConnection();
+  // testDbConnection();
 
   return {
     env: {
