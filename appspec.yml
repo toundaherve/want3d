@@ -5,7 +5,7 @@ files:
     destination: /home/ubuntu/bonvih/website
 hooks:
   BeforeInstall:
-    - location: scrips/before-install.sh
+    - location: scripts/before-install.sh
   AfterInstall:
     - location: scripts/after-install.sh
     runas: root
