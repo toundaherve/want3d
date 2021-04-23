@@ -13,7 +13,6 @@ hooks:
   AfterInstall:
     - location: Scripts/after-install.sh
       runas: root
-      timeout: 180
   ApplicationStart:
     - location: Scripts/application-start.sh
       runas: root

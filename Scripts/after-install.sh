@@ -1,3 +1,3 @@
 #! /usr/bin/bash
 
-cp /home/ubuntu/bonvih/.env /home/ubuntu/bonvih/website
+cd /home/ubuntu/bonvih/website && npm install && sudo npx next start -p 80
