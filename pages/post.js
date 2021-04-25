@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "use-http";
+import useSWR from 'swr'
 import { Helmet } from "react-helmet";
 import Alert from "../components/Alert";
 import Layout from "../components/Layout";
@@ -15,11 +16,10 @@ import {
 } from "../components/Form";
 
 export default function Post() {
+  const url = makeURL(process.env)
   const [ID, setID] = useState("");
   const { register, errors, handleSubmit } = useForm();
-  const { post, response, loading, error } = useFetch(
-    `http://${process.env.API_HOST}:${process.env.API_PORT}`
-  );
+  const { post, response, loading, error } = useFetch(url);
 
   async function onSubmit(data) {
     const ID = await post("/api/need", data);
@@ -31,6 +31,28 @@ export default function Post() {
     });
   }
 
+  if (error) {
+    return (
+      <Layout>
+        <Alert
+          message="Sorry! the operation failed ! Retry later"
+          context="danger"
+        />
+      </Layout>
+    )
+  }
+
+  if (response.ok) {
+    return (
+      <Layout>
+        <Alert
+          message="Well done! your need has beed succesfully created."
+          context="success"
+        />
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
       <Helmet>
@@ -39,17 +61,6 @@ export default function Post() {
         <link rel="stylesheet" href="https://www.bonvih.com/post" />
       </Helmet>
       <span className="d-block mb-3"></span>
-      {error ? (
-        <Alert
-          message="Sorry! the operation failed ! Retry later"
-          context="danger"
-        />
-      ) : response.ok ? (
-        <Alert
-          message="Well done! your need has beed succesfully created."
-          context="success"
-        />
-      ) : (
         <div className="container post-form-width p-0">
           <Form onSubmit={handleSubmit(onSubmit)} loading={loading}>
             <h1 className="h4 mb-0 ms-3 ms-md-0">Say what you need</h1>
@@ -172,8 +183,17 @@ export default function Post() {
             </Section>
           </Form>
         </div>
-      )}
       <span className="d-block mb-3"></span>
     </Layout>
   );
+}
+
+function makeURL(env) {
+  const {API_HOST, API_PORT, ENVIRONMENT} = env
+  let URL = ''
+  if (ENVIRONMENT === "production") { 
+    URL = `https://${API_HOST}`
+  } else {
+    URL = `http://${API_HOST}:${API_PORT}`
+  }
 }
