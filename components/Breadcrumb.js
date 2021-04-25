@@ -1,14 +1,20 @@
-export default function Breadcrumb() {
+import Reat from "react";
+
+const Breadcrumb = ({current = ""}) => {
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb mb-0">
         <li className="breadcrumb-item">
-          <a href="/">Home</a>
+          <a className="text-dark" href="/">
+            Home
+          </a>
         </li>
         <li className="breadcrumb-item active" aria-current="page">
-          Results
+          {current}
         </li>
       </ol>
     </nav>
   );
-}
+};
+
+export default Breadcrumb;

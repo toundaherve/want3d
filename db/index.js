@@ -1,7 +1,9 @@
 const { Sequelize } = require("sequelize");
 
+const { DB_USER, DB_PASS, DB_HOST } = process.env;
+
 const sequelize = new Sequelize(
-  "postgres://postgres:Futurefuture1!@want3d.cq4cqradygxj.eu-west-2.rds.amazonaws.com:5432/want3d"
+  `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:5432/bonvih`
 );
 
-export default sequelize;
+module.exports = sequelize;

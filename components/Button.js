@@ -7,6 +7,7 @@ export default function Button({
   disabled = false,
   children,
   link = "",
+  loading = false,
 }) {
   return link ? (
     <a
@@ -25,9 +26,17 @@ export default function Button({
         !textWrappable ? "text-nowrap" : ""
       } ${size && "btn-" + size}`}
       type={type}
-      disabled={disabled}
+      disabled={loading}
     >
-      {children}
+      {!loading ? children : <Spinner />}
     </button>
+  );
+}
+
+function Spinner() {
+  return (
+    <div className="spinner-border text-light" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
   );
 }

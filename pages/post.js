@@ -1,90 +1,199 @@
-import axios from "axios";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import useFetch from "use-http";
+import useSWR from 'swr'
+import { Helmet } from "react-helmet";
 import Alert from "../components/Alert";
-import PostPage from "../components/PostPage";
+import Layout from "../components/Layout";
+import {
+  Input,
+  Label,
+  Section,
+  TextArea,
+  Select,
+  Form,
+  ErrorMessage,
+} from "../components/Form";
 
 export default function Post() {
-  const [newPostId, setNewPostId] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [croppedImage, setCroppedImage] = useState(null);
+  const url = makeURL(process.env)
+  const [ID, setID] = useState("");
+  const { register, errors, handleSubmit } = useForm();
+  const { post, response, loading, error } = useFetch(url);
 
-  function handleError(error) {
-    let errorMessage;
-
-    if (typeof error === "String") {
-      errorMessage = error;
-    }
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
-    setErrorMessage(errorMessage);
+  async function onSubmit(data) {
+    const ID = await post("/api/need", data);
+    if (response.ok) setID(ID);
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }
 
-  function validImage(imageData) {
-    return imageData ? true : false;
+  if (error) {
+    return (
+      <Layout>
+        <Alert
+          message="Sorry! the operation failed ! Retry later"
+          context="danger"
+        />
+      </Layout>
+    )
   }
 
-  function collectImageData(imageData) {
-    setCroppedImage(imageData);
-  }
-
-  async function onSubmit(newPost) {
-    setIsSubmitting(true);
-
-    if (!validImage(croppedImage)) {
-      handleError("Invalid image");
-    } else {
-      const data = {
-        ...newPost,
-        image: croppedImage,
-      };
-
-      let response;
-      try {
-        response = await axios.post("http://192.168.1.68:3000/api/post", data);
-
-        if (response.data.error) {
-          handleError(response.data.errorMessage);
-        } else {
-          setNewPostId(response.data.newPostId);
-        }
-      } catch (error) {
-        handleError(error);
-      }
-    }
-
-    setIsSubmitting(false);
+  if (response.ok) {
+    return (
+      <Layout>
+        <Alert
+          message="Well done! your need has beed succesfully created."
+          context="success"
+        />
+      </Layout>
+    )
   }
 
   return (
-    <>
-      {errorMessage && (
-        <Alert
-          heading="Sorry ! We could not perform the operation"
-          message={errorMessage}
-          type="danger"
-        />
-      )}
-      {newPostId && (
-        <Alert
-          heading="Well done!"
-          message="You wanted poster has been successfully created"
-          type="success"
-          nextMessage={"You can see your wanted poster here: "}
-          nextButtonText="View poster"
-          nextLink={`/item?id=${newPostId}`}
-        />
-      )}
-      {!errorMessage && !newPostId && (
-        <PostPage
-          isSubmitting={isSubmitting}
-          onSubmit={onSubmit}
-          handleImageCropped={collectImageData}
-        />
-      )}
-    </>
+    <Layout>
+      <Helmet>
+        <title>Say what you need here</title>
+        <meta name="description" content="Let the world know what you need" />
+        <link rel="stylesheet" href="https://www.bonvih.com/post" />
+      </Helmet>
+      <span className="d-block mb-3"></span>
+        <div className="container post-form-width p-0">
+          <Form onSubmit={handleSubmit(onSubmit)} loading={loading}>
+            <h1 className="h4 mb-0 ms-3 ms-md-0">Say what you need</h1>
+            <span className="d-block mb-3"></span>
+            <Section>
+              <div>
+                <Label htmlFor="name-field">Name</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="name-field"
+                  type="text"
+                  name="name"
+                  placeholder="Name of the item"
+                  register={register}
+                  isInvalid={errors.name}
+                />
+                {errors.name && (
+                  <ErrorMessage>
+                    Please provide the name of the item.
+                  </ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="category-field">Category</Label>
+                <span className="d-block mb-1"></span>
+                <Select
+                  name="category"
+                  type="Select a category"
+                  options={["Automobile", "Phones", "Clothing"]}
+                  register={() => register({ required: true })}
+                  isInvalid={errors.category}
+                />
+                {errors.category && (
+                  <ErrorMessage>
+                    Please select a category for the item.
+                  </ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="reward-field">Budget</Label>
+                <span className="d-block mb-1"></span>
+                <div className="d-flex align-items-start">
+                  <div className="d-flex flex-column">
+                    <Select
+                      className="form-select flex-grow-0 w-auto"
+                      id="curency-field"
+                      name="currency"
+                      register={() => register({ required: true })}
+                      type="Currency"
+                      options={["GBP", "EUR", "USD"]}
+                      isInvalid={errors.currency}
+                    />
+                    {errors.currency && (
+                      <ErrorMessage>Please select a currency.</ErrorMessage>
+                    )}
+                  </div>
+                  <span className="d-block mb-3 ms-2"></span>
+                  <div className="flex-grow-1">
+                    <Input
+                      id="budget-field"
+                      type="number"
+                      name="budget"
+                      register={() => register({ required: true })}
+                      isInvalid={errors.budget}
+                    />
+                    {errors.budget && (
+                      <ErrorMessage>Please provide your budget.</ErrorMessage>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="description-field">Note to sellers</Label>
+                <span className="d-block mb-1"></span>
+                <TextArea
+                  id="description-field"
+                  rows="3"
+                  name="description"
+                  register={register}
+                ></TextArea>
+              </div>
+            </Section>
+            <span className="d-block mb-3"></span>
+            <Section>
+              <div>
+                <Label htmlFor="location-field">City / Country</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="location-field"
+                  type="text"
+                  name="location"
+                  register={() => register({ required: true })}
+                  error={errors.location}
+                />
+                {errors.location && (
+                  <ErrorMessage>Please provide your location.</ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="email-field">Email</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="email-field"
+                  type="email"
+                  name="email"
+                  register={() => register({ required: true })}
+                  error={errors.email}
+                />
+                {errors.email && (
+                  <ErrorMessage>Please provide your email.</ErrorMessage>
+                )}
+                <div className="form-text">
+                  We will never share your email with anyone.
+                </div>
+              </div>
+            </Section>
+          </Form>
+        </div>
+      <span className="d-block mb-3"></span>
+    </Layout>
   );
+}
+
+function makeURL(env) {
+  const {API_HOST, API_PORT, ENVIRONMENT} = env
+  let URL = ''
+  if (ENVIRONMENT === "production") { 
+    URL = `https://${API_HOST}`
+  } else {
+    URL = `http://${API_HOST}:${API_PORT}`
+  }
 }
