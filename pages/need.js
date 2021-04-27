@@ -43,9 +43,9 @@ export default function Need({ data }) {
         <div>
           <Section>
             <div className="">
-              <h1 className="h4 mb-0 fw-bold text-primary">
+              <h1 className="h4 mb-0 fw-bold text-dark">
                 {/* <span className="text-dark">I need </span> */}
-                {`${name},${getCurrencySymbol(currency)}${budget}`}
+                {`${name} - ${getCurrencySymbol(currency)}${budget}`}
               </h1>
               <Divider />
               <div className="row">
@@ -80,7 +80,7 @@ export default function Need({ data }) {
             onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
           >
             <Section>
-              <h2 className="h4 mb-0">Contact the buyer</h2>
+              <h2 className="h4 mb-0 fw-bold">Contact the buyer</h2>
               <span className="d-block mb-3"></span>
               <div>
                 <Label htmlFor="email-field">Your Email</Label>

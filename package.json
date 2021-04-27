@@ -6,14 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "dropTables": "node db/dropAllTables.js"
+    "dropTables": "node db/dropAllTables.js",
+    "bootstrap-compile": "node-sass --output-style compressed scss/custom-bootstrap.scss styles/custom-bootstrap.css"
   },
   "dependencies": {
     "aws-sdk": "^2.832.0",
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0-beta3",
     "dotenv": "^8.2.0",
     "next": "10.0.5",
+    "node-sass": "^5.0.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "react": "17.0.1",

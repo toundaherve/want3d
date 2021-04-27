@@ -9,7 +9,7 @@ export default function SearchBar({ fullWidth = false }) {
           autoComplete="off"
           className="form-control"
           type="text"
-          placeholder="ie: Iphone X"
+          placeholder={`e.g. "iphone 12"`}
           aria-label="Search"
           name="search"
           required
