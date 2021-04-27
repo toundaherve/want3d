@@ -14,7 +14,7 @@ export function Form({
       <span className="d-block mb-3"></span>
       <div className="p-3 p-md-0">
         <div className="d-grid d-md-block text-end">
-          <Button loading={loading} type="submit" purpose="primary">
+          <Button loading={loading} type="submit" purpose="secondary">
             {buttonText}
           </Button>
         </div>

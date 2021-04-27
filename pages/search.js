@@ -116,9 +116,9 @@ export default function Search() {
 function FilterView({ type, options }) {
   return (
     <div className="py-2 px-1">
-      <div className="dropdown bg-white">
+      <div className="dropdown">
         <button
-          className="btn btn-outline-secondary border border-1 dropdown-toggle"
+          className="btn btn-light bg-white border border-1 dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-bs-toggle="dropdown"
@@ -144,15 +144,15 @@ function NeedView({ name, location, currency, budget, description }) {
   return (
     <div className="card shadow">
       {/* <img src="..." className="card-img-top" alt="..." /> */}
-      {/* <div className="card-header px-2 py-1">
-                    <small>Needed</small>
-                  </div> */}
+      <div className="d-none card-header px-2 py-1 bg-secondary text-dark">
+        {/* <small>Needed</small> */}
+      </div>
       <div className="card-body p-2">
         <div className="h6 card-title p-0 m-0 fw-bold">
           {/* <span>I need</span>{" "} */}
           <span className="text-primary fw-bold">{name}</span>
         </div>
-        <small className="text-secondary">
+        <small className="text-dark">
           Leeds - United Kingdom
         </small>
         <div className="h6 card-title  p-0 m-0 fw-bold">

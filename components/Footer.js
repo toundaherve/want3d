@@ -39,7 +39,7 @@ export default function Footer() {
 }
 
 function Divider() {
-  return <span className="d-block border-bottom border-secondary"></span>;
+  return <span className="d-block border-bottom border-light"></span>;
 }
 
 function FooterNav({ title, links = [] }) {

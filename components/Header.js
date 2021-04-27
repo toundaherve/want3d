@@ -9,7 +9,7 @@ export default function Header() {
   const addShadow = useWindowHasScrolledPastValue(2);
   return (
     <div
-      className={`sticky-top border-bottom header-top ${
+      className={`sticky-top header-top ${
         addShadow ? "shadow" : "shadow-none"
       }`}
     >

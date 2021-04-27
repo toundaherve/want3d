@@ -43,7 +43,7 @@ export default function Need({ data }) {
         <div>
           <Section>
             <div className="">
-              <h1 className="h4 mb-0 fw-bold text-dark">
+              <h1 className="h4 mb-0 fw-bold text-primary">
                 {/* <span className="text-dark">I need </span> */}
                 {`${name} - ${getCurrencySymbol(currency)}${budget}`}
               </h1>
