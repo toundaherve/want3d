@@ -12,6 +12,7 @@ import {
   Form,
   ErrorMessage,
 } from "../components/Form";
+import Button from "../components/Button";
 
 export default function Need({ data }) {
   const { register, errors, handleSubmit } = useForm();
@@ -49,7 +50,7 @@ export default function Need({ data }) {
               </h1>
               <Divider />
               <div className="row">
-                <div className="col-12 col-md-6">
+                <div className="col-12">
                   <div className="h5 mb-0">Details</div>
                   <span className="d-block mb-2"></span>
                   <div className="d-flex flex-column">
@@ -64,10 +65,10 @@ export default function Need({ data }) {
                     <Field name="Date published" value={createdAt} />
                   </div>
                 </div>
-                <div className="col-12 d-md-none">
+                <div className="col-12 ">
                   <Divider />
                 </div>
-                <div className="col-12 col-md-6">
+                <div className="col-12">
                   <div className="h5 mb-0">Note for sellers</div>
                   <span className="d-block mb-2"></span>
                   <p className="mb-0">{description}</p>
@@ -75,47 +76,8 @@ export default function Need({ data }) {
               </div>
             </div>
           </Section>
-          <Form
-            className="pt-3"
-            onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-          >
-            <Section>
-              <h2 className="h4 mb-0 fw-bold">Contact the buyer</h2>
-              <span className="d-block mb-3"></span>
-              <div>
-                <Label htmlFor="email-field">Your Email</Label>
-                <span className="d-block mb-1"></span>
-                <Input
-                  id="email-field"
-                  type="email"
-                  name="email"
-                  register={() => register({ required: true })}
-                  isInvalid={errors.email}
-                />
-                {errors.email && (
-                  <ErrorMessage>Please provide your the email</ErrorMessage>
-                )}
-                <div className="form-text">
-                  We will never share your email with anyone except this buyer.
-                </div>
-              </div>
-              <span className="d-block mb-3"></span>
-              <div>
-                <Label htmlFor="message-field">Your Message</Label>
-                <span className="d-block mb-1"></span>
-                <TextArea
-                  id="message-field"
-                  rows="3"
-                  name="message"
-                  register={register}
-                ></TextArea>
-                {errors.message && (
-                  <ErrorMessage>Please provide a message.</ErrorMessage>
-                )}
-              </div>
-              <span className="d-block mb-3"></span>
-            </Section>
-          </Form>
+          <span className="d-block mb-3"></span>
+          <Button className="d-inline-block" purpose="secondary" link="/contact">Contact buyer</Button>
         </div>
       </div>
       <span className="d-block mb-3"></span>
@@ -133,7 +95,7 @@ function Field({ name, value }) {
 }
 
 function Divider() {
-  return <span className="item-divider d-block my-3 divider-bg"></span>;
+  return <span className="item-divider d-block mb-3"></span>;
 }
 
 export async function getServerSideProps(context) {
