@@ -1,11 +1,12 @@
 import Logo from "./Logo";
+import { FaInstagram, FaFacebookF } from "react-icons/fa"
 
 export default function Footer() {
   const links = getLinksData();
 
   return (
     <div className="position-relative z-index-0">
-      <div className="bg-dark text-white">
+      <div className="text-white" style={{backgroundColor: "#031633"}}>
         <div className="container py-32px">
           <div className="row">
             <div className="col-12 col-md-4">
@@ -22,15 +23,11 @@ export default function Footer() {
         <Divider />
         <div className="d-flex justify-content-center py-20px">
           <a href="/" className="text-white text-decoration-none">
-            F
+            <FaInstagram size={24} />
           </a>
           <span className="d-block ml-12px mb-3"></span>
           <a href="/" className="text-white text-decoration-none">
-            I
-          </a>
-          <span className="d-block ml-12px mb-3"></span>
-          <a href="/" className="text-white text-decoration-none">
-            T
+            <FaFacebookF size={24} />
           </a>
         </div>
       </div>
@@ -39,7 +36,7 @@ export default function Footer() {
 }
 
 function Divider() {
-  return <span className="d-block border-bottom border-light"></span>;
+  return <span className="d-block border-bottom" style={{borderColor: "#6c757d !important"}}></span>;
 }
 
 function FooterNav({ title, links = [] }) {
