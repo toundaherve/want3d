@@ -1,5 +1,7 @@
-import { MdMenu } from "react-icons/md";
+import { useState } from "react";
 import { IoIosCreate } from "react-icons/io";
+import { BsSearch } from "react-icons/bs";
+import { MdMenu } from "react-icons/md"
 import Logo from "./Logo";
 import SearchForm from "./SearchBar";
 import Button from "./Button";
@@ -7,6 +9,12 @@ import useWindowHasScrolledPastValue from "../hooks/useWindowHasScrolledPastValu
 
 export default function Header() {
   const addShadow = useWindowHasScrolledPastValue(2);
+  const [showSearchBar, setShowSearchBar] = useState(false)
+
+  const toggleSearchBar = () => {
+    setShowSearchBar(!showSearchBar)
+  }
+
   return (
     <div
       className={`sticky-top header-top ${
@@ -18,43 +26,39 @@ export default function Header() {
           <div className="container">
             <div className="header-content-wrapping">
               <div className="pt-12px pb-12px">
-                <div className="d-md-none">
-                  <div className="row justify-content-center">
-                    <div className="col-auto">
-                      <Logo />
-                    </div>
-                    <div className="col-12 mb-12px" />
-                    <div className="col-12">
-                      <div className="d-flex justify-content-center align-items-start">
-                        <Button
-                          purpose="link btn-primary text-white border-white text-decoration-none"
-                          link="/post"
-                        >
-                          POST
-                        </Button>
-                        <div className="span d-block mb-3"></div>
-                        <div className="flex-grow-1 ml-12px">
-                          <SearchForm />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="d-none d-md-flex align-items-center justify-content-between">
+                <div className="d-flex align-items-center justify-content-between">
                   <Logo />
                   <span className="d-inline-block mb-3 ms-3"></span>
                   <div className="flex-grow-1">
-                    <SearchForm />
+                    <div className="d-none d-lg-block">
+                      <SearchForm />
+                    </div>
                   </div>
                   <span className="d-inline-block mb-3 ml-20px"></span>
-                  <Button
-                    purpose="link btn-primary text-white border-white text-decoration-none"
-                    link="/post"
-                  >
-                    POST A NEED
-                  </Button>
+                  <div className="d-lg-none">
+                    <BsSearch color="#FFFFFF" size={18} onClick={toggleSearchBar} />
+                    <span className="d-inline-block mb-3 ms-3"></span>
+                  </div>
+                  <div className="d-lg-none">
+                    <a href="/post" className="text-decoration-none">
+                      <IoIosCreate color="#FFFFFF" size={24} />
+                    </a>
+                  </div>
+                  <div className="d-none d-lg-block">
+                    <Button
+                      purpose="link btn-primary text-white border-white text-decoration-none"
+                      link="/post"
+                    >
+                      POST A NEED
+                    </Button>
+                  </div>
                 </div>
+                {showSearchBar && <>
+                  <span className="d-block" style={{marginBottom: "12px"}}></span>
+                  <div className="d-lg-none">
+                    <SearchForm fullWidth />
+                  </div>
+                </>}
               </div>
             </div>
           </div>

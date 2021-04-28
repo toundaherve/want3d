@@ -114,12 +114,13 @@ body {
 }
 
 .header-height {
-  height: 108px;
+  /* height: 108px; */
+  min-height: 62px;
 }
 
 @media screen and (min-width: 768px) {
   .header-height {
-    height: 62px;
+    min-height: 62px;
   }
 }
 
