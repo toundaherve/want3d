@@ -1,4 +1,4 @@
-const sequelize = require(".");
+const sequelize = require("./index");
 
 sequelize
   .drop()

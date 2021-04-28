@@ -140,7 +140,7 @@ function FilterView({ type, options }) {
   );
 }
 
-function NeedView({ name, location, currency, budget, description }) {
+function NeedView({ name, currency, budget, description, country, city }) {
   return (
     <div className="card shadow">
       {/* <img src="..." className="card-img-top" alt="..." /> */}
@@ -153,7 +153,7 @@ function NeedView({ name, location, currency, budget, description }) {
           <span className="text-primary fw-bold">{name}</span>
         </div>
         <small className="text-dark">
-          Leeds - United Kingdom
+          {city} - {country}
         </small>
         <div className="h6 card-title  p-0 m-0 fw-bold">
            {getCurrencySymbol(currency) + budget}

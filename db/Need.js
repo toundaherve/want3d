@@ -1,13 +1,14 @@
 import { DataTypes, Op } from "sequelize";
 import sequelize from ".";
 
-const Need = sequelize.define("Need", {
+export const Need = sequelize.define("Need", {
   name: { type: DataTypes.STRING },
   budget: { type: DataTypes.DOUBLE },
   currency: { type: DataTypes.STRING },
   description: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
   category: { type: DataTypes.STRING },
-  location: { type: DataTypes.STRING },
+  country: { type: DataTypes.STRING },
+  city: { type: DataTypes.STRING },
   email: { type: DataTypes.STRING },
 });
 

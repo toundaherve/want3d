@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "use-http";
-import useSWR from 'swr'
 import { Helmet } from "react-helmet";
 import Alert from "../components/Alert";
 import Layout from "../components/Layout";
@@ -15,11 +14,16 @@ import {
   ErrorMessage,
 } from "../components/Form";
 
+import countries from "../countries-json/countries.min.json"
+
 export default function Post() {
   const url = makeURL(process.env)
   const [ID, setID] = useState("");
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, watch } = useForm();
   const { post, response, loading, error } = useFetch(url);
+
+  const country = watch("country", false)
+  const cities = country ? countries[country] : []
 
   async function onSubmit(data) {
     const ID = await post("/api/need", data);
@@ -149,17 +153,37 @@ export default function Post() {
             <span className="d-block mb-3"></span>
             <Section>
               <div>
-                <Label htmlFor="location-field">City / Country</Label>
+                <Label htmlFor="location-field">Country</Label>
                 <span className="d-block mb-1"></span>
-                <Input
-                  id="location-field"
-                  type="text"
-                  name="location"
+                <Select
+                  className="form-select flex-grow-0 w-auto"
+                  id="country-field"
+                  name="country"
                   register={() => register({ required: true })}
-                  error={errors.location}
+                  type=""
+                  options={Object.keys(countries)}
+                  isInvalid={errors.country}
                 />
-                {errors.location && (
-                  <ErrorMessage>Please provide your location.</ErrorMessage>
+                {errors.country && (
+                  <ErrorMessage>Please select a country.</ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="location-field">City</Label>
+                <span className="d-block mb-1"></span>
+                <Select
+                  className="form-select flex-grow-0 w-auto"
+                  id="city-field"
+                  name="city"
+                  register={() => register({ required: true })}
+                  type=""
+                  options={cities}
+                  isInvalid={errors.city}
+                  disabled={!country}
+                />
+                {errors.city && (
+                  <ErrorMessage>Please select a city.</ErrorMessage>
                 )}
               </div>
               <span className="d-block mb-3"></span>
