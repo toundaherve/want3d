@@ -18,7 +18,7 @@ import countries from "../countries-json/countries.min.json"
 
 export default function Post() {
   const url = makeURL(process.env)
-  const [ID, setID] = useState("");
+  const [email, setEmail] = useState("")
   const { register, errors, handleSubmit, watch } = useForm();
   const { post, response, loading, error } = useFetch(url);
 
@@ -26,8 +26,8 @@ export default function Post() {
   const cities = country ? countries[country] : []
 
   async function onSubmit(data) {
-    const ID = await post("/api/need", data);
-    if (response.ok) setID(ID);
+    await post("/api/need", data);
+    if (response.ok) setEmail(data.email);
     window.scroll({
       top: 0,
       left: 0,
@@ -39,7 +39,6 @@ export default function Post() {
     return (
       <Layout>
         <Alert
-          message="Sorry! the operation failed ! Retry later"
           context="danger"
         />
       </Layout>
@@ -50,8 +49,8 @@ export default function Post() {
     return (
       <Layout>
         <Alert
-          message="Well done! your need has beed succesfully created."
           context="success"
+          email={email}
         />
       </Layout>
     )
