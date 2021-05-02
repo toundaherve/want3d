@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "use-http";
 import useSWR from 'swr'
+import {useRouter} from "next/router"
 import { Helmet } from "react-helmet";
 import Alert from "../components/Alert";
 import Layout from "../components/Layout";
@@ -15,14 +16,20 @@ import {
   ErrorMessage,
 } from "../components/Form";
 
-export default function Post() {
+import countries from "../countries-json/countries.min.json"
+
+export default function Post(props) {
+  const router = useRouter()
   const url = makeURL(process.env)
   const [ID, setID] = useState("");
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, watch } = useForm();
   const { post, response, loading, error } = useFetch(url);
 
+  const country = watch("sellerCountry", false)
+  const cities = country ? countries[country] : []
+
   async function onSubmit(data) {
-    const ID = await post("/api/contact", data);
+    const ID = await post("/api/notification", {...data, postID: router.query.postid});
     if (response.ok) setID(ID);
     window.scroll({
       top: 0,
@@ -46,7 +53,7 @@ export default function Post() {
     return (
       <Layout>
         <Alert
-          message="Well done! your email has beed succesfully sent to the buyer."
+          message="Well done! The buyer has successfully been contacted via email."
           context="success"
         />
       </Layout>
@@ -67,14 +74,29 @@ export default function Post() {
             <span className="d-block mb-3"></span>
             <Section>
               <div>
+                <Label htmlFor="email-field">Your name</Label>
+                <span className="d-block mb-1"></span>
+                <Input
+                  id="sellerName-field"
+                  type="text"
+                  name="sellerName"
+                  register={() => register({ required: true })}
+                  isInvalid={errors.sellerName}
+                />
+                {errors.sellerName && (
+                  <ErrorMessage>Please provide your name</ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
                 <Label htmlFor="email-field">Your Email</Label>
                 <span className="d-block mb-1"></span>
                 <Input
                   id="email-field"
                   type="email"
-                  name="email"
+                  name="sellerEmail"
                   register={() => register({ required: true })}
-                  isInvalid={errors.email}
+                  isInvalid={errors.sellerEmail}
                 />
                 {errors.email && (
                   <ErrorMessage>Please provide your the email</ErrorMessage>
@@ -85,19 +107,39 @@ export default function Post() {
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="message-field">Your Message</Label>
+                <Label htmlFor="location-field">Your country</Label>
                 <span className="d-block mb-1"></span>
-                <TextArea
-                  id="message-field"
-                  rows="3"
-                  name="message"
-                  register={register}
-                ></TextArea>
-                {errors.message && (
-                  <ErrorMessage>Please provide a message.</ErrorMessage>
+                <Select
+                  className="form-select flex-grow-0 w-auto"
+                  id="country-field"
+                  name="sellerCountry"
+                  register={() => register({ required: true })}
+                  type=""
+                  options={Object.keys(countries)}
+                  isInvalid={errors.sellerCountry}
+                />
+                {errors.sellerCountry && (
+                  <ErrorMessage>Please select your country.</ErrorMessage>
                 )}
               </div>
               <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="location-field">Your city</Label>
+                <span className="d-block mb-1"></span>
+                <Select
+                  className="form-select flex-grow-0 w-auto"
+                  id="city-field"
+                  name="sellerCity"
+                  register={() => register({ required: true })}
+                  type=""
+                  options={cities}
+                  isInvalid={errors.sellerCity}
+                  disabled={!country}
+                />
+                {errors.sellerCity && (
+                  <ErrorMessage>Please select your city.</ErrorMessage>
+                )}
+              </div>
             </Section>
           </Form>
         </div>

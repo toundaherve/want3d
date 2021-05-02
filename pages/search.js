@@ -140,7 +140,7 @@ function FilterView({ type, options }) {
   );
 }
 
-function NeedView({ name, currency, budget, description, country, city }) {
+function NeedView({ itemName,itemDescription, buyerCurrency, buyerBudget, buyerCountry, buyerCity }) {
   return (
     <div className="card shadow">
       {/* <img src="..." className="card-img-top" alt="..." /> */}
@@ -150,17 +150,17 @@ function NeedView({ name, currency, budget, description, country, city }) {
       <div className="card-body p-2">
         <div className="h6 card-title p-0 m-0 fw-bold">
           {/* <span>I need</span>{" "} */}
-          <span className="text-primary fw-bold">{name}</span>
+          <span className="text-primary fw-bold">{itemName}</span>
         </div>
         <small className="text-dark">
-          {city} - {country}
+          {buyerCity} - {buyerCountry}
         </small>
         <div className="h6 card-title  p-0 m-0 fw-bold">
-           {getCurrencySymbol(currency) + budget}
+           {getCurrencySymbol(buyerCurrency) + buyerBudget}
         </div>
         <span className="d-block mb-3"></span>
         <p className="card-text p-0 m-0">
-           {description}
+           {itemDescription}
         </p>
       </div>
     </div>

@@ -18,27 +18,28 @@ export default function Need({ data }) {
   const { register, errors, handleSubmit } = useForm();
   const {
     id,
-    name,
-    budget,
-    currency,
-    location,
-    category,
+    itemName,
+    itemCategory,
+    itemDescription,
+    buyerBudget,
+    buyerCurrency,
+    buyerCountry,
+    buyerCity,
     createdAt,
-    description,
   } = data;
 
   return (
     <Layout>
       <Helmet>
-        <title>{`I need ${name}`}</title>
-        <meta name="description" content={`I need ${name}. ${description}`} />
+        <title>{`I need ${itemName}`}</title>
+        <meta name="description" content={`I need ${itemName}. ${itemDescription}`} />
         <link rel="canonical" href={`https://www.bonvih.com/item/${id}`} />
       </Helmet>
       <span className="d-block mb-2"></span>
       <div className="container post-form-width ">
         <span className="d-block mb-3"></span>
         <div className="d-none d-md-block">
-          <Breadcrumb current={name} />
+          <Breadcrumb current={itemName} />
           <span className="d-block mb-3"></span>
         </div>
         <div>
@@ -46,38 +47,47 @@ export default function Need({ data }) {
             <div className="">
               <h1 className="h4 mb-0 fw-bold text-primary">
                 {/* <span className="text-dark">I need </span> */}
-                {`${name} - ${getCurrencySymbol(currency)}${budget}`}
+                {`${itemName} - ${getCurrencySymbol(buyerCurrency)}${buyerBudget}`}
               </h1>
               <Divider />
               <div className="row">
                 <div className="col-12">
-                  <div className="h5 mb-0">Details</div>
+                  <div className="h5 mb-0">Item details</div>
                   <span className="d-block mb-2"></span>
                   <div className="d-flex flex-column">
-                    <Field name="Name" value={name} />
-                    <Field name="Category" value={category} />
-                    <Field
-                      name="Budget"
-                      value={getCurrencySymbol(currency) + budget}
-                    />
-                    <Field name="Currency" value={currency} />
-                    <Field name="City / Country" value={location} />
-                    <Field name="Date published" value={createdAt} />
+                    <Field name="Item name" value={itemName} />
+                    <Field name="Item category" value={itemCategory} />
                   </div>
                 </div>
                 <div className="col-12 ">
                   <Divider />
                 </div>
                 <div className="col-12">
-                  <div className="h5 mb-0">Note for sellers</div>
+                  <div className="h5 mb-0">Buyer's requirements</div>
                   <span className="d-block mb-2"></span>
-                  <p className="mb-0">{description}</p>
+                  <p className="mb-0">{itemDescription}</p>
+                </div>
+                <div className="col-12 ">
+                  <Divider />
+                </div>
+                <div className="col-12">
+                  <div className="h5 mb-0">Buyer details</div>
+                  <span className="d-block mb-2"></span>
+                  <div className="d-flex flex-column">
+                    <Field
+                      name="Buyer's budget"
+                      value={getCurrencySymbol(buyerCurrency) + buyerBudget}
+                    />
+                    <Field name="Buyer's city" value={buyerCity} />
+                    <Field name="Buyer's country" value={buyerCountry} />
+                    <Field name="Date published" value={createdAt} />
+                  </div>
                 </div>
               </div>
             </div>
           </Section>
           <span className="d-block mb-3"></span>
-          <Button className="d-inline-block" purpose="secondary" link="/contact">Contact buyer</Button>
+          <Button className="d-inline-block" purpose="secondary" link={`/contact?postid=${id}`}>Contact buyer</Button>
         </div>
       </div>
       <span className="d-block mb-3"></span>

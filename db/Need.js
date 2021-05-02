@@ -2,14 +2,15 @@ import { DataTypes, Op } from "sequelize";
 import sequelize from ".";
 
 export const Need = sequelize.define("Need", {
-  name: { type: DataTypes.STRING },
-  budget: { type: DataTypes.DOUBLE },
-  currency: { type: DataTypes.STRING },
-  description: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
-  category: { type: DataTypes.STRING },
-  country: { type: DataTypes.STRING },
-  city: { type: DataTypes.STRING },
-  email: { type: DataTypes.STRING },
+  itemName: { type: DataTypes.STRING },
+  itemCategory: { type: DataTypes.STRING },
+  itemDescription: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
+  buyerBudget: { type: DataTypes.DOUBLE },
+  buyerCurrency: { type: DataTypes.STRING },
+  buyerName: { type: DataTypes.STRING },
+  buyerCountry: { type: DataTypes.STRING },
+  buyerCity: { type: DataTypes.STRING },
+  buyerEmail: { type: DataTypes.STRING },
 });
 
 async function create(data) {
@@ -47,7 +48,7 @@ async function findAll(search, limit = 10, offset = 0) {
   try {
     const needs = Need.findAll({
       where: {
-        name: {
+        itemName: {
           [Op.and]: clauses,
         },
       },

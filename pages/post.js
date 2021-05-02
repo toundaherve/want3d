@@ -22,8 +22,8 @@ export default function Post() {
   const { register, errors, handleSubmit, watch } = useForm();
   const { post, response, loading, error } = useFetch(url);
 
-  const country = watch("country", false)
-  const cities = country ? countries[country] : []
+  const buyerCountry = watch("buyerCountry", false)
+  const cities = buyerCountry ? countries[buyerCountry] : []
 
   async function onSubmit(data) {
     await post("/api/need", data);
@@ -70,17 +70,16 @@ export default function Post() {
             <span className="d-block mb-3"></span>
             <Section>
               <div>
-                <Label htmlFor="name-field">Name</Label>
+                <Label htmlFor="name-field">What is the name of the item?</Label>
                 <span className="d-block mb-1"></span>
                 <Input
                   id="name-field"
                   type="text"
-                  name="name"
-                  placeholder="Name of the item"
+                  name="itemName"
                   register={register}
-                  isInvalid={errors.name}
+                  isInvalid={errors.itemName}
                 />
-                {errors.name && (
+                {errors.itemName && (
                   <ErrorMessage>
                     Please provide the name of the item.
                   </ErrorMessage>
@@ -88,37 +87,49 @@ export default function Post() {
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="category-field">Category</Label>
+                <Label htmlFor="category-field">Select the category of the item</Label>
                 <span className="d-block mb-1"></span>
                 <Select
-                  name="category"
-                  type="Select a category"
+                  name="itemCategory"
+                  type=""
                   options={["Automobile", "Phones", "Clothing"]}
                   register={() => register({ required: true })}
-                  isInvalid={errors.category}
+                  isInvalid={errors.itemCategory}
                 />
-                {errors.category && (
+                {errors.itemCategory && (
                   <ErrorMessage>
-                    Please select a category for the item.
+                    Please select the category of the item.
                   </ErrorMessage>
                 )}
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="reward-field">Budget</Label>
+                <Label htmlFor="description-field">What are your requirements for the item?</Label>
+                <span className="d-block mb-1"></span>
+                <TextArea
+                  id="description-field"
+                  rows="3"
+                  name="itemDescription"
+                  placeholder="color, quality, year, etc"
+                  register={register}
+                ></TextArea>
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="reward-field">What is your budget?</Label>
                 <span className="d-block mb-1"></span>
                 <div className="d-flex align-items-start">
                   <div className="d-flex flex-column">
                     <Select
                       className="form-select flex-grow-0 w-auto"
                       id="curency-field"
-                      name="currency"
+                      name="buyerCurrency"
                       register={() => register({ required: true })}
                       type="Currency"
                       options={["GBP", "EUR", "USD"]}
-                      isInvalid={errors.currency}
+                      isInvalid={errors.buyerCurrency}
                     />
-                    {errors.currency && (
+                    {errors.buyerCurrency && (
                       <ErrorMessage>Please select a currency.</ErrorMessage>
                     )}
                   </div>
@@ -127,81 +138,88 @@ export default function Post() {
                     <Input
                       id="budget-field"
                       type="number"
-                      name="budget"
+                      name="buyerBudget"
                       register={() => register({ required: true })}
-                      isInvalid={errors.budget}
+                      isInvalid={errors.buyerCurrency}
                     />
-                    {errors.budget && (
+                    {errors.buyerCurrency && (
                       <ErrorMessage>Please provide your budget.</ErrorMessage>
                     )}
                   </div>
                 </div>
               </div>
-              <span className="d-block mb-3"></span>
-              <div>
-                <Label htmlFor="description-field">Note to sellers</Label>
-                <span className="d-block mb-1"></span>
-                <TextArea
-                  id="description-field"
-                  rows="3"
-                  name="description"
-                  register={register}
-                ></TextArea>
-              </div>
+              
             </Section>
             <span className="d-block mb-3"></span>
             <Section>
               <div>
-                <Label htmlFor="location-field">Country</Label>
+                <Label htmlFor="name-field">Your name</Label>
                 <span className="d-block mb-1"></span>
-                <Select
-                  className="form-select flex-grow-0 w-auto"
-                  id="country-field"
-                  name="country"
-                  register={() => register({ required: true })}
-                  type=""
-                  options={Object.keys(countries)}
-                  isInvalid={errors.country}
+                <Input
+                  id="name-field"
+                  type="text"
+                  name="buyerName"
+                  register={register}
+                  isInvalid={errors.buyerName}
                 />
-                {errors.country && (
-                  <ErrorMessage>Please select a country.</ErrorMessage>
+                {errors.buyerName && (
+                  <ErrorMessage>
+                    Please provide your name.
+                  </ErrorMessage>
                 )}
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="location-field">City</Label>
-                <span className="d-block mb-1"></span>
-                <Select
-                  className="form-select flex-grow-0 w-auto"
-                  id="city-field"
-                  name="city"
-                  register={() => register({ required: true })}
-                  type=""
-                  options={cities}
-                  isInvalid={errors.city}
-                  disabled={!country}
-                />
-                {errors.city && (
-                  <ErrorMessage>Please select a city.</ErrorMessage>
-                )}
-              </div>
-              <span className="d-block mb-3"></span>
-              <div>
-                <Label htmlFor="email-field">Email</Label>
+                <Label htmlFor="email-field">Your email</Label>
                 <span className="d-block mb-1"></span>
                 <Input
                   id="email-field"
                   type="email"
-                  name="email"
+                  name="buyerEmail"
                   register={() => register({ required: true })}
-                  error={errors.email}
+                  error={errors.buyerEmail}
                 />
-                {errors.email && (
+                {errors.buyerEmail && (
                   <ErrorMessage>Please provide your email.</ErrorMessage>
                 )}
                 <div className="form-text">
                   We will never share your email with anyone.
                 </div>
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="location-field">Your country</Label>
+                <span className="d-block mb-1"></span>
+                <Select
+                  className="form-select flex-grow-0 w-auto"
+                  id="country-field"
+                  name="buyerCountry"
+                  register={() => register({ required: true })}
+                  type=""
+                  options={Object.keys(countries)}
+                  isInvalid={errors.buyerCountry}
+                />
+                {errors.buyerCountry && (
+                  <ErrorMessage>Please select your country.</ErrorMessage>
+                )}
+              </div>
+              <span className="d-block mb-3"></span>
+              <div>
+                <Label htmlFor="location-field">Your city</Label>
+                <span className="d-block mb-1"></span>
+                <Select
+                  className="form-select flex-grow-0 w-auto"
+                  id="city-field"
+                  name="buyerCity"
+                  register={() => register({ required: true })}
+                  type=""
+                  options={cities}
+                  isInvalid={errors.buyerCity}
+                  disabled={!buyerCountry}
+                />
+                {errors.buyerCity && (
+                  <ErrorMessage>Please select your city.</ErrorMessage>
+                )}
               </div>
             </Section>
           </Form>

@@ -1,6 +1,6 @@
-const sgMail = require("@sendgrid/mail")
+import sgMail from "@sendgrid/mail"
 
-function notifyNewOfferToBuyer(buyer, seller, item) {
+export async function notifyNewOfferToBuyer(buyer, seller, item) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = {
         to: buyer.email,
@@ -13,25 +13,12 @@ function notifyNewOfferToBuyer(buyer, seller, item) {
             item
         }
     }
-    sgMail.send(msg).then(() => console.log("Email sent")).catch(error => console.log(error))
+    
+    try {
+        await sgMail.send(msg)
+        console.log("Email sent")
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to send email")
+    }
 }
-
-const buyer = {
-    name: "Herve",
-    email: "toundaherve@gmail.com", 
-    budget: "$3000",
-}
-
-const item = {
-    name: "Toyota Corolla",
-    images:[]
-}
-
-const seller = {
-    name: "Franck",
-    email: "franckbethuel@gmail.com",
-    city: "Dudley",
-    country: "United Kingdom"
-}
-
-notifyNewOfferToBuyer(buyer, seller, item)

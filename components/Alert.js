@@ -2,7 +2,7 @@ import Button from "./Button";
 
 export default function Alert({
 context = "success",
-email = ""
+email = "",
 }) {
   return (
     <>
