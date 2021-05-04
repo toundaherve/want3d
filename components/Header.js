@@ -1,13 +1,15 @@
 import { useState } from "react";
+import {useRouter} from "next/router"
 import { IoIosCreate } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { MdMenu } from "react-icons/md"
 import Logo from "./Logo";
-import SearchForm from "./SearchBar";
+import SearchBar from "./SearchBar";
 import Button from "./Button";
 import useWindowHasScrolledPastValue from "../hooks/useWindowHasScrolledPastValue";
 
 export default function Header() {
+  const router = useRouter()
   const addShadow = useWindowHasScrolledPastValue(2);
   const [showSearchBar, setShowSearchBar] = useState(false)
 
@@ -31,7 +33,7 @@ export default function Header() {
                   <span className="d-inline-block mb-3 ms-3"></span>
                   <div className="flex-grow-1">
                     <div className="d-none d-lg-block">
-                      <SearchForm />
+                      {router.pathname !== "/" && <SearchBar />}
                     </div>
                   </div>
                   <span className="d-inline-block mb-3 ml-20px"></span>
@@ -56,7 +58,7 @@ export default function Header() {
                 {showSearchBar && <>
                   <span className="d-block" style={{marginBottom: "12px"}}></span>
                   <div className="d-lg-none">
-                    <SearchForm fullWidth />
+                    <SearchBar fullWidth />
                   </div>
                 </>}
               </div>
