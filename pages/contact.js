@@ -22,6 +22,7 @@ export default function Post(props) {
   const router = useRouter()
   const url = makeURL(process.env)
   const [ID, setID] = useState("");
+  const [sellerEmail, setSellerEmail] = useState("")
   const { register, errors, handleSubmit, watch } = useForm();
   const { post, response, loading, error } = useFetch(url);
 
@@ -30,7 +31,10 @@ export default function Post(props) {
 
   async function onSubmit(data) {
     const ID = await post("/api/notification", {...data, postID: router.query.postid});
-    if (response.ok) setID(ID);
+    if (response.ok) {
+      setID(ID)
+      setSellerEmail(data.sellerEmail)
+    };
     window.scroll({
       top: 0,
       left: 0,
@@ -41,10 +45,13 @@ export default function Post(props) {
   if (error) {
     return (
       <Layout>
-        <Alert
-          message="Sorry! the operation failed ! Retry later"
-          context="danger"
-        />
+        <Alert context="danger" heading="Sorry, the operation failed!">
+          <p className="mb-0">We are working on it and we'll get it fixed as soon as we can.</p>
+          <hr/>
+          <p className="mb-0">
+            Retry later!
+          </p>
+        </Alert>
       </Layout>
     )
   }
@@ -52,10 +59,15 @@ export default function Post(props) {
   if (response.ok) {
     return (
       <Layout>
-        <Alert
-          message="Well done! The buyer has successfully been contacted via email."
-          context="success"
-        />
+        <Alert heading="Well done!" context="success">
+          <p className="mb-0">
+            The buyer has been notified of your interest and will contact you at <strong><em>{sellerEmail}</em></strong>.
+          </p>
+          <hr/>
+          <p className="mb-0">
+            You can now leave or search for other buyers.
+          </p>
+        </Alert>
       </Layout>
     )
   }

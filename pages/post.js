@@ -18,7 +18,7 @@ import countries from "../countries-json/countries.min.json"
 
 export default function Post() {
   const url = makeURL(process.env)
-  const [email, setEmail] = useState("")
+  const [buyerEmail, setBuyerEmail] = useState("")
   const { register, errors, handleSubmit, watch } = useForm();
   const { post, response, loading, error } = useFetch(url);
 
@@ -27,7 +27,7 @@ export default function Post() {
 
   async function onSubmit(data) {
     await post("/api/need", data);
-    if (response.ok) setEmail(data.email);
+    if (response.ok) setBuyerEmail(data.buyerEmail);
     window.scroll({
       top: 0,
       left: 0,
@@ -38,9 +38,9 @@ export default function Post() {
   if (error) {
     return (
       <Layout>
-        <Alert
-          context="danger"
-        />
+        <Alert context="danger" heading="Sorry, there is an error!">
+          <div className="mb-0">We are working on it and we'll get it fixed as soon as we can.</div>
+        </Alert>
       </Layout>
     )
   }
@@ -48,10 +48,11 @@ export default function Post() {
   if (response.ok) {
     return (
       <Layout>
-        <Alert
-          context="success"
-          email={email}
-        />
+        <Alert heading="Well done!" context="success">
+          <p className="mb-0">
+            Your post has beed succesfully created. We will contact you at <strong><em>{buyerEmail}</em></strong> &nbsp;when there is an offer.
+          </p>
+        </Alert>
       </Layout>
     )
   }
