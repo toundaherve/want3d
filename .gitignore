@@ -36,3 +36,4 @@ yarn-error.log*
 # bonvih
 .env
 sendgrid.env
+/config

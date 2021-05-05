@@ -33,5 +33,8 @@
     "swr": "^0.5.5",
     "use-http": "^1.0.18",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
   }
 }
