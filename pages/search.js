@@ -1,9 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import useSWR from "swr";
+import {useRouter} from "next/router"
 import { Helmet } from "react-helmet";
-// import { GiMoneyStack } from "react-icons/gi";
-// import { MdLocationOn, MdMessage } from "react-icons/md";
-// import needModel from "../db/Need";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import Breadcrumb from "../components/Breadcrumb";
@@ -18,20 +16,33 @@ const filters = [
 ];
 
 export default function Search() {
-  const {data, error} = useSWR("/api/need?search=", url => {
-    const query = location.search.split("=")[1]
-    return fetch(`${url}${query}`).then(r => r.json())
+  const {query : { search }} = useRouter()
+  const [initialLoad, setInitialLoad] = useState(true)
+  const [needs, setNeeds] = useState([])
+  const [pageIndex, setPageIndex] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+
+  const { error} = useSWR(`/api/need?per_page=12&page=${pageIndex}`, url => {
+    const itemName = location.search.split("=")[1]
+    return fetch(`${url}&search=${itemName}`).then(r => r.json()).then(data => {
+      const {totalNeeds, needs : moreNeeds, totalPages, currentPage} = data
+      setNeeds([...needs].concat(moreNeeds))
+      if(initialLoad) setInitialLoad(false);
+      setHasMore(totalNeeds > (needs.length + moreNeeds.length))
+      if(!initialLoad) setLoadingMore(false)
+    })
   })
   
   if (error) return <div>Failed to load</div>
-  if (!data) return <Loading />
+  if (initialLoad) return <Loading />
 
-  const {needs, search} = data
-  let resultsFound = needs.length > 0;
-  let resultsFoundText = 'People who need "' + search + '"';
-  let noResultsFoundText = 'Nobody needs "' + search + '" yet';
-  let headingText = resultsFound ? resultsFoundText : noResultsFoundText;
-  let moreResults = false
+  let isEmpty = needs.length > 0;
+
+  function handleLoadMore() {
+    if(!initialLoad) setLoadingMore(true)
+    setPageIndex(pageIndex + 1)
+  }
 
   return (
     <Layout>
@@ -58,9 +69,11 @@ export default function Search() {
               <div>
                 <span className="d-block mb-2"></span>
                 <Breadcrumb current="Results" />
-                <h1 className="mb-0">{headingText}</h1>
+                <h1 className="mb-0">
+                  {isEmpty ? `People who need "${search}"` : `Nobody needs "${search}" yet`}
+                </h1>
                 <span className="d-block mb-12px"></span>
-                {resultsFound && (
+                {isEmpty && (
                   <div className="d-flex flex-nowrap">
                     {filters.map((filter, idx) => (
                       <div key={idx}>
@@ -72,7 +85,7 @@ export default function Search() {
                 <span className="d-block pb-3"></span>
               </div>
               <span className="d-block mb-3"></span>
-              {resultsFound && (
+              {isEmpty && (
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
                   {needs.map((item, idx) => (
                     <div className="col" key={idx}>
@@ -86,11 +99,11 @@ export default function Search() {
                   ))}
                 </div>
               )}
-              {moreResults && (
-                <div className="py-3 d-flex justify-content-center">
-                  <Button purpose="success shadow">Load more</Button>
-                </div>
-              )}
+              <div className="py-3 d-flex justify-content-center">
+                <Button disabled={!hasMore} loading={loadingMore} purpose="success shadow" onClick={handleLoadMore}>
+                  {hasMore ? "Load more" : "No more results"}
+                </Button>
+              </div>
             </div>
           </div>
           {/* <div className="d-none d-lg-block  ms-3">

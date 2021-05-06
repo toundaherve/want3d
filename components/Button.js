@@ -8,6 +8,7 @@ export default function Button({
   children,
   link = "",
   loading = false,
+  onClick = () => {}
 }) {
   return link ? (
     <a
@@ -17,6 +18,7 @@ export default function Button({
       } ${size && "btn-" + size}`}
       role="button"
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </a>
@@ -26,7 +28,8 @@ export default function Button({
         !textWrappable ? "text-nowrap" : ""
       } ${size && "btn-" + size}`}
       type={type}
-      disabled={loading}
+      disabled={disabled}
+      onClick={onClick}
     >
       {!loading ? children : <Spinner />}
     </button>

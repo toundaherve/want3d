@@ -38,6 +38,7 @@ async function findOne(id) {
 }
 
 async function findAll(search, limit = 10, offset = 0) {
+  console.log(search)
   const splited = search.split(" ");
 
   const clauses = {};
@@ -46,7 +47,7 @@ async function findAll(search, limit = 10, offset = 0) {
   });
 
   try {
-    const needs = Need.findAll({
+    const needs = await Need.findAll({
       where: {
         itemName: {
           [Op.and]: clauses,
@@ -59,12 +60,43 @@ async function findAll(search, limit = 10, offset = 0) {
 
     return needs;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 }
 
+async function findAndCountAll(search, limit = 10, offset = 0) {
+  console.log(search)
+  const splited = search.split(" ");
+
+  const clauses = {};
+  splited.forEach((word) => {
+    clauses[Op.iLike] = `%${word}%`;
+  });
+
+  try {
+    const needs = await Need.findAndCountAll({
+      where: {
+        itemName: {
+          [Op.and]: clauses,
+        },
+      },
+      offset,
+      limit,
+      raw: true,
+    });
+
+    return needs;
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+}
+
+
 export default {
   findAll,
+  findAndCountAll,
   findOne,
   create,
 };
