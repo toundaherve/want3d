@@ -65,6 +65,14 @@ export default function Search() {
       case SORT_BY_BUDGET_LOW_TO_HIGH:
         sortBudgetLowToHigh()
         break;
+
+      case SORT_BY_NEWEST_FIRST:
+        sortNewestFirst()
+        break;
+
+      case SORT_BY_OLDEST_FIRST:
+        sortOldestFirst()
+        break;
     
       default:
         break;
@@ -84,6 +92,22 @@ export default function Search() {
     setSearchParams({
       ...searchParams,
       sortBy: "buyerBudget",
+      sortOrder: "ASC",
+    })
+  }
+
+  function sortNewestFirst() {
+    setSearchParams({
+      ...searchParams,
+      sortBy: "createdAt",
+      sortOrder: "DESC",
+    })
+  }
+
+  function sortOldestFirst() {
+    setSearchParams({
+      ...searchParams,
+      sortBy: "createdAt",
       sortOrder: "ASC",
     })
   }
@@ -194,6 +218,16 @@ function SortByFilter({onSortBy}) {
             <li onClick={handleClick(SORT_BY_BUDGET_LOW_TO_HIGH)}>
               <a className="dropdown-item" href="#">
                 Budget low to high
+              </a>
+            </li>
+            <li onClick={handleClick(SORT_BY_NEWEST_FIRST)}>
+              <a className="dropdown-item" href="#">
+                Newest first
+              </a>
+            </li>
+            <li onClick={handleClick(SORT_BY_OLDEST_FIRST)}>
+              <a className="dropdown-item" href="#">
+                Oldest first
               </a>
             </li>
         </ul>
