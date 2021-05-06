@@ -27,10 +27,7 @@ async function postHandler(req, res) {
 }
 
 async function getHandler(req, res) {
-  const url = new URL(req.url, `http://${req.headers.host}`)
-  const search = url.searchParams.get("search")
-  const page = url.searchParams.get("page")
-  const perPage = url.searchParams.get("per_page")
+  const {search, page, perPage, sortBy, sortOrder} = getSearchParams(req)
 
   if (!search) {
     res.writeHead(400);
@@ -47,14 +44,13 @@ async function getHandler(req, res) {
   const {limit, offset} = getPagination(page, perPage)
 
   try {
-    let needs = await needModel.findAndCountAll(search, limit, offset);
+    let results = await needModel.findAndCountAll(search, limit, offset, sortBy, sortOrder);
 
-    needs.rows.forEach((need) => {
-      delete need.createdAt; // not needed
-      delete need.updatedAt; // not needed
-    });
+    removeUnecessaryProperties(results.rows)
+
+    stringifyTimestamps(results.rows)
     
-    const response = getPagingData(needs, page, limit)
+    const response = getPagingData(results, page, limit)
 
     res.writeHead(200);
     res.write(
@@ -102,4 +98,27 @@ function getPagingData(data, page, limit) {
   const totalPages = Math.ceil(totalNeeds / limit)
 
   return { totalNeeds, needs, totalPages, currentPage}
+}
+
+function getSearchParams(req) {
+  const url = new URL(req.url, `http://${req.headers.host}`)
+  const search = url.searchParams.get("search")
+  const page = url.searchParams.get("page")
+  const perPage = url.searchParams.get("per_page")
+  const sortBy = url.searchParams.get("sort_by")
+  const sortOrder = url.searchParams.get("sort_order")
+
+  return {search, page, perPage, sortBy, sortOrder}
+} 
+
+function removeUnecessaryProperties(needs) {
+  needs.forEach((need) => {
+    delete need.updatedAt;
+  });
+}
+
+function stringifyTimestamps(needs) {
+  needs.forEach((need) => {
+    need.createdAt = JSON.stringify(need.createdAt)
+  });
 }

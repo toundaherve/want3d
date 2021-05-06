@@ -65,7 +65,7 @@ async function findAll(search, limit = 10, offset = 0) {
   }
 }
 
-async function findAndCountAll(search, limit = 10, offset = 0) {
+async function findAndCountAll(search, limit = 10, offset = 0, sortBy = "createdAt", sortOrder = "DESC") {
   console.log(search)
   const splited = search.split(" ");
 
@@ -81,6 +81,9 @@ async function findAndCountAll(search, limit = 10, offset = 0) {
           [Op.and]: clauses,
         },
       },
+      order: [
+        [sortBy, sortOrder]
+      ],
       offset,
       limit,
       raw: true,

@@ -8,12 +8,10 @@ import Breadcrumb from "../components/Breadcrumb";
 import getCurrencySymbol from "../utils/getCurrencySymbol";
 import Loading from "../components/Loading";
 
-const filters = [
-  {
-    type: "Sort by",
-    options: ["Budget", "Location", "Date posted"],
-  },
-];
+const SORT_BY_BUDGET_LOW_TO_HIGH = "SORT_BY_BUDGET_LOW_TO_HIGH"
+const SORT_BY_BUDGET_HIGH_TO_LOW = "SORT_BY_BUDGET_HIGH_TO_LOW"
+const SORT_BY_NEWEST_FIRST = "SORT_BY_NEWEST_FIRST"
+const SORT_BY_OLDEST_FIRST = "SORT_BY_OLDEST_FIRST"
 
 export default function Search() {
   const {query : { search }} = useRouter()
@@ -22,8 +20,10 @@ export default function Search() {
   const [pageIndex, setPageIndex] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
+  const [searchParams, setSearchParams] = useState({ sortBy : "createdAt", sortOrder : "DESC"})
+  const [sortedBy, setSortedBy] = useState("")
 
-  const { error} = useSWR(`/api/need?per_page=12&page=${pageIndex}`, url => {
+  const { error} = useSWR("/api/need" + queryString() , url => {
     const itemName = location.search.split("=")[1]
     return fetch(`${url}&search=${itemName}`).then(r => r.json()).then(data => {
       const {totalNeeds, needs : moreNeeds, totalPages, currentPage} = data
@@ -37,11 +37,55 @@ export default function Search() {
   if (error) return <div>Failed to load</div>
   if (initialLoad) return <Loading />
 
-  let isEmpty = needs.length > 0;
+  let hasData = needs.length > 0;
 
   function handleLoadMore() {
     if(!initialLoad) setLoadingMore(true)
     setPageIndex(pageIndex + 1)
+  }
+
+  function queryString() {
+    const perPage = 10
+    const {sortBy, sortOrder} = searchParams
+    return `?page=${pageIndex}&per_page=${perPage}&sort_by=${sortBy}&sort_order=${sortOrder}`
+  }
+
+  function handleSortBy(sortType) {
+    if(sortedBy === sortType) {
+      return
+    }
+    setInitialLoad(true)
+    setNeeds([])
+    setPageIndex(1)
+    switch (sortType) {
+      case SORT_BY_BUDGET_HIGH_TO_LOW:
+        sortBudgetHighToLow()
+        break;
+      
+      case SORT_BY_BUDGET_LOW_TO_HIGH:
+        sortBudgetLowToHigh()
+        break;
+    
+      default:
+        break;
+    }
+    setSortedBy(sortType)
+  }
+
+  function sortBudgetHighToLow() {
+    setSearchParams({
+      ...searchParams,
+      sortBy: "buyerBudget",
+      sortOrder: "DESC",
+    })
+  }
+
+  function sortBudgetLowToHigh() {
+    setSearchParams({
+      ...searchParams,
+      sortBy: "buyerBudget",
+      sortOrder: "ASC",
+    })
   }
 
   return (
@@ -70,22 +114,18 @@ export default function Search() {
                 <span className="d-block mb-2"></span>
                 <Breadcrumb current="Results" />
                 <h1 className="mb-0">
-                  {isEmpty ? `People who need "${search}"` : `Nobody needs "${search}" yet`}
+                  {hasData ? `People who need "${search}"` : `Nobody needs "${search}" yet`}
                 </h1>
                 <span className="d-block mb-12px"></span>
-                {isEmpty && (
+                {hasData && (
                   <div className="d-flex flex-nowrap">
-                    {filters.map((filter, idx) => (
-                      <div key={idx}>
-                        <FilterView {...filter} />
-                      </div>
-                    ))}
+                    <SortByFilter onSortBy={handleSortBy} />
                   </div>
                 )}
                 <span className="d-block pb-3"></span>
               </div>
               <span className="d-block mb-3"></span>
-              {isEmpty && (
+              {hasData && (
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
                   {needs.map((item, idx) => (
                     <div className="col" key={idx}>
@@ -126,7 +166,13 @@ export default function Search() {
   ) 
 }
 
-function FilterView({ type, options }) {
+function SortByFilter({onSortBy}) {
+
+  const handleClick = sortType => e => {
+    e.stopPropagation()
+    onSortBy(sortType)
+  }
+
   return (
     <div className="py-2 px-1">
       <div className="dropdown">
@@ -137,28 +183,31 @@ function FilterView({ type, options }) {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {type}
+          Sort by
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {options.map((option, idx) => (
-            <li key={idx}>
+            <li onClick={handleClick(SORT_BY_BUDGET_HIGH_TO_LOW)}>
               <a className="dropdown-item" href="#">
-                {option}
+                Budget high to low
               </a>
             </li>
-          ))}
+            <li onClick={handleClick(SORT_BY_BUDGET_LOW_TO_HIGH)}>
+              <a className="dropdown-item" href="#">
+                Budget low to high
+              </a>
+            </li>
         </ul>
       </div>
     </div>
   );
 }
 
-function NeedView({ itemName,itemDescription, buyerCurrency, buyerBudget, buyerCountry, buyerCity }) {
+function NeedView({ itemName,itemDescription, buyerCurrency, buyerBudget, buyerCountry, buyerCity, createdAt }) {
   return (
     <div className="card shadow">
       {/* <img src="..." className="card-img-top" alt="..." /> */}
-      <div className="d-none card-header px-2 py-1 bg-secondary text-dark">
-        {/* <small>Needed</small> */}
+      <div className="d-block card-header px-2 py-1 bg-light text-dark">
+        <small>{createdAt}</small>
       </div>
       <div className="card-body p-2">
         <div className="h6 card-title p-0 m-0 fw-bold">
