@@ -198,42 +198,52 @@ function SortByFilter({onSortBy}) {
   }
 
   return (
-    <div className="py-2 px-1">
-      <div className="dropdown">
-        <button
-          className="btn btn-light bg-white border border-1 dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Sort by
-        </button>
-        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li onClick={handleClick(SORT_BY_BUDGET_HIGH_TO_LOW)}>
-              <a className="dropdown-item" href="#">
-                Budget high to low
-              </a>
-            </li>
-            <li onClick={handleClick(SORT_BY_BUDGET_LOW_TO_HIGH)}>
-              <a className="dropdown-item" href="#">
-                Budget low to high
-              </a>
-            </li>
-            <li onClick={handleClick(SORT_BY_NEWEST_FIRST)}>
-              <a className="dropdown-item" href="#">
-                Newest first
-              </a>
-            </li>
-            <li onClick={handleClick(SORT_BY_OLDEST_FIRST)}>
-              <a className="dropdown-item" href="#">
-                Oldest first
-              </a>
-            </li>
-        </ul>
-      </div>
-    </div>
+    <Dropdown title="Sort by">
+      <DropdownItem onClick={handleClick(SORT_BY_BUDGET_HIGH_TO_LOW)} >
+        Budget high to low
+      </DropdownItem>
+      <DropdownItem onClick={handleClick(SORT_BY_BUDGET_LOW_TO_HIGH)} >
+        Budget low to high
+      </DropdownItem>
+      <DropdownItem onClick={handleClick(SORT_BY_NEWEST_FIRST)} >
+        Newest first
+      </DropdownItem>
+      <DropdownItem onClick={handleClick(SORT_BY_OLDEST_FIRST)} >
+        Oldest first
+      </DropdownItem>
+    </Dropdown>
   );
+}
+
+function Dropdown({title = "N/A", children = []}) {
+  return (
+  <div className="py-2 px-1">
+    <div className="dropdown">
+      <button
+        className="btn btn-light bg-white border border-1 dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        {title}
+      </button>
+      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {children}
+      </ul>
+    </div>
+  </div>
+  )
+}
+
+function DropdownItem({onClick = () => {}, children}) {
+  return (
+    <li onClick={onClick}>
+      <a className="dropdown-item" href="#">
+        {children}
+      </a>
+    </li>
+  )
 }
 
 function NeedView({ itemName,itemDescription, buyerCurrency, buyerBudget, buyerCountry, buyerCity, createdAt }) {
