@@ -38,7 +38,6 @@ async function findOne(id) {
 }
 
 async function findAll(search, limit = 10, offset = 0) {
-  console.log(search)
   const splited = search.split(" ");
 
   const clauses = {};
@@ -65,22 +64,12 @@ async function findAll(search, limit = 10, offset = 0) {
   }
 }
 
-async function findAndCountAll(search, limit = 10, offset = 0, sortBy = "createdAt", sortOrder = "DESC") {
-  console.log(search)
-  const splited = search.split(" ");
-
-  const clauses = {};
-  splited.forEach((word) => {
-    clauses[Op.iLike] = `%${word}%`;
-  });
+async function findAndCountAll(search, limit = 10, offset = 0, sortBy = "createdAt", sortOrder = "DESC", category = "") {
+  const whereClause = buildWhereClause(search, category)
 
   try {
     const needs = await Need.findAndCountAll({
-      where: {
-        itemName: {
-          [Op.and]: clauses,
-        },
-      },
+      where: whereClause,
       order: [
         [sortBy, sortOrder]
       ],
@@ -96,10 +85,41 @@ async function findAndCountAll(search, limit = 10, offset = 0, sortBy = "created
   }
 }
 
+async function getCategoriesForItem(itemName) {
+  const whereClause = buildWhereClause(itemName)
+
+  try {
+    const data = await Need.aggregate('itemCategory', 'DISTINCT', { plain: false, where: whereClause })
+    return data.map(row => row["DISTINCT"])
+  } catch (error) {
+    consol.log(error)
+    throw error
+  }
+}
+
+function buildWhereClause(search = "", category = "") {
+  const splited = search.split(" ");
+
+  const itemNameChecks = {};
+  splited.forEach((word) => {
+    itemNameChecks[Op.iLike] = `%${word}%`;
+  });
+
+  const where = {
+    itemName: {
+      [Op.and]: itemNameChecks,
+    },
+  }
+
+  if(category) where.itemCategory = category;
+
+  return where
+}
 
 export default {
   findAll,
   findAndCountAll,
   findOne,
   create,
+  getCategoriesForItem,
 };

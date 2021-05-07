@@ -27,7 +27,7 @@ async function postHandler(req, res) {
 }
 
 async function getHandler(req, res) {
-  const {search, page, perPage, sortBy, sortOrder} = getSearchParams(req)
+  const {search, page, perPage, sortBy, sortOrder, category} = getSearchParams(req)
 
   if (!search) {
     res.writeHead(400);
@@ -44,13 +44,16 @@ async function getHandler(req, res) {
   const {limit, offset} = getPagination(page, perPage)
 
   try {
-    let results = await needModel.findAndCountAll(search, limit, offset, sortBy, sortOrder);
+    let results = await needModel.findAndCountAll(search, limit, offset, sortBy, sortOrder, category);
 
     removeUnecessaryProperties(results.rows)
 
     stringifyTimestamps(results.rows)
     
     const response = getPagingData(results, page, limit)
+
+    const categories = await needModel.getCategoriesForItem(search)
+    response.categories = categories
 
     res.writeHead(200);
     res.write(
@@ -107,8 +110,9 @@ function getSearchParams(req) {
   const perPage = url.searchParams.get("per_page")
   const sortBy = url.searchParams.get("sort_by")
   const sortOrder = url.searchParams.get("sort_order")
+  const category = url.searchParams.get("category")
 
-  return {search, page, perPage, sortBy, sortOrder}
+  return {search, page, perPage, sortBy, sortOrder, category}
 } 
 
 function removeUnecessaryProperties(needs) {

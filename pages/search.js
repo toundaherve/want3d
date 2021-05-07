@@ -20,15 +20,17 @@ export default function Search() {
   const [pageIndex, setPageIndex] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [searchParams, setSearchParams] = useState({ sortBy : "createdAt", sortOrder : "DESC"})
+  const [searchParams, setSearchParams] = useState({ sortBy : "createdAt", sortOrder : "DESC", category: ""})
   const [sortedBy, setSortedBy] = useState("")
+  const [categories, setCategories] = useState([])
 
   const { error} = useSWR("/api/need" + queryString() , url => {
     const itemName = location.search.split("=")[1]
     return fetch(`${url}&search=${itemName}`).then(r => r.json()).then(data => {
-      const {totalNeeds, needs : moreNeeds, totalPages, currentPage} = data
+      const {totalNeeds, needs : moreNeeds, totalPages, currentPage, categories} = data
       setNeeds([...needs].concat(moreNeeds))
-      if(initialLoad) setInitialLoad(false);
+      if(initialLoad) setInitialLoad(false)
+      setCategories(categories)
       setHasMore(totalNeeds > (needs.length + moreNeeds.length))
       if(!initialLoad) setLoadingMore(false)
     })
@@ -46,17 +48,19 @@ export default function Search() {
 
   function queryString() {
     const perPage = 10
-    const {sortBy, sortOrder} = searchParams
-    return `?page=${pageIndex}&per_page=${perPage}&sort_by=${sortBy}&sort_order=${sortOrder}`
+    const {sortBy, sortOrder, category} = searchParams
+    return `?page=${pageIndex}&per_page=${perPage}&sort_by=${sortBy}&sort_order=${sortOrder}&category=${category}`
   }
 
-  function handleSortBy(sortType) {
-    if(sortedBy === sortType) {
-      return
-    }
+  function reInitialize() {
     setInitialLoad(true)
     setNeeds([])
     setPageIndex(1)
+  }
+
+  function handleSortBy(sortType) {
+    if(sortedBy === sortType) return
+    reInitialize()
     switch (sortType) {
       case SORT_BY_BUDGET_HIGH_TO_LOW:
         sortBudgetHighToLow()
@@ -112,6 +116,15 @@ export default function Search() {
     })
   }
 
+  function handleCategory(category = "") {
+    if(searchParams.category === category) return
+    reInitialize()
+    setSearchParams({
+      ...searchParams,
+      category
+    })
+  }
+
   return (
     <Layout>
       <Helmet>
@@ -144,6 +157,7 @@ export default function Search() {
                 {hasData && (
                   <div className="d-flex flex-nowrap">
                     <SortByFilter onSortBy={handleSortBy} />
+                    <CategoryFilter onCategory={handleCategory} categories={categories} />
                   </div>
                 )}
                 <span className="d-block pb-3"></span>
@@ -191,12 +205,10 @@ export default function Search() {
 }
 
 function SortByFilter({onSortBy}) {
-
   const handleClick = sortType => e => {
     e.stopPropagation()
     onSortBy(sortType)
   }
-
   return (
     <Dropdown title="Sort by">
       <DropdownItem onClick={handleClick(SORT_BY_BUDGET_HIGH_TO_LOW)} >
@@ -213,6 +225,22 @@ function SortByFilter({onSortBy}) {
       </DropdownItem>
     </Dropdown>
   );
+}
+
+function CategoryFilter({onCategory, categories = null}) {
+  const handleClick = category => e => {
+    e.stopPropagation()
+    onCategory(category)
+  }
+  return (
+    <Dropdown title="Category">
+      {categories && categories.map((category, idx) => (
+        <DropdownItem key={idx} onClick={handleClick(category)}>
+          {category}
+        </DropdownItem>
+      ))}
+    </Dropdown>
+  )
 }
 
 function Dropdown({title = "N/A", children = []}) {
@@ -246,12 +274,12 @@ function DropdownItem({onClick = () => {}, children}) {
   )
 }
 
-function NeedView({ itemName,itemDescription, buyerCurrency, buyerBudget, buyerCountry, buyerCity, createdAt }) {
+function NeedView({ itemName,itemDescription, itemCategory, buyerCurrency, buyerBudget, buyerCountry, buyerCity, createdAt }) {
   return (
     <div className="card shadow">
       {/* <img src="..." className="card-img-top" alt="..." /> */}
       <div className="d-block card-header px-2 py-1 bg-light text-dark">
-        <small>{createdAt}</small>
+        <small>{itemCategory}</small>
       </div>
       <div className="card-body p-2">
         <div className="h6 card-title p-0 m-0 fw-bold">

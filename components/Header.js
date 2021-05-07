@@ -6,11 +6,11 @@ import { MdMenu } from "react-icons/md"
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
-import useWindowHasScrolledPastValue from "../hooks/useWindowHasScrolledPastValue";
+// import useWindowHasScrolledPastValue from "../hooks/useWindowHasScrolledPastValue";
 
 export default function Header() {
   const router = useRouter()
-  const addShadow = useWindowHasScrolledPastValue(2);
+  // const addShadow = useWindowHasScrolledPastValue(2);
   const [showSearchBar, setShowSearchBar] = useState(false)
 
   const toggleSearchBar = () => {
@@ -19,9 +19,7 @@ export default function Header() {
 
   return (
     <div
-      className={`sticky-top header-top ${
-        addShadow ? "shadow" : "shadow-none"
-      }`}
+      className="sticky-top header-top shadow"
     >
       <div className="bg-primary shadow">
         <div className="header-height">
