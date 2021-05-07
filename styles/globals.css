@@ -21,6 +21,8 @@ body {
 
 .bootstrap-select .dropdown-menu{
   z-index: 3000 !important;
+  transform: unset !important;
+  top: 40px !important;
 }
 
 .p-12px {
