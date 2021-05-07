@@ -14,7 +14,7 @@ const SORT_BY_NEWEST_FIRST = "SORT_BY_NEWEST_FIRST"
 const SORT_BY_OLDEST_FIRST = "SORT_BY_OLDEST_FIRST"
 
 export default function Search() {
-  const {query : { search }} = useRouter()
+  const {query : { search = ""}} = useRouter()
   const [initialLoad, setInitialLoad] = useState(true)
   const [needs, setNeeds] = useState([])
   const [pageIndex, setPageIndex] = useState(1)
@@ -47,7 +47,7 @@ export default function Search() {
   }
 
   function queryString() {
-    const perPage = 10
+    const perPage = 12
     const {sortBy, sortOrder, category} = searchParams
     return `?page=${pageIndex}&per_page=${perPage}&sort_by=${sortBy}&sort_order=${sortOrder}&category=${category}`
   }
@@ -177,11 +177,15 @@ export default function Search() {
                   ))}
                 </div>
               )}
-              <div className="py-3 d-flex justify-content-center">
-                <Button disabled={!hasMore} loading={loadingMore} purpose="success shadow" onClick={handleLoadMore}>
-                  {hasMore ? "Load more" : "No more results"}
-                </Button>
-              </div>
+              {
+                hasData && (
+                  <div className="py-3 d-flex justify-content-center">
+                    <Button disabled={!hasMore} loading={loadingMore} purpose="success shadow" onClick={handleLoadMore}>
+                      {hasMore ? "Load more" : "No more results"}
+                    </Button>
+                  </div>
+                )
+              }
             </div>
           </div>
           {/* <div className="d-none d-lg-block  ms-3">
