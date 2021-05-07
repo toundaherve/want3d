@@ -82,8 +82,6 @@ export function SelectWithLiveSearch({
   options = [],
   isInvalid = false,
   register = () => {},
-  disabled = false,
-  name,
   ...rest
 }) {
 
@@ -94,14 +92,12 @@ export function SelectWithLiveSearch({
   return (
     <select
       {...rest}
-      name={name}
       className={`selectpicker form-select ${isInvalid ? "invalid-input" : ""}`}
       data-live-search="true"
       data-width="100%"
       data-style="btn-white"
-      title={`Select a ${name.split("buyer")[1]}`}
+      title={``}
       ref={register({ required: true })}
-      disabled={disabled}
     >
       <option value={""} data-icon="x" defaultValue>
         {type}

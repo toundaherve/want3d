@@ -17,6 +17,9 @@ import {
 
 import countries from "../countries-json/countries.min.json"
 
+const categories = ["Electronics", "Cars & Motorcycle", "Gardening", "Furniture", "Pets", "Toys & Games", "Sports", "Watches & Jewellery"].sort()
+categories.push("Others")
+
 export default function Post() {
   const url = makeURL(process.env)
   const [buyerEmail, setBuyerEmail] = useState("")
@@ -61,14 +64,14 @@ export default function Post() {
   return (
     <Layout>
       <Helmet>
-        <title>Say what you need here</title>
+        <title>What do you need?</title>
         <meta name="description" content="Let the world know what you need" />
         <link rel="stylesheet" href="https://www.bonvih.com/post" />
       </Helmet>
       <span className="d-block mb-3"></span>
         <div className="container post-form-width p-0">
           <Form onSubmit={handleSubmit(onSubmit)} loading={loading}>
-            <h1 className="h4 mb-0 ms-3 ms-md-0">Say what you need</h1>
+            <h1 className="h4 mb-0 ms-3 ms-md-0">What do you need?</h1>
             <span className="d-block mb-3"></span>
             <Section>
               <div>
@@ -94,7 +97,7 @@ export default function Post() {
                 <Select
                   name="itemCategory"
                   type=""
-                  options={["Automobile", "Phones", "Clothing"]}
+                  options={categories}
                   register={() => register({ required: true })}
                   isInvalid={errors.itemCategory}
                 />
@@ -217,6 +220,7 @@ export default function Post() {
                   type=""
                   options={cities}
                   isInvalid={errors.buyerCity}
+                  disabled={!buyerCountry}
                 />
                 {errors.buyerCity && (
                   <ErrorMessage>Please select your city.</ErrorMessage>

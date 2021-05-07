@@ -30,7 +30,7 @@ export default function Search() {
       const {totalNeeds, needs : moreNeeds, totalPages, currentPage, categories} = data
       setNeeds([...needs].concat(moreNeeds))
       if(initialLoad) setInitialLoad(false)
-      setCategories(categories)
+      setCategories(categories.sort())
       setHasMore(totalNeeds > (needs.length + moreNeeds.length))
       if(!initialLoad) setLoadingMore(false)
     })
