@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "./Button";
 
 export function Form({
@@ -70,6 +70,44 @@ export function Select({
       </option>
       {options.map((option, idx) => (
         <option key={idx} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+export function SelectWithLiveSearch({
+  type = "",
+  options = [],
+  isInvalid = false,
+  register = () => {},
+  disabled = false,
+  name,
+  ...rest
+}) {
+
+  useEffect(() => {
+    $('.selectpicker').selectpicker('refresh');
+  })
+
+  return (
+    <select
+      {...rest}
+      name={name}
+      className={`selectpicker form-select ${isInvalid ? "invalid-input" : ""}`}
+      data-live-search="true"
+      data-width="100%"
+      data-style="btn-white"
+      title={`Select a ${name.split("buyer")[1]}`}
+      ref={register({ required: true })}
+      disabled={disabled}
+    >
+      <option value={""} data-icon="x" defaultValue>
+        {type}
+      </option>
+      {options.map((option, idx) => (
+        <option key={idx} value={option} data-icon="x">
           {option}
         </option>
       ))}

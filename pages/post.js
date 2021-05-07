@@ -10,6 +10,7 @@ import {
   Section,
   TextArea,
   Select,
+  SelectWithLiveSearch,
   Form,
   ErrorMessage,
 } from "../components/Form";
@@ -19,7 +20,7 @@ import countries from "../countries-json/countries.min.json"
 export default function Post() {
   const url = makeURL(process.env)
   const [buyerEmail, setBuyerEmail] = useState("")
-  const { register, errors, handleSubmit, watch } = useForm();
+  const { register, errors, handleSubmit, watch, getValues } = useForm();
   const { post, response, loading, error } = useFetch(url);
 
   const buyerCountry = watch("buyerCountry", false)
@@ -191,7 +192,7 @@ export default function Post() {
               <div>
                 <Label htmlFor="location-field">Your country</Label>
                 <span className="d-block mb-1"></span>
-                <Select
+                <SelectWithLiveSearch
                   className="form-select flex-grow-0 w-auto"
                   id="country-field"
                   name="buyerCountry"
@@ -208,7 +209,7 @@ export default function Post() {
               <div>
                 <Label htmlFor="location-field">Your city</Label>
                 <span className="d-block mb-1"></span>
-                <Select
+                <SelectWithLiveSearch
                   className="form-select flex-grow-0 w-auto"
                   id="city-field"
                   name="buyerCity"
@@ -216,7 +217,6 @@ export default function Post() {
                   type=""
                   options={cities}
                   isInvalid={errors.buyerCity}
-                  disabled={!buyerCountry}
                 />
                 {errors.buyerCity && (
                   <ErrorMessage>Please select your city.</ErrorMessage>

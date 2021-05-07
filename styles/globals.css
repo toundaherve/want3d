@@ -3,6 +3,26 @@ body {
   font-family: "Lato", sans-serif !important;
 }
 
+.bootstrap-select.form-select{
+  padding: 0 !important;
+}
+
+.bootstrap-select .dropdown-toggle::after {
+  content: none !important;
+}
+
+.bootstrap-select .dropdown-toggle:focus{
+  outline: none !important;
+}
+
+.bootstrap-select .dropdown-item.active, .bootstrap-select .dropdown-item:active{
+  background-color: #084298 !important;
+}
+
+.bootstrap-select .dropdown-menu{
+  z-index: 3000 !important;
+}
+
 .p-12px {
   padding: 12px !important;
 }
