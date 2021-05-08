@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import {useRouter} from "next/router"
 import useFetch from "use-http";
 import { Helmet } from "react-helmet";
 import Alert from "../components/Alert";
@@ -21,6 +22,7 @@ const categories = ["Electronics", "Cars & Motorcycle", "Gardening", "Furniture"
 categories.push("Others")
 
 export default function Post() {
+  const {query: {itemName : defaultItemName = ""}} = useRouter()
   const url = makeURL(process.env)
   const [buyerEmail, setBuyerEmail] = useState("")
   const { register, errors, handleSubmit, watch, getValues } = useForm();
@@ -71,7 +73,7 @@ export default function Post() {
       <span className="d-block mb-3"></span>
         <div className="container post-form-width p-0">
           <Form onSubmit={handleSubmit(onSubmit)} loading={loading}>
-            <h1 className="h4 mb-0 ms-3 ms-md-0">What do you need?</h1>
+            <h1 className="h4 mb-0 ms-3 ms-md-0">Create a need</h1>
             <span className="d-block mb-3"></span>
             <Section>
               <div>
@@ -83,6 +85,7 @@ export default function Post() {
                   name="itemName"
                   register={register}
                   isInvalid={errors.itemName}
+                  defaultValue={defaultItemName}
                 />
                 {errors.itemName && (
                   <ErrorMessage>
