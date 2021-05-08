@@ -147,7 +147,7 @@ body {
 }
 
 .hero-height {
-  height: calc(100vh - 108px - 16px - 16px);
+  height: calc(100vh - 62px - 16px - 16px);
 }
 
 @media screen and (min-width: 768px) {

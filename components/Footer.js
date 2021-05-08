@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <div className="position-relative z-index-0">
-      <div className="text-white" style={{backgroundColor: "#031633"}}>
+      <div className="text-white bg-dark" style={{backgroundColor: "#031633"}}>
         <div className="container py-32px">
           <div className="row">
             <div className="col-12 col-md-4">
