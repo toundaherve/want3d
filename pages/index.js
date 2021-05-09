@@ -26,8 +26,8 @@ export default function Home() {
               <span className="d-block mb-3"></span>
               <div className="p-3" style={{backgroundColor: "rgba(33, 37, 41, 0.6)"}} >
                 <form className="d-flex flex-column flex-md-row" action="/post">
-                  <input className="form-control me-md-2 mb-2 mb-md-0 w-auto flex-grow-1" type="search" name="itemName" placeholder='i.e "iPhone 12"' required />
-                  <button className="btn btn-secondary" type="submit">Create need</button>
+                  <input className="d-none form-control me-md-2 mb-2 mb-md-0 w-auto flex-grow-1" type="search" name="itemName" placeholder='i.e "iPhone 12"' required />
+                  <a className="btn btn-secondary w-100" href="/post">Create need</a>
                 </form>
               </div>
             </div>
