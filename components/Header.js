@@ -11,7 +11,7 @@ import Button from "./Button";
 export default function Header() {
   const router = useRouter()
   // const addShadow = useWindowHasScrolledPastValue(2);
-  const [showSearchBar, setShowSearchBar] = useState(false)
+  const [showSearchBar, setShowSearchBar] = useState(true)
 
   const toggleSearchBar = () => {
     setShowSearchBar(!showSearchBar)
@@ -31,7 +31,7 @@ export default function Header() {
                   <span className="d-inline-block mb-3 ms-3"></span>
                   <div className="flex-grow-1">
                     <div className="d-none d-lg-block">
-                      {router.pathname !== "/" && <SearchBar />}
+                      <SearchBar />
                     </div>
                   </div>
                   <span className="d-inline-block mb-3 ml-20px"></span>
@@ -49,13 +49,13 @@ export default function Header() {
                       purpose="link btn-primary text-white border-white text-decoration-none"
                       link="/post"
                     >
-                      POST A NEED
+                      Create a need
                     </Button>
                   </div>
                 </div>
                 {showSearchBar && <>
-                  <span className="d-block" style={{marginBottom: "12px"}}></span>
                   <div className="d-lg-none">
+                    <span className="d-block" style={{marginBottom: "12px"}}></span>
                     <SearchBar fullWidth />
                   </div>
                 </>}
