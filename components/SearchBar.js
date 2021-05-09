@@ -32,7 +32,7 @@ export default function SearchBar({fullWidth}) {
   const maxWidth = fullWidth ? "100%" : "400px";
   return (
     <form className="d-flex" action="/search" style={{ maxWidth }} >
-      <input className="form-control me-2 w-auto flex-grow-1" type="search" name="search" placeholder='i.e "iPhone 12"' required />
+      <input className="form-control me-2 w-50 flex-grow-1" type="search" name="search" placeholder='i.e "iPhone 12"' required />
       <button className="btn btn-primary border-white" type="submit">Search needs</button>
     </form>
   )

@@ -18,15 +18,15 @@ export default function Home() {
       <span className="d-block mb-3"></span>
       <div className="container">
           <div className="d-flex hero-height justify-content-center position-relative" >
-            <div className="d-flex flex-column hero-text-height justify-content-center bg-transparent" style={{zIndex: "23"}} >
+            <div className="d-flex flex-column hero-text-height justify-content-center bg-transparent" style={{zIndex: "23", padding: "12px 8px"}} >
               <h1 className="display-5 mb-0 text-white fw-bold text-center hero-heading">
                 SAY WHAT YOU WANT
                 <br /> MEET YOUR N££D
               </h1>
               <span className="d-block mb-3"></span>
-              <div className="p-3" style={{backgroundColor: "#212529cc"}} >
-                <form className="d-flex" action="/post">
-                  <input className="form-control me-2 w-auto flex-grow-1" type="search" name="itemName" placeholder='i.e "iPhone 12"' required />
+              <div className="p-3" style={{backgroundColor: "rgba(33, 37, 41, 0.6)"}} >
+                <form className="d-flex flex-column flex-md-row" action="/post">
+                  <input className="form-control me-md-2 mb-2 mb-md-0 w-auto flex-grow-1" type="search" name="itemName" placeholder='i.e "iPhone 12"' required />
                   <button className="btn btn-secondary" type="submit">Create need</button>
                 </form>
               </div>

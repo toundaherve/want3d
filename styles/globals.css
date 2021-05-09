@@ -137,7 +137,7 @@ body {
 
 .header-height {
   /* height: 108px; */
-  min-height: 108px;
+  max-height: 108px;
 }
 
 @media screen and (min-width: 768px) {
@@ -147,7 +147,14 @@ body {
 }
 
 .hero-height {
-  height: calc(100vh - 62px - 16px - 16px);
+  height: calc(100vh - 62px - 16px - 16px - 96px);
+}
+
+
+@media screen and (min-width: 414px) {
+  .hero-height {
+    height: calc(100vh - 62px - 16px - 16px - 120px);
+  }
 }
 
 @media screen and (min-width: 768px) {
