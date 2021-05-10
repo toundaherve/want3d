@@ -23,16 +23,34 @@ export default function Search() {
   const [searchParams, setSearchParams] = useState({ sortBy : "createdAt", sortOrder : "DESC", category: ""})
   const [sortedBy, setSortedBy] = useState("")
   const [categories, setCategories] = useState([])
+  const [isIntitalSearchByCategories, setIsIntitalSearchByCategories] = useState(true)
+  const [isCategorySearch, setIsCategorySearch] = useState(false)
+  const [categorySearched, setCategorySearched] = useState("")
 
   const { error} = useSWR("/api/need" + queryString() , url => {
-    const itemName = location.search.split("=")[1]
+    const params = new URL(document.location).searchParams
+    let itemName = params.get("search")
+    if (itemName === " " || itemName === "" || itemName === null || itemName === undefined) {
+      itemName = "+"
+    }
+    let category = params.get("category")
+    if (category && isIntitalSearchByCategories) {
+      setIsCategorySearch(true)
+      setCategorySearched(category)
+      url = modifyUrlParam("category", category, url)
+    }
+
     return fetch(`${url}&search=${itemName}`).then(r => r.json()).then(data => {
       const {totalNeeds, needs : moreNeeds, totalPages, currentPage, categories} = data
       setNeeds([...needs].concat(moreNeeds))
       if(initialLoad) setInitialLoad(false)
+      if(isIntitalSearchByCategories) setIsIntitalSearchByCategories(false)
       setCategories(categories.sort())
       setHasMore(totalNeeds > (needs.length + moreNeeds.length))
       if(!initialLoad) setLoadingMore(false)
+      if(isCategorySearch) {
+        setCategorySearched(searchParams.category)
+      }
     })
   })
   
@@ -42,6 +60,9 @@ export default function Search() {
   let hasData = needs.length > 0;
 
   function handleLoadMore() {
+    if(isCategorySearch) {
+      setSearchParams({...searchParams, category: categorySearched})
+    }
     if(!initialLoad) setLoadingMore(true)
     setPageIndex(pageIndex + 1)
   }
@@ -89,6 +110,7 @@ export default function Search() {
       ...searchParams,
       sortBy: "buyerBudget",
       sortOrder: "DESC",
+      category: isCategorySearch ? categorySearched : searchParams.category
     })
   }
 
@@ -97,6 +119,7 @@ export default function Search() {
       ...searchParams,
       sortBy: "buyerBudget",
       sortOrder: "ASC",
+      category: isCategorySearch ? categorySearched : searchParams.category
     })
   }
 
@@ -105,6 +128,7 @@ export default function Search() {
       ...searchParams,
       sortBy: "createdAt",
       sortOrder: "DESC",
+      category: isCategorySearch ? categorySearched : searchParams.category
     })
   }
 
@@ -113,6 +137,7 @@ export default function Search() {
       ...searchParams,
       sortBy: "createdAt",
       sortOrder: "ASC",
+      category: isCategorySearch ? categorySearched : searchParams.category
     })
   }
 
@@ -151,7 +176,7 @@ export default function Search() {
                 <span className="d-block mb-2"></span>
                 <Breadcrumb current="Results" />
                 <h1 className="mb-0">
-                  {hasData ? `People who need "${search}"` : `Nobody needs "${search}" yet`}
+                  {hasData ? (isCategorySearch ? `${categorySearched} needs` : `People who need "${search}"`) : ( isCategorySearch ? `No ${categorySearched} needs yet` : `Nobody needs "${search}" yet`)}
                 </h1>
                 <span className="d-block mb-12px"></span>
                 {hasData && (
@@ -303,6 +328,11 @@ function NeedView({ itemName,itemDescription, itemCategory, buyerCurrency, buyer
       </div>
     </div>
   );
+}
+
+function modifyUrlParam(param, value, url) {
+  let splited = url.split(param+"=")
+  return (splited[0] + param + "=" + value + splited[1])
 }
 
 // export async function getServerSideProps(context) {

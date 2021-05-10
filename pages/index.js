@@ -2,8 +2,11 @@ import Layout from "../components/Layout";
 import SearchBar from "../components/SearchBar";
 import { Helmet } from "react-helmet";
 import Button from "../components/Button";
+import {categories} from "./post"
+import needModel from "../db/Need"
+import * as Promise from "bluebird"
 
-export default function Home() {
+export default function Home({latestNeeds}) {
   return (
     <Layout>
       <Helmet>
@@ -45,8 +48,69 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <span className="d-block" style={{marginBottom: "32px"}}></span>
+        <div>
+          <span className="d-block pb-3"></span>
+          <h2 className="h2 text-center mb-0">Search needs by categories</h2>
+          <span className="d-block" style={{paddingBottom: "32px"}}></span>
+          <div className="row justify-content-center gx-1 gy-1">
+            {Object.keys(latestNeeds).sort().map((category, idx) => (
+                <div className="col-auto" key={idx}>
+                  <a href={"/search?category=" + category}  className="btn btn-outline-primary">{category}</a>
+                </div>
+            ))}
+          </div>
+        </div>
+        <span className="d-block" style={{marginBottom: "32px"}}></span>
+        <div>
+          <span className="d-block pb-3"></span>
+          <h2 className="h2 text-center mb-0">Latest needs</h2>
+          <span className="d-block" style={{marginBottom: "32px"}}></span>
+          {Object.keys(latestNeeds).sort().map((category, index) => (
+            <div className="mb-3" key={index}>
+              <h6 className="h6 mb-0 fw-bold">{category}</h6>
+              <span className="d-block pb-1"></span>
+              <div className="row gx-1 gy-1">
+                {latestNeeds[category].map((need, idx) => (
+                    <div className="col-auto" key={idx}>
+                      <a href={"/need?id=" + need.id} className="text-primary">{need.itemName},</a>
+                    </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <span className="d-block" style={{paddingBottom: "32px"}}></span>
       </div>
       <span className="d-block mb-3 "></span>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+
+  try {
+    let latestNeeds = {}
+    let categories = await needModel.getCategoriesForItem("")
+
+    await Promise.mapSeries(categories, function(category, index, arrayLength) {
+      return needModel.getLatestNeedsForCategory(category).then(needs => {
+        needs.forEach(need => {
+          delete need.createdAt
+          delete need.updatedAt
+        })
+        latestNeeds[category] = needs
+      }).catch(error => console.log("Failed category: " + category))
+
+    })
+
+    return {
+      props: {
+        latestNeeds
+      }
+    }
+
+  } catch(error) {
+    console.log(error)
+  }
 }

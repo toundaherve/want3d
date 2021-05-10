@@ -18,7 +18,7 @@ import {
 
 import countries from "../countries-json/countries.min.json"
 
-const categories = ["Electronics", "Cars & Motorcycle", "Gardening", "Furniture", "Pets", "Toys & Games", "Sports", "Watches & Jewellery"].sort()
+export const categories = ["Automobile", "Beauty", "Books", "Clothing", "Computers", "Games", "Home", "Jewellery", "Movies", "Phones", "Shoes", "Garden", "Furniture", "Pets", "Toys", "Sports", "Watches"].sort()
 categories.push("Others")
 
 export default function Post() {

@@ -97,6 +97,26 @@ async function getCategoriesForItem(itemName) {
   }
 }
 
+async function getLatestNeedsForCategory(category, limit = 30){
+  try {
+    const needs = await Need.findAll({
+      where: {
+        itemCategory: category,
+      },
+      order: [
+        ["createdAt", "DESC"]
+      ],
+      limit,
+      raw: true,
+    });
+
+    return needs;
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+}
+
 function buildWhereClause(search = "", category = "") {
   const splited = search.split(" ");
 
@@ -122,4 +142,5 @@ export default {
   findOne,
   create,
   getCategoriesForItem,
+  getLatestNeedsForCategory,
 };
