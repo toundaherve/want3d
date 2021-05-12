@@ -383,3 +383,13 @@ body {
   right: -20px;
   padding: 11px;
 }
+
+.drop-zone {
+  background-color: #FFFFFF;
+}
+
+.drop-zone-over {
+  background-color: #cfe2ff !important;
+  color: #084298 !important;
+  border-color: #084298 !important;
+}

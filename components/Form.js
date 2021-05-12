@@ -38,12 +38,12 @@ export function Label({ children, ...rest }) {
   );
 }
 
-export function Input({ isInvalid, register = () => {}, ...rest }) {
+export function Input({ isInvalid, className,register = () => {}, ...rest }) {
   return (
     <input
       {...rest}
       ref={register({ required: true })}
-      className={`form-control ${isInvalid ? "invalid-input" : ""}`}
+      className={`form-control ${className} ${isInvalid ? "invalid-input" : ""}`}
     />
   );
 }

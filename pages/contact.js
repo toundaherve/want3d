@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "use-http";
 import useSWR from 'swr'
 import {useRouter} from "next/router"
 import { Helmet } from "react-helmet";
+import {BiImageAdd} from "react-icons/bi"
 import Alert from "../components/Alert";
 import Layout from "../components/Layout";
 import {
@@ -23,11 +24,19 @@ export default function Contact(props) {
   const url = makeURL(process.env)
   const [ID, setID] = useState("");
   const [sellerEmail, setSellerEmail] = useState("")
-  const { register, errors, handleSubmit, watch } = useForm();
+  const { register, errors, handleSubmit, watch, setValue } = useForm();
   const { post, response, loading, error } = useFetch(url);
+  const [imageFiles, setImageFiles] = useState([])
+  const [isDraggedOverDropZone, setIsDraggedOverDropZone] = useState(false);
 
   const country = watch("sellerCountry", false)
   const cities = country ? countries[country] : []
+
+  const fileList = watch("images", [])
+  
+  function handleCloseImage(fileToRemove) {
+    setImageFiles(imageFiles.filter(file => file.name !== fileToRemove.name))
+  }
 
   async function onSubmit(data) {
     const ID = await post("/api/notification", {...data, postID: router.query.postid});
@@ -41,6 +50,21 @@ export default function Contact(props) {
       behavior: "smooth",
     });
   }
+
+  function handleDragOver() {
+    setIsDraggedOverDropZone(true)
+  }
+
+  function handleDragLeave() {
+    setIsDraggedOverDropZone(false)
+  }
+
+  useEffect(() => {
+    if (fileList.length > 0) {
+      const newImageFiles = Array.from(fileList)
+      setImageFiles([...imageFiles, ...newImageFiles])
+    }
+  }, [fileList])
 
   if (error) {
     return (
@@ -88,22 +112,36 @@ export default function Contact(props) {
               <div>
                 <Label htmlFor="email-field">Photos of the item</Label>
                 <span className="d-block mb-1"></span>
-                <Input type="file" className="form-control" id="images"  />
+                <div className="position-relative">
+                  <div className={`d-flex justify-content-center align-items-center rounded w-100 bg-light drop-zone ${isDraggedOverDropZone ? "drop-zone-over" : ""}`} style={{height: "104px", border: "2px dashed rgb(15, 29, 14)"}}>
+                    <BiImageAdd size={48} />
+                  </div>
+                  <Input type="file" multiple accept="image/png, image/jpeg" style={{opacity: "0"}} className="position-absolute top-0 start-0 w-100 h-100" id="images" name="images" register={() => register({ required: true })} isInvalid={errors.images} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDragLeave} />
+                  {errors.images && (
+                    <ErrorMessage>Please provide photos</ErrorMessage>
+                  )}
+                </div>
                 <span className="d-block mb-2"></span>
-                <small>Maximum 4 photos</small>
-                <span className="d-block mb-3"></span>
-                <ul className="list-unstyled mb-0 thumbnail-list">
-                  {[1,2,3].map(n => (
-                    <li key={n} className="thumbnail-item">
-                      <span className="thumbnail-close">
-                        <span className="badge bg-dark">X</span>
-                      </span>
-                      <img className="img-thumbnail w-100 bg-primary" style={{height: "94px"}} src="blob:https://www.shpock.com/ebb32852-65ff-4cfc-afa6-26e4c113359f" /> 
-                    </li>
-                  ))}
-                </ul>
-                <span className="d-block mb-2"></span>
-                <small>You can drag and drop to change the order they will appear in.</small>
+                <div className="form-text">Maximum 4 photos</div>
+                {
+                  imageFiles.length > 0 && (
+                    <div>
+                      <span className="d-block mb-3"></span>
+                      <ul className="list-unstyled mb-0 thumbnail-list">
+                        {imageFiles.map((file, idx) => (
+                          <li key={idx} className="thumbnail-item">
+                            <span className="thumbnail-close" onClick={() => handleCloseImage(file)}>
+                              <span className="badge bg-dark">x</span>
+                            </span>
+                            <img className="img-thumbnail w-100" style={{height: "94px", objectFit: "cover"}} src={URL.createObjectURL(file)} /> 
+                          </li>
+                        ))}
+                      </ul>
+                      {/*<span className="d-block mb-2"></span>
+                      <div className="form-text">You can drag and drop to change the order they will appear in.</div>*/}
+                    </div>
+                  )
+                }
               </div>
             </Section> 
             <span className="d-block mb-3"></span>
@@ -124,7 +162,7 @@ export default function Contact(props) {
               </div>
               <span className="d-block mb-3"></span>
               <div>
-                <Label htmlFor="email-field">Your Email</Label>
+                <Label htmlFor="email-field">Your email</Label>
                 <span className="d-block mb-1"></span>
                 <Input
                   id="email-field"
@@ -133,7 +171,7 @@ export default function Contact(props) {
                   register={() => register({ required: true })}
                   isInvalid={errors.sellerEmail}
                 />
-                {errors.email && (
+                {errors.sellerEmail && (
                   <ErrorMessage>Please provide your the email</ErrorMessage>
                 )}
                 <div className="form-text">
