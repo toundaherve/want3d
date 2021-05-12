@@ -18,7 +18,7 @@ import {
 
 import countries from "../countries-json/countries.min.json"
 
-export default function Post(props) {
+export default function Contact(props) {
   const router = useRouter()
   const url = makeURL(process.env)
   const [ID, setID] = useState("");
@@ -83,6 +83,29 @@ export default function Post(props) {
         <div className="container post-form-width p-0">
           <Form onSubmit={handleSubmit(onSubmit)} loading={loading}>
             <h1 className="h4 mb-0 ms-3 ms-md-0">Contact buyer</h1>
+            <span className="d-block mb-3"></span>
+            <Section>
+              <div>
+                <Label htmlFor="email-field">Photos of the item</Label>
+                <span className="d-block mb-1"></span>
+                <Input type="file" className="form-control" id="images"  />
+                <span className="d-block mb-2"></span>
+                <small>Maximum 4 photos</small>
+                <span className="d-block mb-3"></span>
+                <ul className="list-unstyled mb-0 thumbnail-list">
+                  {[1,2,3].map(n => (
+                    <li key={n} className="thumbnail-item">
+                      <span className="thumbnail-close">
+                        <span className="badge bg-dark">X</span>
+                      </span>
+                      <img className="img-thumbnail w-100 bg-primary" style={{height: "94px"}} src="blob:https://www.shpock.com/ebb32852-65ff-4cfc-afa6-26e4c113359f" /> 
+                    </li>
+                  ))}
+                </ul>
+                <span className="d-block mb-2"></span>
+                <small>You can drag and drop to change the order they will appear in.</small>
+              </div>
+            </Section> 
             <span className="d-block mb-3"></span>
             <Section>
               <div>
