@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import {useRouter} from "next/router"
 import { Helmet } from "react-helmet";
 import {BiImageAdd} from "react-icons/bi"
+import {uploadPhotos} from "../aws"
 import Alert from "../components/Alert";
 import Layout from "../components/Layout";
 import {
@@ -28,27 +29,43 @@ export default function Contact(props) {
   const { post, response, loading, error } = useFetch(url);
   const [imageFiles, setImageFiles] = useState([])
   const [isDraggedOverDropZone, setIsDraggedOverDropZone] = useState(false);
+  const [hasException, setHasException] = useState(false);
 
   const country = watch("sellerCountry", false)
   const cities = country ? countries[country] : []
 
-  const fileList = watch("images", [])
+  const fileList = watch("itemImages", [])
   
   function handleCloseImage(fileToRemove) {
     setImageFiles(imageFiles.filter(file => file.name !== fileToRemove.name))
   }
 
   async function onSubmit(data) {
-    const ID = await post("/api/notification", {...data, postID: router.query.postid});
-    if (response.ok) {
-      setID(ID)
-      setSellerEmail(data.sellerEmail)
-    };
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
+    try {
+      const uploadedFiles = await uploadPhotos(imageFiles)
+      
+      data.itemImages = uploadedFiles.map(file => file.objectURL)
+
+      try {
+        const ID = await post("/api/notification", {...data, postID: router.query.postid});
+        if (response.ok) {
+          setID(ID)
+          setSellerEmail(data.sellerEmail)
+        };
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      } catch (error) {
+        console.log("Contact page: failed to make post request :" + error.message)
+        setHasException(true)
+      } 
+
+    } catch (error) {
+      console.log("Contact page: failed to upload photos :" + error.message)
+      setHasException(true)
+    }
   }
 
   function handleDragOver() {
@@ -66,7 +83,7 @@ export default function Contact(props) {
     }
   }, [fileList])
 
-  if (error) {
+  if (error || hasException) {
     return (
       <Layout>
         <Alert context="danger" heading="Sorry, the operation failed!">
@@ -116,8 +133,8 @@ export default function Contact(props) {
                   <div className={`d-flex justify-content-center align-items-center rounded w-100 bg-light drop-zone ${isDraggedOverDropZone ? "drop-zone-over" : ""}`} style={{height: "104px", border: "2px dashed rgb(15, 29, 14)"}}>
                     <BiImageAdd size={48} />
                   </div>
-                  <Input type="file" multiple accept="image/png, image/jpeg" style={{opacity: "0"}} className="position-absolute top-0 start-0 w-100 h-100" id="images" name="images" register={() => register({ required: true })} isInvalid={errors.images} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDragLeave} />
-                  {errors.images && (
+                  <Input type="file" multiple accept="image/png, image/jpeg" style={{opacity: "0"}} className="position-absolute top-0 start-0 w-100 h-100" id="itemImages" name="itemImages" register={() => register({ required: true })} isInvalid={errors.itemImages} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDragLeave} />
+                  {errors.itemImages && (
                     <ErrorMessage>Please provide photos</ErrorMessage>
                   )}
                 </div>
